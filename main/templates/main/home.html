@@ -2568,13 +2568,14 @@
     </footer>
 
     <!-- Модальные окна -->
+    <!-- Модальное окно входа -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
             <div class="modal-header">
                 <h2>Вход в личный кабинет</h2>
             </div>
-            <form class="auth-form">
+            <form id="loginForm" class="auth-form">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="login-phone">Номер телефона</label>
@@ -2600,16 +2601,17 @@
         </div>
     </div>
 
+    <!-- Модальное окно регистрации -->
     <div id="registerModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
             <div class="modal-header">
                 <h2>Регистрация</h2>
             </div>
             <div class="welcome-text">
                 <p>Добро пожаловать в TokyoRoll! Создайте аккаунт для доступа к персональным скидкам и быстрому оформлению заказов.</p>
             </div>
-            <form class="auth-form">
+            <form id="registerForm" class="auth-form">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="register-name">Ваше имя</label>
@@ -2633,24 +2635,25 @@
                 <p>При нажатии на кнопку "Зарегистрироваться" вы соглашаетесь с <a href="#">политикой обработки персональных данных</a></p>
             </div>
             <div class="auth-switch">
-                <p>Уже есть аккаунт? <a href="#" onclick="closeModal('registerModal'); showLoginModal(); return false;">Войти</a></p>
+                <p>Уже есть аккаунт? <a href="#" onclick="showLoginModal(); return false;">Войти</a></p>
             </div>
         </div>
     </div>
 
+    <!-- Модальное окно восстановления пароля -->
     <div id="forgotPasswordModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onclick="closeModal('forgotPasswordModal')">&times;</span>
             <div class="modal-header">
                 <h2>Восстановление пароля</h2>
             </div>
-            <form class="auth-form">
+            <form id="forgotPasswordForm" class="auth-form">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="recovery-phone">Номер телефона</label>
                     <input type="tel" id="recovery-phone" class="phone-input" placeholder="+7(***)***-**-**" required>
                 </div>
-                <button type="button" class="auth-btn" id="sendRecoveryCode">Отправить код</button>
+                <button type="button" class="auth-btn" id="sendRecoveryCodeBtn">Отправить код</button>
                 
                 <div class="code-section" id="codeSection" style="display: none;">
                     <div class="form-group">
@@ -4101,11 +4104,18 @@ function closeNewsletterModal() {
     return closeModal('newsletterModal');
 }
 
+function showPromotionsModal() {
+    return showModal('promotionsModal');
+}
+
+function closePromotionsModal() {
+    return closeModal('promotionsModal');
+}
+
 // Закрытие модального окна при клике вне его
 window.addEventListener('click', function(event) {
     if (event.target.classList.contains('modal')) {
-        const modalId = event.target.id;
-        closeModal(modalId);
+        closeModal(event.target.id);
     }
 });
 
@@ -4120,66 +4130,53 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Обновляем обработчик для кнопки "Адреса" в шапке
-document.querySelector('.nav-item[href="#"]').forEach(item => {
-    if (item.textContent.includes('Адреса')) {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            showAddressModal();
-        });
-    }
+// Обработчик для кнопки "Адреса" в шапке
+document.addEventListener('DOMContentLoaded', function() {
+    // Находим все элементы с классом nav-item
+    document.querySelectorAll('.nav-item').forEach(item => {
+        if (item.textContent.includes('Адреса')) {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                showAddressModal();
+            });
+        }
+    });
+    
+    // Находим кнопку акций
+    document.querySelectorAll('.nav-item').forEach(item => {
+        if (item.textContent.includes('Акции')) {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                showPromotionsModal();
+            });
+        }
+    });
 });
 
-// Более точный обработчик для кнопки Адреса
-document.querySelectorAll('.nav-item').forEach(item => {
-    if (item.textContent.includes('Адреса') || item.textContent.includes('Адреса')) {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            showAddressModal();
-        });
-    }
-});
-
-// Функция для показа модального окна акций
-function showPromotionsModal() {
-    return showModal('promotionsModal');
-}
-
-function closePromotionsModal() {
-    return closeModal('promotionsModal');
-}
-
-function toggleMobileMenu() {
-    document.querySelector('.nav-menu').classList.toggle('show');
-}
-
+// Функции для авторизации
 function showLoginModal() {
-    var modal = document.getElementById('loginModal');
-    if (modal) {
-        modal.style.display = 'block';
-        setTimeout(function() {
-            modal.classList.add('show');
-        }, 10);
-    }
+    closeModal('registerModal');
+    closeModal('forgotPasswordModal');
+    showModal('loginModal');
 }
 
 function showRegisterModal() {
-    var modal = document.getElementById('registerModal');
-    if (modal) {
-        modal.style.display = 'block';
-        setTimeout(function() {
-            modal.classList.add('show');
-        }, 10);
-    }
+    closeModal('loginModal');
+    closeModal('forgotPasswordModal');
+    showModal('registerModal');
 }
 
 function showForgotPasswordModal() {
-    var modal = document.getElementById('forgotPasswordModal');
-    if (modal) {
-        modal.style.display = 'block';
-        setTimeout(function() {
-            modal.classList.add('show');
-        }, 10);
+    closeModal('loginModal');
+    closeModal('registerModal');
+    showModal('forgotPasswordModal');
+}
+
+// Функция для переключения мобильного меню (если нужно)
+function toggleMobileMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    if (navMenu) {
+        navMenu.classList.toggle('show');
     }
 }
 

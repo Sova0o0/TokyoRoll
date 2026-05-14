@@ -7,7 +7,6 @@
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     {% load static %}
     <style>
-        /* Все стили из главной страницы + дополнительные для корзины */
         * {
             margin: 0;
             padding: 0;
@@ -447,7 +446,7 @@
             font-size: 16px;
         }
 
-        .form-group input, .form-group textarea {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
             padding: 15px;
             background: #1a1a1a;
@@ -548,27 +547,7 @@
             box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
         }
 
-        @media (max-width: 768px) {
-            .top-info .container {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .item-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .quantity-controls {
-                justify-content: center;
-            }
-
-            .payment-methods {
-                flex-direction: column;
-            }
-        }
-
-        /* Модальные окна с плавной анимацией */
+        /* Модальные окна */
         .modal {
             display: none;
             position: fixed;
@@ -602,17 +581,6 @@
 
         .modal.show .modal-content {
             transform: scale(1);
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .close {
@@ -654,106 +622,8 @@
             font-size: 24px;
         }
 
-        .welcome-text {
-            color: #b8b8b8;
-            margin: 10px 0 0 0;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
         .auth-form {
             padding: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #d4af37;
-            font-weight: bold;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            background: #1a1a1a;
-            border: 2px solid #333;
-            border-radius: 10px;
-            color: #e0e0e0;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }
-
-        .phone-input {
-            font-family: monospace;
-            letter-spacing: 1px;
-        }
-
-        .phone-input::placeholder {
-            color: #666;
-            opacity: 1;
-        }
-
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            color: #b8b8b8;
-        }
-
-        .checkbox-label input {
-            display: none;
-        }
-
-        .checkmark {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #d4af37;
-            border-radius: 4px;
-            margin-right: 10px;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .checkbox-label input:checked + .checkmark {
-            background: #d4af37;
-        }
-
-        .checkbox-label input:checked + .checkmark::after {
-            content: '✓';
-            position: absolute;
-            color: #1a1a1a;
-            font-size: 14px;
-            font-weight: bold;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .forgot-password {
-            color: #d4af37;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .forgot-password:hover {
-            color: #ffd700;
         }
 
         .auth-btn {
@@ -775,187 +645,7 @@
             box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
         }
 
-        .auth-agreement {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 12px;
-            color: #b8b8b8;
-        }
-
-        .auth-agreement a {
-            color: #d4af37;
-            text-decoration: none;
-        }
-
-        .auth-switch {
-            text-align: center;
-            color: #b8b8b8;
-        }
-
-        .auth-switch a {
-            color: #d4af37;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .auth-switch a:hover {
-            color: #ffd700;
-        }
-
-        .code-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-        }
-
-        .cart-icon {
-            position: relative;
-        }
-
-        .cart-counter {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #e74c3c;
-            color: white;
-            font-size: 11px;
-            font-weight: bold;
-            min-width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 4px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
-        }
-
-        /* Стили для модального окна адресов */
-        .address-modal-list {
-            padding: 20px;
-        }
-
-        .address-modal-item {
-            display: flex;
-            gap: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-            border-radius: 15px;
-            border: 1px solid #333;
-            transition: all 0.3s;
-        }
-
-        .address-modal-item:hover {
-            border-color: #d4af37;
-            transform: translateX(5px);
-        }
-
-        .address-details h4 {
-            color: #d4af37;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        .address-details p {
-            color: #b8b8b8;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 25px;
-            border-bottom: 1px solid #333;
-        }
-
-        .modal-header h2 {
-            color: #d4af37;
-            margin: 0;
-            font-size: 22px;
-        }
-
-        .close {
-            color: #d4af37;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            line-height: 1;
-            padding: 0 5px;
-        }
-
-        .close:hover {
-            color: #ffd700;
-            transform: scale(1.1);
-        }
-
-        /* Анимация свечения для телефона */
-        .glowing-text {
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
-            50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.6); }
-        }
-
-        /* Стили для телефона в верхней панели */
-        .phone-order .phone {
-            font-size: 20px;
-            font-weight: bold;
-            color: #d4af37;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-        }
-
-        /* Модальное окно акций */
-        .promotions-list {
-            padding: 20px;
-            max-height: 500px;
-            overflow-y: auto;
-        }
-
-        .promotion-card {
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-            border-radius: 15px;
-            border: 1px solid #333;
-            transition: all 0.3s;
-        }
-
-        .promotion-card:hover {
-            border-color: #d4af37;
-            transform: translateX(5px);
-        }
-
-        .promotion-icon {
-            font-size: 48px;
-        }
-
-        .promotion-details h3 {
-            color: #d4af37;
-            margin-bottom: 8px;
-            font-size: 20px;
-        }
-
-        .promotion-details p {
-            color: #b8b8b8;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        .promotion-date {
-            color: #27ae60;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        /* Стили для выбора доставки/самовывоза */
+        /* Доставка */
         .delivery-options {
             display: flex;
             gap: 20px;
@@ -1002,16 +692,7 @@
             margin-top: 8px;
         }
 
-        .delivery-free {
-            color: #27ae60;
-        }
-
-        .address-field {
-            margin-top: 20px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        /* Секция промокода */
+        /* Промокод */
         .promo-section {
             background: rgba(0, 0, 0, 0.2);
             padding: 15px;
@@ -1032,11 +713,6 @@
             border-radius: 10px;
             color: #e0e0e0;
             font-size: 14px;
-        }
-
-        .promo-input-wrapper input:focus {
-            outline: none;
-            border-color: #d4af37;
         }
 
         .apply-promo-btn {
@@ -1060,19 +736,12 @@
             margin-top: 8px;
         }
 
-        .promo-success {
-            color: #27ae60;
-        }
-
-        .promo-error {
-            color: #e74c3c;
-        }
+        .promo-success { color: #27ae60; }
+        .promo-error { color: #e74c3c; }
 
         /* Детали расчета */
-        .summary-details {
-            margin-bottom: 25px;
-        }
-
+        .summary-details { margin-bottom: 25px; }
+        
         .summary-row {
             display: flex;
             justify-content: space-between;
@@ -1091,20 +760,9 @@
             margin-top: 5px;
         }
 
-        .summary-label {
-            color: #b8b8b8;
-        }
-
-        .summary-value {
-            color: #d4af37;
-            font-weight: bold;
-        }
-
         /* Стили для выбора адреса */
-        .saved-addresses {
-            margin-bottom: 15px;
-        }
-
+        .saved-addresses { margin-bottom: 15px; }
+        
         .saved-address-select {
             width: 100%;
             padding: 12px;
@@ -1117,11 +775,6 @@
             cursor: pointer;
         }
 
-        .saved-address-select:focus {
-            outline: none;
-            border-color: #d4af37;
-        }
-
         .address-field-input {
             width: 100%;
             padding: 12px;
@@ -1132,12 +785,6 @@
             font-size: 14px;
         }
 
-        .address-field-input:focus {
-            outline: none;
-            border-color: #d4af37;
-        }
-
-        /* Отображение выбранного адреса */
         .selected-address-card {
             background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
             border-radius: 10px;
@@ -1146,28 +793,13 @@
             border: 1px solid #d4af37;
         }
 
-        .selected-address-card strong {
-            color: #d4af37;
-        }
+        .selected-address-card strong { color: #d4af37; }
+        .selected-address-card p { margin: 8px 0; color: #e0e0e0; }
+        .selected-address-card small { color: #b8b8b8; font-size: 12px; }
 
-        .selected-address-card p {
-            margin: 8px 0;
-            color: #e0e0e0;
-        }
-
-        .selected-address-card small {
-            color: #b8b8b8;
-            font-size: 12px;
-        }
-
-        /* Адреса для самовывоза */
-        .pickup-addresses-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
+        /* Адреса самовывоза */
+        .pickup-addresses-list { display: flex; flex-direction: column; gap: 15px; margin-top: 10px; }
+        
         .pickup-address-card {
             display: flex;
             align-items: center;
@@ -1181,45 +813,19 @@
             position: relative;
         }
 
-        .pickup-address-card:hover {
-            border-color: #d4af37;
-            transform: translateX(5px);
-        }
-
+        .pickup-address-card:hover { border-color: #d4af37; transform: translateX(5px); }
         .pickup-address-card.selected {
             border-color: #d4af37;
             background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
 
-        .pickup-address-icon {
-            font-size: 40px;
-        }
-
-        .pickup-address-details {
-            flex: 1;
-        }
-
-        .pickup-address-name {
-            color: #d4af37;
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-
-        .pickup-address-text {
-            color: #e0e0e0;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .pickup-address-schedule,
-        .pickup-address-phone {
-            color: #b8b8b8;
-            font-size: 12px;
-            margin-top: 3px;
-        }
-
+        .pickup-address-icon { font-size: 40px; }
+        .pickup-address-details { flex: 1; }
+        .pickup-address-name { color: #d4af37; font-weight: bold; font-size: 16px; margin-bottom: 5px; }
+        .pickup-address-text { color: #e0e0e0; font-size: 14px; margin-bottom: 5px; }
+        .pickup-address-schedule, .pickup-address-phone { color: #b8b8b8; font-size: 12px; margin-top: 3px; }
+        
         .pickup-address-check {
             position: absolute;
             right: 15px;
@@ -1230,539 +836,56 @@
         }
 
         @media (max-width: 768px) {
-            .pickup-address-card {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .pickup-address-check {
-                position: static;
-                transform: none;
-                margin-top: 10px;
-            }
+            .item-content { flex-direction: column; text-align: center; }
+            .quantity-controls { justify-content: center; }
+            .delivery-options { flex-direction: column; }
+            .payment-methods { flex-direction: column; }
+            .promo-input-wrapper { flex-direction: column; }
         }
 
-        /* ===== АДАПТИВНОСТЬ ДЛЯ КОРЗИНЫ ===== */
-        /* Для планшетов (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .cart-container {
-                max-width: 90%;
-                margin: 30px auto;
-            }
-            
-            .cart-title {
-                font-size: 36px;
-            }
-            
-            .delivery-options {
-                gap: 15px;
-            }
+        .promotions-list {
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
         }
 
-        /* Для мобильных телефонов (до 768px) */
-        @media (max-width: 768px) {
-            .main-header .container {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                align-items: center;
-                padding: 10px 15px;
-                gap: 10px;
-                width: 100%;
-                box-sizing: border-box;
-            }
-        
-            .logo-section {
-                order: 1;
-                flex: 0 0 auto;
-            }
-            
-            .logo {
-                width: 45px;
-                height: 45px;
-            }
-            
-            .brand-main {
-                font-size: 16px;
-            }
-            
-            .brand-sub {
-                font-size: 8px;
-            }
-            
-            .user-actions {
-                order: 2;
-                flex: 0 0 auto;
-            }
-            
-            .nav-menu {
-                order: 3;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                gap: 8px;
-                margin-top: 5px;
-            }
-            
-            .nav-item {
-                padding: 5px 10px;
-                font-size: 11px;
-            }
-            
-            /* Верхняя панель */
-            .top-info .container {
-                flex-direction: column;
-                text-align: center;
-                gap: 5px;
-                padding: 8px 15px;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            
-            .cart-container {
-                padding: 0 15px;
-                margin: 20px auto;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            .cart-header {
-                margin-bottom: 20px;
-            }
-            
-            .cart-title {
-                font-size: 28px;
-            }
-            
-            .back-to-menu {
-                padding: 8px 16px;
-                font-size: 13px;
-            }
-            
-            /* Товар в корзине */
-            .cart-item {
-                padding: 15px;
-            }
-            
-            .item-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 12px;
-            }
-            
-            .item-image {
-                width: 80px;
-                height: 80px;
-                margin: 0 auto;
-            }
-            
-            .item-name {
-                font-size: 16px;
-            }
-            
-            .item-price {
-                font-size: 14px;
-            }
-            
-            .quantity-controls {
-                justify-content: center;
-                margin-top: 8px;
-            }
-            
-            .quantity-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
-            }
-            
-            .quantity {
-                font-size: 14px;
-                min-width: 35px;
-            }
-            
-            .item-total {
-                font-size: 16px;
-                margin-left: 0;
-            }
-            
-            .delete-btn {
-                margin-left: 0;
-                margin-top: 5px;
-                padding: 8px 16px;
-                font-size: 12px;
-            }
-
-            /* Чат виджет */
-            .chat-widget {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                width: 320px;
-                height: 480px;
-                z-index: 1000;
-                display: flex;
-                flex-direction: column;
-                background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-                border-radius: 15px;
-                border: 2px solid #d4af37;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            }
-            
-            /* Выбор доставки */
-            .delivery-options {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .delivery-option {
-                padding: 12px;
-            }
-            
-            .delivery-option-icon {
-                font-size: 24px;
-            }
-            
-            .delivery-option-title {
-                font-size: 14px;
-            }
-            
-            .delivery-option-desc {
-                font-size: 11px;
-            }
-            
-            .delivery-price {
-                font-size: 12px;
-            }
-            
-            /* Выбор адреса */
-            .saved-address-select {
-                padding: 10px;
-                font-size: 13px;
-            }
-            
-            .selected-address-card {
-                padding: 12px;
-            }
-            
-            .selected-address-card strong {
-                font-size: 13px;
-            }
-            
-            .selected-address-card p {
-                font-size: 12px;
-            }
-            
-            .selected-address-card small {
-                font-size: 10px;
-            }
-            
-            /* Форма */
-            .form-group {
-                margin-bottom: 15px;
-            }
-            
-            .form-group label {
-                font-size: 14px;
-            }
-            
-            .form-group input, 
-            .form-group textarea {
-                padding: 10px;
-                font-size: 14px;
-            }
-            
-            .address-field-input {
-                padding: 10px;
-                font-size: 14px;
-            }
-            
-            /* Способы оплаты */
-            .payment-methods {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .payment-method {
-                padding: 12px;
-            }
-            
-            .payment-icon {
-                font-size: 20px;
-                margin-bottom: 5px;
-            }
-            
-            .payment-name {
-                font-size: 13px;
-            }
-            
-            /* Итоговая сумма */
-            .cart-summary {
-                padding: 20px;
-            }
-            
-            .summary-row {
-                margin-bottom: 12px;
-                padding-bottom: 8px;
-            }
-            
-            .summary-label {
-                font-size: 14px;
-            }
-            
-            .summary-value {
-                font-size: 16px;
-            }
-            
-            .total-row {
-                font-size: 18px;
-                padding-top: 12px;
-            }
-            
-            .checkout-btn {
-                padding: 14px;
-                font-size: 16px;
-            }
-            
-            /* Промокод */
-            .promo-section {
-                padding: 12px;
-                margin-bottom: 20px;
-            }
-            
-            .promo-input-wrapper {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .promo-input-wrapper input {
-                width: 100%;
-                padding: 10px;
-                font-size: 14px;
-            }
-            
-            .apply-promo-btn {
-                width: 100%;
-                padding: 10px;
-                font-size: 14px;
-            }
-            
-            .promo-message {
-                font-size: 11px;
-                margin-top: 8px;
-            }
-            
-            /* Детали расчета */
-            .summary-details {
-                margin-bottom: 20px;
-            }
-            
-            /* Пустая корзина */
-            .cart-empty {
-                padding: 40px 20px;
-            }
-            
-            .cart-empty h2 {
-                font-size: 24px;
-            }
-            
-            .cart-empty p {
-                font-size: 14px;
-            }
-            
-            /* Модальные окна */
-            .modal-content {
-                width: 95%;
-                margin: 20px auto;
-            }
-            
-            .modal-header {
-                padding: 15px 20px;
-            }
-            
-            .modal-header h2 {
-                font-size: 18px;
-            }
-            
-            .auth-form {
-                padding: 20px;
-            }
-            
-            .chat-header {
-                padding: 10px 12px;
-            }
-            
-            .chat-name {
-                font-size: 14px;
-            }
-            
-            .chat-messages {
-                padding: 12px;
-            }
-            
-            .message {
-                font-size: 12px;
-                padding: 8px 10px;
-            }
-            
-            .chat-input input {
-                padding: 8px 12px;
-                font-size: 12px;
-            }
-            
-            .chat-input button {
-                width: 35px;
-                height: 35px;
-            }
-            
-            /* Кнопка наверх */
-            .scroll-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-            }
-            
-            /* Счетчик корзины */
-            .cart-counter {
-                font-size: 10px;
-                min-width: 16px;
-                height: 16px;
-            }
+        .promotion-card {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            border-radius: 15px;
+            border: 1px solid #333;
+            transition: all 0.3s;
         }
 
-        /* Для очень маленьких телефонов (до 480px) */
-        @media (max-width: 480px) {
-            .cart-title {
-                font-size: 24px;
-            }
-            
-            .item-name {
-                font-size: 14px;
-            }
-            
-            .quantity {
-                font-size: 13px;
-            }
-            
-            .item-total {
-                font-size: 15px;
-            }
-            
-            .total-row .summary-value {
-                font-size: 20px;
-            }
-            
-            .summary-label {
-                font-size: 13px;
-            }
-            
-            .summary-value {
-                font-size: 15px;
-            }
-            
-            .checkout-btn {
-                padding: 12px;
-                font-size: 15px;
-            }
-            
-            .chat-widget {
-                width: calc(100% - 20px);
-                right: 10px;
-                left: 10px;
-                height: 450px;
-            }
+        .promotion-card:hover {
+            border-color: #d4af37;
+            transform: translateX(5px);
         }
 
-        /* Горизонтальная ориентация на телефонах */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .cart-item {
-                padding: 12px;
-            }
-            
-            .item-content {
-                flex-direction: row;
-                text-align: left;
-            }
-            
-            .item-image {
-                width: 60px;
-                height: 60px;
-                margin: 0;
-            }
-            
-            .quantity-controls {
-                justify-content: flex-start;
-            }
-            
-            .delivery-options {
-                flex-direction: row;
-            }
-            
-            .payment-methods {
-                flex-direction: row;
-            }
-            
-            .chat-widget {
-                height: 350px;
-            }
+        .promotion-icon {
+            font-size: 48px;
         }
 
-        /* Отключаем hover эффекты на мобильных */
-        @media (max-width: 768px) {
-            .back-to-menu:hover,
-            .quantity-btn:hover,
-            .delete-btn:hover,
-            .delivery-option:hover,
-            .payment-method:hover,
-            .apply-promo-btn:hover,
-            .checkout-btn:hover,
-            .close:hover,
-            .auth-btn:hover,
-            .slide-btn:hover,
-            .add-to-cart-btn:hover {
-                transform: none;
-                box-shadow: none;
-            }
-            
-            .quantity-btn:hover {
-                transform: scale(1.05);
-            }
-            
-            .delivery-option.selected:hover,
-            .payment-method.selected:hover {
-                transform: none;
-            }
+        .promotion-details h3 {
+            color: #d4af37;
+            margin-bottom: 8px;
+            font-size: 20px;
         }
 
-        /* Увеличенные области для тач-экранов */
-        @media (max-width: 768px) {
-            button,
-            .quantity-btn,
-            .delete-btn,
-            .apply-promo-btn,
-            .checkout-btn,
-            .back-to-menu,
-            .delivery-option,
-            .payment-method,
-            .close,
-            .auth-btn,
-            .slide-btn,
-            .add-to-cart-btn {
-                cursor: pointer;
-                min-height: 44px;
-            }
-            
-            .quantity-btn {
-                min-height: 32px;
-            }
-            
-            input, textarea, select {
-                font-size: 16px !important;
-            }
+        .promotion-details p {
+            color: #b8b8b8;
+            margin-bottom: 8px;
+            font-size: 14px;
         }
 
-
+        .promotion-date {
+            color: #27ae60;
+            font-size: 12px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -1837,7 +960,7 @@
                     {% load static %}
                     <div class="item-image">
                         {% if item.product.image %}
-                            <img src="{% static 'images/products/' %}{{ item.product.image.name|cut:'products/' }}" alt="{{ item.product.name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
                         {% else %}
                             <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px;">🍱</div>
                         {% endif %}
@@ -1862,20 +985,20 @@
             <form class="checkout-form" method="post" action="/orders/create/" id="orderForm">
                 {% csrf_token %}
                 <input type="hidden" id="deliveryTypeInput" name="delivery_type" value="delivery">
-                <input type="hidden" id="finalTotal" name="final_total" value="{{ total }}">
+                <input type="hidden" id="finalTotal" name="final_total" value="{{ total|default:0 }}">
                 <input type="hidden" id="appliedPromo" name="applied_promo" value="">
                 
-                <!-- 1. Выбор способа получения -->
+                <!-- Выбор способа получения -->
                 <div class="form-group">
                     <label>Способ получения:</label>
                     <div class="delivery-options">
-                        <div class="delivery-option selected" onclick="selectDeliveryType('delivery')">
+                        <div class="delivery-option selected" onclick="selectDeliveryType('delivery')" data-type="delivery">
                             <div class="delivery-option-icon">🚚</div>
                             <div class="delivery-option-title">Доставка</div>
                             <div class="delivery-option-desc">Курьером по адресу</div>
                             <div class="delivery-price" id="deliveryPriceText">Бесплатно</div>
                         </div>
-                        <div class="delivery-option" onclick="selectDeliveryType('pickup')">
+                        <div class="delivery-option" onclick="selectDeliveryType('pickup')" data-type="pickup">
                             <div class="delivery-option-icon">🏪</div>
                             <div class="delivery-option-title">Самовывоз</div>
                             <div class="delivery-option-desc">Заберите сами</div>
@@ -1884,12 +1007,12 @@
                     </div>
                 </div>
                 
-                <!-- 2. Адрес (только для доставки) -->
+                <!-- Адрес доставки -->
                 <div id="addressField">
                     <div class="form-group">
                         <label for="address">Адрес доставки:</label>
                         
-                        {% if user_authenticated and user_addresses %}
+                        {% if user.is_authenticated and user_addresses %}
                             <div class="saved-addresses">
                                 <select id="savedAddressSelect" class="saved-address-select" onchange="toggleAddressForm()">
                                     <option value="">+ Ввести новый адрес</option>
@@ -1903,14 +1026,12 @@
                                             {% if default_address and default_address.id == addr.id %}selected{% endif %}>
                                         {{ addr.title }}: {{ addr.address }}
                                         {% if addr.entrance %} (подъезд {{ addr.entrance }}){% endif %}
-                                        {% if addr.floor %} этаж {{ addr.floor }}{% endif %}
                                     </option>
                                     {% endfor %}
                                 </select>
                             </div>
                         {% endif %}
                         
-                        <!-- Форма для ручного ввода адреса (скрыта по умолчанию, если выбран сохраненный) -->
                         <div id="manualAddressForm" style="display: {% if default_address %}none{% else %}block{% endif %};">
                             <input type="text" id="address_street" name="address_street" placeholder="Улица, дом*" class="address-field-input" style="margin-bottom: 10px;">
                             <div style="display: flex; gap: 10px; margin-bottom: 10px;">
@@ -1921,7 +1042,6 @@
                             <input type="text" id="address_comment" name="address_comment" placeholder="Комментарий для курьера (домофон, ориентиры)">
                         </div>
                         
-                        <!-- Поле для отображения выбранного сохраненного адреса -->
                         <div id="selectedAddressDisplay" style="display: {% if default_address %}block{% else %}none{% endif %};">
                             <div class="selected-address-card">
                                 <strong>Выбранный адрес:</strong>
@@ -1934,14 +1054,14 @@
                     </div>
                 </div>
 
-                <!-- 2.5 Выбор адреса для самовывоза (только для самовывоза) -->
+                <!-- Выбор адреса самовывоза -->
                 <div id="pickupAddressField" style="display: none;">
                     <div class="form-group">
                         <label>Выберите ресторан для самовывоза:</label>
                         <div class="pickup-addresses-list" id="pickupAddressesList">
                             {% for addr in pickup_addresses %}
                             <div class="pickup-address-card" onclick="selectPickupAddress({{ addr.id }})" data-address-id="{{ addr.id }}">
-                                <div class="pickup-address-icon">{{ addr.icon }}</div>
+                                <div class="pickup-address-icon">{{ addr.icon|default:"🏪" }}</div>
                                 <div class="pickup-address-details">
                                     <div class="pickup-address-name">{{ addr.name }}</div>
                                     <div class="pickup-address-text">{{ addr.address }}</div>
@@ -1956,15 +1076,17 @@
                     </div>
                 </div>
                 
-                <!-- 3. Данные клиента -->
+                <!-- Данные клиента -->
                 <div class="form-group">
                     <label for="name">Ваше имя:</label>
-                    <input type="text" id="name" name="name" required>
+                    {# Используем фильтр default, чтобы поле было пустым для неавторизованных пользователей #}
+                    <input type="text" id="name" name="name" value="{{ user.first_name|default:user.username|default:'' }}" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="phone">Телефон:</label>
-                    <input type="tel" id="phone" name="phone" class="phone-input" placeholder="+7(***)***-**-**" required>
+                    {# Аналогично для телефона. Предполагаем, что у вас есть кастомное поле 'phone' в модели User #}
+                    <input type="tel" id="phone" name="phone" class="phone-input" placeholder="+7 (***) ***-**-**" value="{{ user_data.phone|default:'' }}" required>
                 </div>
                 
                 <div class="form-group">
@@ -1972,16 +1094,16 @@
                     <textarea id="comment" name="comment" rows="3" placeholder="Укажите пожелания, аллергии, время доставки..."></textarea>
                 </div>
                 
-                <!-- 4. Способ оплаты -->
+                <!-- Способ оплаты -->
                 <div class="form-group">
                     <label>Способ оплаты:</label>
                     <div class="payment-methods">
-                        <div class="payment-method selected" onclick="selectPayment('cash')">
+                        <div class="payment-method selected" onclick="selectPayment('cash')" data-payment="cash">
                             <div class="payment-icon">💵</div>
                             <div class="payment-name">Наличные</div>
                             <input type="radio" name="payment" value="cash" checked hidden>
                         </div>
-                        <div class="payment-method" onclick="selectPayment('card')">
+                        <div class="payment-method" onclick="selectPayment('card')" data-payment="card">
                             <div class="payment-icon">💳</div>
                             <div class="payment-name">Картой при получении</div>
                             <input type="radio" name="payment" value="card" hidden>
@@ -1989,7 +1111,7 @@
                     </div>
                 </div>
                 
-                <!-- 5. Промокод -->
+                <!-- Промокод -->
                 <div class="promo-section">
                     <div class="promo-input-wrapper">
                         <input type="text" id="promocode" placeholder="Введите промокод">
@@ -1998,11 +1120,11 @@
                     <div id="promoMessage" class="promo-message"></div>
                 </div>
                 
-                <!-- 6. Расчетные поля -->
+                <!-- Расчетные поля -->
                 <div class="summary-details">
                     <div class="summary-row">
                         <span class="summary-label">Сумма заказа:</span>
-                        <span class="summary-value" id="subtotal">{{ total }} ₽</span>
+                        <span class="summary-value" id="subtotal">{{ total|default:0 }} ₽</span>
                     </div>
                     
                     <div class="summary-row" id="deliveryRow">
@@ -2012,12 +1134,12 @@
                     
                     <div class="summary-row" id="discountRow" style="display: none;">
                         <span class="summary-label">Скидка:</span>
-                        <span class="summary-value" id="discountAmount">0 ₽</span>
+                        <span class="summary-value" id="discountAmount">-0 ₽</span>
                     </div>
                     
                     <div class="summary-row total-row">
                         <span class="summary-label">ИТОГО к оплате:</span>
-                        <span class="summary-value" id="totalAmount">{{ total }} ₽</span>
+                        <span class="summary-value" id="totalAmount">{{ total|default:0 }} ₽</span>
                     </div>
                 </div>
                 
@@ -2034,16 +1156,16 @@
     </div>
 
     <!-- Кнопка наверх -->
-    <button class="scroll-to-top" id="scrollToTop">↑</button>
+    <button class="scroll-to-top" id="scrollToTop" title="Наверх">↑</button>
 
-    <!-- Модальные окна (такие же как на главной) -->
+    <!-- Модальные окна -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
             <div class="modal-header">
                 <h2>Вход в личный кабинет</h2>
             </div>
-            <form class="auth-form">
+            <div class="auth-form">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="login-phone">Номер телефона</label>
@@ -2053,30 +1175,22 @@
                     <label for="login-password">Пароль</label>
                     <input type="password" id="login-password" placeholder="Введите пароль" required>
                 </div>
-                <div class="form-options">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="remember-me">
-                        <span class="checkmark"></span>
-                        Запомнить меня
-                    </label>
-                    <a href="#" class="forgot-password" id="forgotPasswordLink">Забыли пароль?</a>
+                <button type="button" class="auth-btn" onclick="handleLogin()">Войти</button>
+                <div style="text-align: center; margin-top: 15px; color: #b8b8b8; font-size: 14px;">
+                    Нет аккаунта? 
+                    <a href="#" onclick="closeModal('loginModal'); showModal('registerModal'); return false;" style="color: #d4af37;">Зарегистрироваться</a>
                 </div>
-                <button type="submit" class="auth-btn">Войти</button>
-            </form>
-            <div class="auth-switch">
-                <p>Нет аккаунта? <a href="#" id="showRegisterLink">Зарегистрироваться</a></p>
             </div>
         </div>
     </div>
 
     <div id="registerModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
             <div class="modal-header">
                 <h2>Регистрация</h2>
-                <p class="welcome-text">Добро пожаловать в TokyoRoll! Создайте аккаунт для доступа к персональным скидкам и быстрому оформлению заказов.</p>
             </div>
-            <form class="auth-form">
+            <div class="auth-form">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="register-name">Ваше имя</label>
@@ -2090,49 +1204,11 @@
                     <label for="register-password">Пароль</label>
                     <input type="password" id="register-password" placeholder="Придумайте пароль" required>
                 </div>
-                <div class="form-group">
-                    <label for="register-confirm">Подтверждение пароля</label>
-                    <input type="password" id="register-confirm" placeholder="Повторите пароль" required>
+                <button type="button" class="auth-btn" onclick="handleRegister()">Зарегистрироваться</button>
+                <div style="text-align: center; margin-top: 15px; color: #b8b8b8; font-size: 14px;">
+                    Уже есть аккаунт? 
+                    <a href="#" onclick="closeModal('registerModal'); showModal('loginModal'); return false;" style="color: #d4af37;">Войти</a>
                 </div>
-                <button type="submit" class="auth-btn">Зарегистрироваться</button>
-            </form>
-            <div class="auth-agreement">
-                <p>При нажатии на кнопку "Зарегистрироваться" вы соглашаетесь с <a href="#">политикой обработки персональных данных</a></p>
-            </div>
-            <div class="auth-switch">
-                <p>Уже есть аккаунт? <a href="#" id="showLoginLink">Войти</a></p>
-            </div>
-        </div>
-    </div>
-
-    <div id="forgotPasswordModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-header">
-                <h2>Восстановление пароля</h2>
-            </div>
-            <form class="auth-form">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="recovery-phone">Номер телефона</label>
-                    <input type="tel" id="recovery-phone" class="phone-input" placeholder="+7(***)***-**-**" required>
-                </div>
-                <button type="button" class="auth-btn" id="sendRecoveryCode">Отправить код</button>
-                
-                <div class="code-section" id="codeSection" style="display: none;">
-                    <div class="form-group">
-                        <label for="recovery-code">Код подтверждения</label>
-                        <input type="text" id="recovery-code" placeholder="Введите код из SMS" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="new-password">Новый пароль</label>
-                        <input type="password" id="new-password" placeholder="Придумайте новый пароль" required>
-                    </div>
-                    <button type="submit" class="auth-btn">Сохранить новый пароль</button>
-                </div>
-            </form>
-            <div class="auth-switch">
-                <p>Вспомнили пароль? <a href="#" id="showLoginFromRecovery">Войти</a></p>
             </div>
         </div>
     </div>
@@ -2144,45 +1220,78 @@
                 <h2>Наши акции</h2>
                 <span class="close" onclick="closePromotionsModal()">&times;</span>
             </div>
-            <div class="promotions-list">
-                <div class="promotion-card">
-                    <div class="promotion-icon">🔥</div>
+            <div class="promotions-list" style="padding: 20px; max-height: 500px; overflow-y: auto;">
+                <div class="promotion-card" style="display: flex; gap: 20px; padding: 20px; margin-bottom: 15px; background: linear-gradient(135deg, #2a2a2a, #1a1a1a); border-radius: 15px; border: 1px solid #333;">
+                    <div class="promotion-icon" style="font-size: 48px;">🔥</div>
                     <div class="promotion-details">
-                        <h3>Скидка 20% на первый заказ</h3>
-                        <p>При первом заказе от 1000₽ получите скидку 20% по промокоду <strong>FIRST20</strong></p>
-                        <span class="promotion-date">Действует бессрочно</span>
+                        <h3 style="color: #d4af37; margin-bottom: 8px;">Скидка 20% на первый заказ</h3>
+                        <p style="color: #b8b8b8; margin-bottom: 8px; font-size: 14px;">При первом заказе от 1000₽ получите скидку 20% по промокоду <strong>FIRST20</strong></p>
+                        <span class="promotion-date" style="color: #27ae60; font-size: 12px; font-weight: bold;">Действует бессрочно</span>
                     </div>
                 </div>
-                <div class="promotion-card">
-                    <div class="promotion-icon">🚚</div>
+                <div class="promotion-card" style="display: flex; gap: 20px; padding: 20px; margin-bottom: 15px; background: linear-gradient(135deg, #2a2a2a, #1a1a1a); border-radius: 15px; border: 1px solid #333;">
+                    <div class="promotion-icon" style="font-size: 48px;">🚚</div>
                     <div class="promotion-details">
-                        <h3>Бесплатная доставка</h3>
-                        <p>При заказе от 1500₽ доставка бесплатно в любой район города</p>
-                        <span class="promotion-date">Постоянная акция</span>
+                        <h3 style="color: #d4af37; margin-bottom: 8px;">Бесплатная доставка</h3>
+                        <p style="color: #b8b8b8; margin-bottom: 8px; font-size: 14px;">При заказе от 1500₽ доставка бесплатно</p>
+                        <span class="promotion-date" style="color: #27ae60; font-size: 12px; font-weight: bold;">Постоянная акция</span>
                     </div>
                 </div>
-                <div class="promotion-card">
-                    <div class="promotion-icon">🎂</div>
+                <div class="promotion-card" style="display: flex; gap: 20px; padding: 20px; margin-bottom: 15px; background: linear-gradient(135deg, #2a2a2a, #1a1a1a); border-radius: 15px; border: 1px solid #333;">
+                    <div class="promotion-icon" style="font-size: 48px;">🎂</div>
                     <div class="promotion-details">
-                        <h3>Скидка 15% в день рождения</h3>
-                        <p>Предъявите документ курьеру и получите скидку 15% на весь заказ</p>
-                        <span class="promotion-date">Активна всегда</span>
+                        <h3 style="color: #d4af37; margin-bottom: 8px;">Скидка 15% в день рождения</h3>
+                        <p style="color: #b8b8b8; margin-bottom: 8px; font-size: 14px;">Предъявите документ курьеру и получите скидку 15% на весь заказ</p>
+                        <span class="promotion-date" style="color: #27ae60; font-size: 12px; font-weight: bold;">Активна всегда</span>
                     </div>
                 </div>
-                <div class="promotion-card">
-                    <div class="promotion-icon">🍱</div>
+                <div class="promotion-card" style="display: flex; gap: 20px; padding: 20px; margin-bottom: 15px; background: linear-gradient(135deg, #2a2a2a, #1a1a1a); border-radius: 15px; border: 1px solid #333;">
+                    <div class="promotion-icon" style="font-size: 48px;">🍱</div>
                     <div class="promotion-details">
-                        <h3>Сет "Токио" со скидкой 25%</h3>
-                        <p>Премиум сет из 40 суши всего за 2190₽ вместо 2790₽</p>
-                        <span class="promotion-date">До конца месяца</span>
+                        <h3 style="color: #d4af37; margin-bottom: 8px;">Сет "Токио" со скидкой 25%</h3>
+                        <p style="color: #b8b8b8; margin-bottom: 8px; font-size: 14px;">Премиум сет из 40 суши всего за 2190₽ вместо 2790₽</p>
+                        <span class="promotion-date" style="color: #27ae60; font-size: 12px; font-weight: bold;">До конца месяца</span>
                     </div>
                 </div>
-                <div class="promotion-card">
-                    <div class="promotion-icon">👥</div>
+                <div class="promotion-card" style="display: flex; gap: 20px; padding: 20px; margin-bottom: 15px; background: linear-gradient(135deg, #2a2a2a, #1a1a1a); border-radius: 15px; border: 1px solid #333;">
+                    <div class="promotion-icon" style="font-size: 48px;">👥</div>
                     <div class="promotion-details">
-                        <h3>Приведи друга</h3>
-                        <p>Приведи друга и получи скидку 10% на следующий заказ</p>
-                        <span class="promotion-date">Постоянная акция</span>
+                        <h3 style="color: #d4af37; margin-bottom: 8px;">Приведи друга</h3>
+                        <p style="color: #b8b8b8; margin-bottom: 8px; font-size: 14px;">Приведи друга и получи скидку 10% на следующий заказ</p>
+                        <span class="promotion-date" style="color: #27ae60; font-size: 12px; font-weight: bold;">Постоянная акция</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно адресов -->
+    <div id="addressModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #333;">
+                <h2 style="color: #d4af37; margin: 0; font-size: 22px;">Наши адреса</h2>
+                <span class="close" onclick="closeAddressModal()" style="position: static; width: auto; height: auto;">&times;</span>
+            </div>
+            <div style="padding: 20px;">
+                <div style="display: flex; gap: 15px; padding: 20px; margin-bottom: 15px; background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border-radius: 15px; border: 1px solid #333;">
+                    <div style="flex: 1;">
+                        <h4 style="color: #d4af37; margin-bottom: 10px;">Улица Ленина 23</h4>
+                        <p style="color: #b8b8b8; margin-bottom: 5px; font-size: 14px;">Пн-Вс: 10:00 - 23:00</p>
+                        <p style="color: #b8b8b8; margin-bottom: 5px; font-size: 14px;">📞 8-920-267-11-44</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 15px; padding: 20px; margin-bottom: 15px; background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border-radius: 15px; border: 1px solid #333;">
+                    <div style="flex: 1;">
+                        <h4 style="color: #d4af37; margin-bottom: 10px;">Улица Садовая 11</h4>
+                        <p style="color: #b8b8b8; margin-bottom: 5px; font-size: 14px;">Пн-Вс: 10:00 - 22:00</p>
+                        <p style="color: #b8b8b8; margin-bottom: 5px; font-size: 14px;">📞 8-920-729-22-77</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 15px; padding: 20px; margin-bottom: 15px; background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border-radius: 15px; border: 1px solid #333;">
+                    <div style="flex: 1;">
+                        <h4 style="color: #d4af37; margin-bottom: 10px;">Проспект Кулакова 4</h4>
+                        <p style="color: #b8b8b8; margin-bottom: 5px; font-size: 14px;">Пн-Вс: 10:00 - 23:00</p>
+                        <p style="color: #b8b8b8; margin-bottom: 5px; font-size: 14px;">📞 8-920-708-22-88</p>
                     </div>
                 </div>
             </div>
@@ -2190,195 +1299,219 @@
     </div>
 
 <script>
-    // === 1. ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ===
-    function getCSRFToken() {
-        var token = document.querySelector('[name=csrfmiddlewaretoken]');
-        return token ? token.value : '';
+    // =====================================================
+    // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ (инициализация с защитой)
+    // =====================================================
+    
+    // Защищенная инициализация переменных из Django контекста
+    try {
+        var subtotal = parseFloat('{{ total|default:0 }}') || 0;
+    } catch(e) {
+        var subtotal = 0;
+        console.error('Ошибка инициализации subtotal:', e);
     }
-
-    function showNotification(message, type) {
-        var notification = document.createElement('div');
-        notification.style.position = 'fixed';
-        notification.style.bottom = '20px';
-        notification.style.right = '20px';
-        notification.style.padding = '12px 20px';
-        notification.style.backgroundColor = type === 'success' ? '#27ae60' : '#e74c3c';
-        notification.style.color = 'white';
-        notification.style.borderRadius = '8px';
-        notification.style.zIndex = '1000';
-        notification.innerText = message;
-        document.body.appendChild(notification);
-        setTimeout(function() { notification.remove(); }, 3000);
-    }
-
-    // === 2. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ===
-    var subtotal = {{ total|default:0 }};
+    
     var deliveryType = 'delivery';
     var deliveryCost = 0;
     var promoDiscount = 0;
     var appliedPromoCode = null;
+    var selectedPickupAddressId = null;
 
-    // === 3. РАСЧЁТ СУММЫ ===
+    // =====================================================
+    // АУТЕНТИФИКАЦИЯ 
+    // =====================================================
+
+    function handleLogin() {
+        var phone = document.getElementById('login-phone').value;
+        var password = document.getElementById('login-password').value;
+        
+        if (!phone || !password) {
+            alert('Заполните все поля');
+            return;
+        }
+        
+        var formData = new FormData();
+        formData.append('phone', phone);
+        formData.append('password', password);
+        formData.append('csrfmiddlewaretoken', getCSRFToken());
+        
+        fetch('/accounts/login/', {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+            if (data.success) {
+                showNotification('Вход выполнен успешно!', 'success');
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+            alert('Ошибка при входе');
+        });
+    }
+
+    function handleRegister() {
+        var name = document.getElementById('register-name').value;
+        var phone = document.getElementById('register-phone').value;
+        var password = document.getElementById('register-password').value;
+        
+        if (!name || !phone || !password) {
+            alert('Заполните все поля');
+            return;
+        }
+        
+        var formData = new FormData();
+        formData.append('name', name);
+        formData.append('phone', phone);
+        formData.append('password', password);
+        formData.append('confirm_password', password);
+        formData.append('csrfmiddlewaretoken', getCSRFToken());
+        
+        fetch('/accounts/register/', {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+            if (data.success) {
+                showNotification('Регистрация прошла успешно!', 'success');
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+            alert('Ошибка при регистрации');
+        });
+    }
+
+    // =====================================================
+    // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+    // =====================================================
+    
+    function getCSRFToken() {
+        var token = document.querySelector('[name=csrfmiddlewaretoken]');
+        return token ? token.value : '';
+    }
+    
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+    function showNotification(message, type) {
+        // Удаляем существующие уведомления
+        var existing = document.querySelector('.notification-toast');
+        if (existing) existing.remove();
+        
+        var notification = document.createElement('div');
+        notification.className = 'notification-toast';
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+            color: white;
+            border-radius: 8px;
+            z-index: 99999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transition = 'opacity 0.3s';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    // =====================================================
+    // ФУНКЦИИ РАБОТЫ С КОРЗИНОЙ
+    // =====================================================
+    
     function calculateAll() {
         var total = subtotal;
         var totalDiscount = 0;
+        
         deliveryCost = 0;
-        var priceText = document.getElementById('deliveryPriceText');
-        var deliveryRow = document.getElementById('deliveryRow');
-        var deliveryCostSpan = document.getElementById('deliveryCost');
-        var discountRow = document.getElementById('discountRow');
-        var discountAmount = document.getElementById('discountAmount');
-        var totalAmount = document.getElementById('totalAmount');
-        var finalTotal = document.getElementById('finalTotal');
-
+        
         if (deliveryType === 'delivery') {
-            deliveryCost = subtotal >= 1500 ? 0 : 400;
-            if (priceText) priceText.innerHTML = deliveryCost === 0 ? 'Бесплатно' : '400 ₽';
-            if (deliveryRow) deliveryRow.style.display = 'flex';
-            if (deliveryCostSpan) deliveryCostSpan.innerHTML = deliveryCost + ' ₽';
+            deliveryCost = (subtotal >= 1500) ? 0 : 400;
+            
+            var priceText = document.getElementById('deliveryPriceText');
+            if (priceText) priceText.innerHTML = (deliveryCost === 0) ? 'Бесплатно' : deliveryCost + ' ₽';
+            
+            var delRow = document.getElementById('deliveryRow');
+            if (delRow) delRow.style.display = 'flex';
+            
+            var delCost = document.getElementById('deliveryCost');
+            if (delCost) delCost.innerHTML = deliveryCost + ' ₽';
+            
             total += deliveryCost;
         } else {
+            // Самовывоз - скидка 10%
             totalDiscount = subtotal * 0.1;
-            if (deliveryRow) deliveryRow.style.display = 'none';
+            var delRow = document.getElementById('deliveryRow');
+            if (delRow) delRow.style.display = 'none';
             total = total - totalDiscount;
         }
-
+        
+        // Промокод скидка
         if (promoDiscount > 0) {
             totalDiscount += promoDiscount;
-            total = total - promoDiscount;
+            total -= promoDiscount;
         }
-
-        if (discountRow && discountAmount) {
+        
+        // Показываем общую скидку
+        var discRow = document.getElementById('discountRow');
+        var discAmount = document.getElementById('discountAmount');
+        if (discRow && discAmount) {
             if (totalDiscount > 0) {
-                discountRow.style.display = 'flex';
-                discountAmount.innerHTML = '-' + Math.round(totalDiscount) + ' ₽';
+                discRow.style.display = 'flex';
+                discAmount.innerHTML = '-' + Math.round(totalDiscount) + ' ₽';
             } else {
-                discountRow.style.display = 'none';
+                discRow.style.display = 'none';
             }
         }
-
+        
+        // Итог
         if (total < 0) total = 0;
-        if (totalAmount) totalAmount.innerHTML = Math.round(total) + ' ₽';
-        if (finalTotal) finalTotal.value = Math.round(total);
+        var totalEl = document.getElementById('totalAmount');
+        if (totalEl) totalEl.innerHTML = Math.round(total) + ' ₽';
+        
+        var finalTotalInput = document.getElementById('finalTotal');
+        if (finalTotalInput) finalTotalInput.value = Math.round(total);
     }
-
-    // === 4. ВЫБОР ТИПА ДОСТАВКИ ===
-    window.selectDeliveryType = function(type) {
-        deliveryType = type;
-        var deliveryTypeInput = document.getElementById('deliveryTypeInput');
-        if (deliveryTypeInput) deliveryTypeInput.value = type;
-
-        var options = document.querySelectorAll('.delivery-option');
-        for (var i = 0; i < options.length; i++) {
-            options[i].classList.remove('selected');
-        }
-
-        var addressField = document.getElementById('addressField');
-        var pickupField = document.getElementById('pickupAddressField');
-        var addressInput = document.getElementById('address');
-
-        if (type === 'delivery') {
-            if (options[0]) options[0].classList.add('selected');
-            if (addressField) addressField.style.display = 'block';
-            if (pickupField) pickupField.style.display = 'none';
-            if (addressInput) addressInput.required = true;
-        } else {
-            if (options[1]) options[1].classList.add('selected');
-            if (addressField) addressField.style.display = 'none';
-            if (pickupField) pickupField.style.display = 'block';
-            if (addressInput) {
-                addressInput.required = false;
-                addressInput.value = '';
-            }
-        }
-        calculateAll();
-    };
-
-    // === 5. ВЫБОР СПОСОБА ОПЛАТЫ ===
-    window.selectPayment = function(method) {
-        var methods = document.querySelectorAll('.payment-method');
-        for (var i = 0; i < methods.length; i++) {
-            methods[i].classList.remove('selected');
-        }
-
-        if (method === 'cash') {
-            if (methods[0]) methods[0].classList.add('selected');
-            var cashRadio = document.querySelector('input[value="cash"]');
-            if (cashRadio) cashRadio.checked = true;
-        } else {
-            if (methods[1]) methods[1].classList.add('selected');
-            var cardRadio = document.querySelector('input[value="card"]');
-            if (cardRadio) cardRadio.checked = true;
-        }
-    };
-
-    // === 6. ВЫБОР АДРЕСА САМОВЫВОЗА ===
-    window.selectPickupAddress = function(addressId) {
-        var cards = document.querySelectorAll('.pickup-address-card');
-        for (var i = 0; i < cards.length; i++) {
-            cards[i].classList.remove('selected');
-            var check = cards[i].querySelector('.pickup-address-check');
-            if (check) check.style.display = 'none';
-        }
-
-        var selectedCard = document.querySelector('.pickup-address-card[data-address-id="' + addressId + '"]');
-        if (selectedCard) {
-            selectedCard.classList.add('selected');
-            var checkIcon = selectedCard.querySelector('.pickup-address-check');
-            if (checkIcon) checkIcon.style.display = 'block';
-            var selectedPickup = document.getElementById('selected_pickup_address');
-            if (selectedPickup) selectedPickup.value = addressId;
-            var addressInput = document.getElementById('address');
-            if (addressInput) {
-                var addressText = selectedCard.querySelector('.pickup-address-text');
-                if (addressText) addressInput.value = 'Самовывоз: ' + addressText.textContent;
-            }
-        }
-    };
-
-    // === 7. ПЕРЕКЛЮЧЕНИЕ ФОРМЫ АДРЕСА ===
-    window.toggleAddressForm = function() {
-        var select = document.getElementById('savedAddressSelect');
-        var manualForm = document.getElementById('manualAddressForm');
-        var selectedDisplay = document.getElementById('selectedAddressDisplay');
-        var addressInput = document.getElementById('address');
-
-        if (!select) return;
-
-        if (select.value === '') {
-            if (manualForm) manualForm.style.display = 'block';
-            if (selectedDisplay) selectedDisplay.style.display = 'none';
-            if (addressInput) addressInput.value = '';
-        } else {
-            if (manualForm) manualForm.style.display = 'none';
-            if (selectedDisplay) selectedDisplay.style.display = 'block';
-
-            var option = select.options[select.selectedIndex];
-            var address = option.getAttribute('data-address') || '';
-            var entrance = option.getAttribute('data-entrance') || '';
-            var floor = option.getAttribute('data-floor') || '';
-            var apartment = option.getAttribute('data-apartment') || '';
-
-            var addressText = document.getElementById('selectedAddressText');
-            if (addressText) addressText.innerHTML = address;
-            
-            var addressDetails = document.getElementById('selectedAddressDetails');
-            if (addressDetails) {
-                var details = [];
-                if (entrance) details.push('подъезд ' + entrance);
-                if (floor) details.push('этаж ' + floor);
-                if (apartment) details.push('кв. ' + apartment);
-                addressDetails.innerHTML = details.join(', ');
-            }
-            if (addressInput) addressInput.value = address;
-        }
-    };
-
-    // === 8. ОБНОВЛЕНИЕ КОЛИЧЕСТВА ===
-    window.updateQuantity = function(itemId, action) {
+    
+    function updateQuantity(itemId, action) {
         fetch('/cart/update/' + itemId + '/', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCSRFToken() },
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken()
+            },
             body: JSON.stringify({ action: action })
         })
         .then(function(response) { return response.json(); })
@@ -2386,204 +1519,463 @@
             if (data.success) {
                 location.reload();
             } else {
-                alert('Ошибка при обновлении корзины');
+                alert(data.message || 'Ошибка при обновлении корзины');
             }
         })
-        .catch(function() { alert('Ошибка при обновлении корзины'); });
-    };
-
-    // === 9. ПРИМЕНЕНИЕ ПРОМОКОДА ===
-    window.applyPromoCode = function() {
-        var promocode = document.getElementById('promocode').value.trim();
-        var promoMessage = document.getElementById('promoMessage');
-
-        if (!promocode) {
-            if (promoMessage) {
-                promoMessage.innerHTML = 'Введите промокод';
-                promoMessage.className = 'promo-error';
+        .catch(function(error) {
+            console.error('Error:', error);
+            alert('Произошла ошибка при обновлении корзины');
+        });
+    }
+    
+    function selectDeliveryType(type) {
+        deliveryType = type;
+        var input = document.getElementById('deliveryTypeInput');
+        if (input) input.value = type;
+        
+        // Убираем выделение со всех опций
+        document.querySelectorAll('.delivery-option').forEach(function(opt) {
+            opt.classList.remove('selected');
+        });
+        
+        // Добавляем выделение выбранной
+        var selectedOption = document.querySelector('.delivery-option[data-type="' + type + '"]');
+        if (selectedOption) selectedOption.classList.add('selected');
+        
+        // Управление отображением полей
+        var addressField = document.getElementById('addressField');
+        var pickupField = document.getElementById('pickupAddressField');
+        var addressInput = document.getElementById('address');
+        
+        if (type === 'delivery') {
+            if (addressField) addressField.style.display = 'block';
+            if (pickupField) pickupField.style.display = 'none';
+            if (addressInput) addressInput.required = true;
+            
+            var pickInput = document.getElementById('selected_pickup_address');
+            if (pickInput) pickInput.value = '';
+        } else {
+            if (addressField) addressField.style.display = 'none';
+            if (pickupField) pickupField.style.display = 'block';
+            if (addressInput) {
+                addressInput.required = false;
+                addressInput.value = '';
             }
+            
+            // Сбрасываем выбор самовывоза если нужно
+            document.querySelectorAll('.pickup-address-card').forEach(function(card) {
+                card.classList.remove('selected');
+                var check = card.querySelector('.pickup-address-check');
+                if (check) check.style.display = 'none';
+            });
+        }
+        
+        calculateAll();
+    }
+    
+    function selectPickupAddress(addressId) {
+        // Убираем выделение
+        document.querySelectorAll('.pickup-address-card').forEach(function(card) {
+            card.classList.remove('selected');
+            var check = card.querySelector('.pickup-address-check');
+            if (check) check.style.display = 'none';
+        });
+        
+        // Выделяем выбранную
+        var card = document.querySelector('.pickup-address-card[data-address-id="' + addressId + '"]');
+        if (card) {
+            card.classList.add('selected');
+            var check = card.querySelector('.pickup-address-check');
+            if (check) check.style.display = 'block';
+            
+            selectedPickupAddressId = addressId;
+            var input = document.getElementById('selected_pickup_address');
+            if (input) input.value = addressId;
+            
+            var addrText = card.querySelector('.pickup-address-text');
+            var addrInput = document.getElementById('address');
+            if (addrText && addrInput) {
+                addrInput.value = 'Самовывоз: ' + addrText.textContent.trim();
+            }
+        }
+    }
+    
+    function toggleAddressForm() {
+        var select = document.getElementById('savedAddressSelect');
+        var manualForm = document.getElementById('manualAddressForm');
+        var selectedDisplay = document.getElementById('selectedAddressDisplay');
+        
+        if (!select) return;
+        
+        if (select.value === '') {
+            if (manualForm) manualForm.style.display = 'block';
+            if (selectedDisplay) selectedDisplay.style.display = 'none';
+            // Очистка полей
+            ['address_street', 'address_entrance', 'address_floor', 'address_apartment', 'address_comment'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+        } else {
+            if (manualForm) manualForm.style.display = 'none';
+            if (selectedDisplay) selectedDisplay.style.display = 'block';
+            
+            var option = select.options[select.selectedIndex];
+            var address = option.getAttribute('data-address') || '';
+            var entrance = option.getAttribute('data-entrance') || '';
+            var floor = option.getAttribute('data-floor') || '';
+            var apartment = option.getAttribute('data-apartment') || '';
+            var comment = option.getAttribute('data-comment') || '';
+            
+            var textEl = document.getElementById('selectedAddressText');
+            var detailsEl = document.getElementById('selectedAddressDetails');
+            
+            if (textEl) textEl.innerHTML = address;
+            
+            if (detailsEl) {
+                var parts = [];
+                if (entrance) parts.push('подъезд ' + entrance);
+                if (floor) parts.push('этаж ' + floor);
+                if (apartment) parts.push('кв. ' + apartment);
+                if (comment) parts.push('(' + comment + ')');
+                detailsEl.innerHTML = parts.join(', ');
+            }
+        }
+    }
+    
+    function selectPayment(method) {
+        document.querySelectorAll('.payment-method').forEach(function(m) {
+            m.classList.remove('selected');
+        });
+        
+        var selected = document.querySelector('.payment-method[data-payment="' + method + '"]');
+        if (selected) selected.classList.add('selected');
+        
+        var radio = document.querySelector('input[value="' + method + '"]');
+        if (radio) radio.checked = true;
+    }
+    
+    function applyPromoCode() {
+        var input = document.getElementById('promocode');
+        var msgEl = document.getElementById('promoMessage');
+        var btn = document.querySelector('.apply-promo-btn');
+        
+        if (!input || !msgEl || !btn) return;
+        
+        var promocode = input.value.trim();
+        if (!promocode) {
+            msgEl.innerHTML = 'Введите промокод';
+            msgEl.className = 'promo-error';
             return;
         }
-
-        var applyBtn = document.querySelector('.apply-promo-btn');
-        if (applyBtn) {
-            applyBtn.disabled = true;
-            applyBtn.textContent = 'Проверка...';
-        }
-
+        
+        btn.disabled = true;
+        btn.textContent = 'Проверка...';
+        
         fetch('/orders/check_promo/', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCSRFToken() },
-            body: JSON.stringify({ promocode: promocode, order_amount: subtotal })
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken()
+            },
+            body: JSON.stringify({
+                promocode: promocode,
+                order_amount: subtotal
+            })
         })
-        .then(function(response) { return response.json(); })
+        .then(function(r) { return r.json(); })
         .then(function(data) {
             if (data.valid) {
                 appliedPromoCode = promocode;
                 promoDiscount = data.discount;
-                if (promoMessage) {
-                    promoMessage.innerHTML = '✓ Промокод применен! Скидка: ' + Math.round(data.discount) + ' ₽';
-                    promoMessage.className = 'promo-success';
-                }
-                var promoInput = document.getElementById('promocode');
-                if (promoInput) promoInput.disabled = true;
-                var appliedPromo = document.getElementById('appliedPromo');
-                if (appliedPromo) appliedPromo.value = promocode;
+                msgEl.innerHTML = '✓ Промокод применен! Скидка: ' + Math.round(data.discount) + ' ₽';
+                msgEl.className = 'promo-success';
+                input.disabled = true;
+                
+                var appliedInput = document.getElementById('appliedPromo');
+                if (appliedInput) appliedInput.value = promocode;
+                
                 calculateAll();
             } else {
-                if (promoMessage) {
-                    promoMessage.innerHTML = data.message || 'Промокод не действителен';
-                    promoMessage.className = 'promo-error';
-                }
+                msgEl.innerHTML = data.message || 'Недействительный промокод';
+                msgEl.className = 'promo-error';
             }
         })
-        .catch(function() {
-            if (promoMessage) {
-                promoMessage.innerHTML = 'Ошибка при проверке промокода';
-                promoMessage.className = 'promo-error';
-            }
+        .catch(function(err) {
+            console.error('Error:', err);
+            msgEl.innerHTML = 'Ошибка при проверке промокода';
+            msgEl.className = 'promo-error';
         })
         .finally(function() {
-            if (applyBtn) {
-                applyBtn.disabled = false;
-                applyBtn.textContent = 'Применить';
-            }
+            btn.disabled = false;
+            btn.textContent = 'Применить';
         });
-    };
-
-    // === 10. ОФОРМЛЕНИЕ ЗАКАЗА ===
-    window.submitOrder = function() {
-        var name = document.getElementById('name').value;
-        var phone = document.getElementById('phone').value;
-        var comment = document.getElementById('comment') ? document.getElementById('comment').value : '';
-        var deliveryTypeValue = document.getElementById('deliveryTypeInput').value;
-        var finalTotal = document.getElementById('finalTotal').value;
-        var promocode = appliedPromoCode || '';
-        var address = '';
-
-        if (deliveryTypeValue === 'pickup') {
-            var selectedPickupId = document.getElementById('selected_pickup_address').value;
-            if (!selectedPickupId) {
-                alert('Пожалуйста, выберите ресторан для самовывоза');
-                return;
-            }
-            address = 'Самовывоз';
-        } else {
-            var select = document.getElementById('savedAddressSelect');
-            if (select && select.value !== '') {
-                var option = select.options[select.selectedIndex];
-                address = option.getAttribute('data-address') || '';
-            } else {
-                address = document.getElementById('address_street') ? document.getElementById('address_street').value : '';
-            }
-        }
-
-        if (!name || !phone) {
+    }
+    
+    function submitOrder() {
+        var name = document.getElementById('name');
+        var phone = document.getElementById('phone');
+        var comment = document.getElementById('comment');
+        var deliveryTypeVal = document.getElementById('deliveryTypeInput');
+        var finalTotalVal = document.getElementById('finalTotal');
+        
+        var nameValue = name ? name.value.trim() : '';
+        var phoneValue = phone ? phone.value.trim() : '';
+        var commentValue = comment ? comment.value : '';
+        var dt = deliveryTypeVal ? deliveryTypeVal.value : 'delivery';
+        var ft = finalTotalVal ? finalTotalVal.value : '0';
+        
+        // Валидация
+        if (!nameValue || !phoneValue) {
             alert('Пожалуйста, заполните имя и телефон');
             return;
         }
-
-        if (deliveryTypeValue === 'delivery' && !address) {
-            alert('Пожалуйста, укажите адрес доставки');
-            return;
+        
+        // Сбор адреса
+        var address = '';
+        
+        if (dt === 'pickup') {
+            var pickId = document.getElementById('selected_pickup_address');
+            if (!pickId || !pickId.value) {
+                alert('Пожалуйста, выберите ресторан для самовывоза');
+                return;
+            }
+            
+            var pickCard = document.querySelector('.pickup-address-card.selected');
+            if (pickCard) {
+                var rName = pickCard.querySelector('.pickup-address-name');
+                var rAddr = pickCard.querySelector('.pickup-address-text');
+                var rPhone = pickCard.querySelector('.pickup-address-phone');
+                address = 'Самовывoz (' + (rName ? rName.textContent : '') + '): ' + 
+                         (rAddr ? rAddr.textContent : '') + 
+                         (rPhone ? ' | Tel: ' + rPhone.textContent : '');
+            } else {
+                address = 'Самовывоз';
+            }
+        } else {
+            var select = document.getElementById('savedAddressSelect');
+            if (select && select.value !== '') {
+                var opt = select.options[select.selectedIndex];
+                address = [
+                    opt.getAttribute('data-address'),
+                    opt.getAttribute('data-entrance') ? ', п.' + opt.getAttribute('data-entrance') : '',
+                    opt.getAttribute('data-floor') ? ', эт.' + opt.getAttribute('data-floor') : '',
+                    opt.getAttribute('data-apartment') ? ', кв.' + opt.getAttribute('data-apartment') : '',
+                    opt.getAttribute('data-comment') ? ' (' + opt.getAttribute('data-comment') + ')' : ''
+                ].join('');
+            } else {
+                var street = document.getElementById('address_street');
+                var entrance = document.getElementById('address_entrance');
+                var floor = document.getElementById('address_floor');
+                var apartment = document.getElementById('address_apartment');
+                var addrComment = document.getElementById('address_comment');
+                
+                address = [
+                    street ? street.value : '',
+                    entrance ? ', п.' + entrance.value : '',
+                    floor ? ', эт.' + floor.value : '',
+                    apartment ? ', кв.' + apartment.value : '',
+                    addrComment ? ' (' + addrComment.value + ')' : ''
+                ].join('');
+            }
+            
+            if (!address.trim()) {
+                alert('Пожалуйста, укажите адрес доставки');
+                return;
+            }
         }
-
+        
+        // Отправка
         var formData = new FormData();
-        formData.append('name', name);
-        formData.append('phone', phone);
+        formData.append('name', nameValue);
+        formData.append('phone', phoneValue);
         formData.append('address', address);
-        formData.append('comment', comment);
-        formData.append('delivery_type', deliveryTypeValue);
-        formData.append('total', finalTotal);
-        formData.append('promocode', promocode);
+        formData.append('comment', commentValue);
+        formData.append('delivery_type', dt);
+        formData.append('total', ft);
+        formData.append('promocode', appliedPromoCode || '');
         formData.append('csrfmiddlewaretoken', getCSRFToken());
-
-        fetch('/orders/create/', { method: 'POST', body: formData })
-        .then(function(response) { return response.json(); })
+        
+        fetch('/orders/create/', {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(r) { return r.json(); })
         .then(function(data) {
             if (data.closed) {
                 alert(data.message);
             } else if (data.success) {
-                alert('Заказ оформлен! Номер заказа: ' + data.order_id);
-                window.location.href = '/cart/clear/';
+                showNotification('Заказ #' + data.order_id + ' успешно оформлен!', 'success');
+                setTimeout(function() {
+                    window.location.href = '/cart/clear/';
+                }, 1500);
             } else {
-                alert('Ошибка: ' + data.message);
+                alert('Ошибка: ' + (data.message || 'Неизвестная ошибка'));
             }
         })
-        .catch(function() { alert('Произошла ошибка при оформлении заказа'); });
-    };
+        .catch(function(err) {
+            console.error('Error:', err);
+            alert('Произошла ошибка при оформлении заказа');
+        });
+    }
 
-    // === 11. ИНИЦИАЛИЗАЦИЯ ===
-    document.addEventListener('DOMContentLoaded', function() {
-        // Заполнение данных пользователя
-        var userData = {{ user_data|safe }};
-        if (userData.name) {
-            var nameInput = document.getElementById('name');
-            if (nameInput && !nameInput.value) nameInput.value = userData.name;
+    // =====================================================
+    // МОДАЛЬНЫЕ ОКНА
+    // =====================================================
+    
+    function showModal(modalId) {
+        var modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'block';
+            setTimeout(function() { modal.classList.add('show'); }, 10);
         }
-        if (userData.phone) {
-            var phoneInput = document.getElementById('phone');
-            if (phoneInput && !phoneInput.value) phoneInput.value = userData.phone;
+        return false;
+    }
+    
+    function closeModal(modalId) {
+        var modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('show');
+            setTimeout(function() { modal.style.display = 'none'; }, 300);
         }
-
-        // Инициализация доставки и оплаты
-        window.selectDeliveryType('delivery');
-        calculateAll();
-        window.selectPayment('cash');
-
-        // Обработчики для адресов
-        var select = document.getElementById('savedAddressSelect');
-        if (select) {
-            if (select.value !== '') {
-                window.toggleAddressForm();
+        return false;
+    }
+    
+    function showPromotionsModal() { return showModal('promotionsModal'); }
+    function closePromotionsModal() { return closeModal('promotionsModal'); }
+    function showAddressModal() { return showModal('addressModal'); }
+    function closeAddressModal() { return closeModal('addressModal'); }
+    
+    function goToMenu() {
+        sessionStorage.setItem('scrollToMenu', 'true');
+        window.location.href = '/';
+    }
+    
+    function handleAuth(e, type) {
+        e.preventDefault();
+        var form = e.target;
+        var formData = new FormData(form);
+        var url = (type === 'login') ? '/accounts/login/' : '/accounts/register/';
+        
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.success) {
+                showNotification((type === 'login') ? 'Вы успешно вошли!' : 'Регистрация завершена!', 'success');
+                closeModal(type === 'login' ? 'loginModal' : 'registerModal');
+                setTimeout(function() { location.reload(); }, 1000);
+            } else {
+                alert(data.message || 'Ошибка авторизации');
             }
-            select.addEventListener('change', function() {
-                window.toggleAddressForm();
-            });
-        }
+        })
+        .catch(function(err) {
+            console.error('Auth error:', err);
+            alert('Ошибка соединения');
+        });
+        
+        return false;
+    }
 
+    // =====================================================
+    // ИНИЦИАЛИЗАЦИЯ (запуск после полной загрузки DOM)
+    // =====================================================
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Инициализация расчетов
+        try {
+            calculateAll();
+        } catch(e) {
+            console.error('Error in calculateAll:', e);
+        }
+        
+        // Инициализация доставки
+        selectDeliveryType('delivery');
+        
+        // Инициализация платежей
+        selectPayment('cash');
+        
+        // Инициализация адресов
+        var savedSelect = document.getElementById('savedAddressSelect');
+        if (savedSelect && savedSelect.value !== '') {
+            toggleAddressForm();
+        }
+        
         // Кнопка наверх
         var scrollBtn = document.getElementById('scrollToTop');
         if (scrollBtn) {
-            scrollBtn.onclick = function() { window.scrollTo({ top: 0, behavior: 'smooth' }); };
-            window.onscroll = function() {
-                scrollBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+            scrollBtn.onclick = function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             };
         }
+        
+        window.onscroll = function() {
+            if (scrollBtn) {
+                scrollBtn.style.display = (window.pageYOffset > 300) ? 'block' : 'none';
+            }
+        };
+        
+        // Клик по иконке пользователя (показ модалки входа)
+        var userIcon = document.getElementById('userIcon');
+        if (userIcon) {
+            userIcon.onclick = function(e) {
+                e.preventDefault();
+                showModal('loginModal');
+            };
+        }
+        
+        // Автозаполнение данных пользователя (если доступны)
+        try {
+            // Безопасная попытка получить данные пользователя
+            var userDataElement = document.getElementById('userDataJSON');
+            if (userDataElement) {
+                var userData = JSON.parse(userDataElement.textContent);
+                if (userData.name) {
+                    var nameInput = document.getElementById('name');
+                    if (nameInput && !nameInput.value) nameInput.value = userData.name;
+                }
+                if (userData.phone) {
+                    var phoneInput = document.getElementById('phone');
+                    if (phoneInput && !phoneInput.value) phoneInput.value = userData.phone;
+                }
+            }
+        } catch(e) {
+            // Если данных нет или ошибка парсинга - игнорируем
+            console.log('User data not available or parse error');
+        }
+        
+        // Закрытие модалок по клику вне области
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('show');
+                setTimeout(function() { event.target.style.display = 'none'; }, 300);
+            }
+        };
+        
+        // Форматирование телефона
+        document.querySelectorAll('.phone-input').forEach(function(input) {
+            input.addEventListener('input', function(e) {
+                var val = e.target.value.replace(/\D/g, '');
+                if (val.startsWith('7')) val = val.substring(1);
+                
+                var formatted = '+7(';
+                if (val.length > 0) formatted += val.substring(0, 3);
+                if (val.length > 3) formatted += ')' + val.substring(3, 6);
+                if (val.length > 6) formatted += '-' + val.substring(6, 8);
+                if (val.length > 8) formatted += '-' + val.substring(8, 10);
+                
+                e.target.value = formatted;
+            });
+        });
     });
+
 </script>
-<!-- Модальное окно для адресов -->
-<div id="addressModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>Наши адреса</h2>
-            <span class="close" onclick="closeAddressModal()">&times;</span>
-        </div>
-        <div class="address-modal-list">
-            <div class="address-modal-item">
-                <div class="address-details">
-                    <h4>Улица Ленина 23</h4>
-                    <p>Пн-Вс: 10:00 - 23:00</p>
-                    <p>📞 8-920-267-11-44</p>
-                </div>
-            </div>
-            <div class="address-modal-item">
-                <div class="address-details">
-                    <h4>Улица Садовая 11</h4>
-                    <p>Пн-Вс: 10:00 - 22:00</p>
-                    <p>📞 8-920-729-22-77</p>
-                </div>
-            </div>
-            <div class="address-modal-item">
-                <div class="address-details">
-                    <h4>Проспект Кулакова 4</h4>
-                    <p>Пн-Вс: 10:00 - 23:00</p>
-                    <p>📞 8-920-708-22-88</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+<!-- Скрытый элемент для передачи данных пользователя безопасным способом -->
+{% if user_data %}
+<script type="application/json" id="userDataJSON">{{ user_data|safe }}</script>
+{% endif %}
 
 </body>
 </html>

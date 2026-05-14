@@ -380,9 +380,8 @@ def user_edit(request, user_id):
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
         
-        # Обновляем права (is_staff - админ, is_superuser - суперпользователь)
+        # Обновляем права (is_staff - админ)
         user.is_staff = request.POST.get('is_staff') == 'on'
-        user.is_superuser = request.POST.get('is_superuser') == 'on'
         user.is_active = request.POST.get('is_active') == 'on'
         
         user.save()

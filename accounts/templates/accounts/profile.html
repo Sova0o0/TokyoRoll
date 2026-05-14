@@ -1772,17 +1772,8 @@
         <div class="profile-content">
             <div class="profile-sidebar">
                 <div class="user-info">
-                    {% load static %}
-                    <div class="user-avatar" id="userAvatar">
-                        {% if profile.avatar %}
-                            <img src="{% static 'images/avatars/' %}{{ profile.avatar.name|cut:'avatars/' }}" alt="Аватар">
-                        {% else %}
-                            <div>👤</div>
-                        {% endif %}
-                    </div>
                     <div class="user-details">
                         <h3>{{ user.first_name|default:"Пользователь" }}</h3>
-                        <p>{% if user.username %}+7 ({{ user.username|slice:":3" }}) {{ user.username|slice:"3:6" }}-{{ user.username|slice:"6:8" }}-{{ user.username|slice:"8:10" }}{% endif %}</p>
                     </div>
                 </div>
                 
@@ -1828,19 +1819,6 @@
                     <h2>Личные данные</h2>
                     <form id="profileEditForm" class="profile-edit-form" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div class="avatar-preview-container" style="text-align: center;">
-                            {% load static %}
-                            {% if profile.avatar %}
-                                <img src="{% static 'images/avatars/' %}{{ profile.avatar.name|cut:'avatars/' }}" alt="Аватар" class="avatar-preview" id="avatarPreview">
-                            {% else %}
-                                <img src="{% static 'images/avatars/default.png' %}" alt="Аватар" class="avatar-preview" id="avatarPreview" style="display: none;">
-                                <div class="avatar-preview" id="avatarPlaceholder" style="display: flex; align-items: center; justify-content: center; font-size: 40px;">👤</div>
-                            {% endif %}
-                            <div class="avatar-upload">
-                                <button type="button" class="auth-btn" onclick="document.getElementById('avatarInput').click();" style="width: auto; padding: 8px 20px; margin-top: 10px;">Загрузить фото</button>
-                                <input type="file" id="avatarInput" name="avatar" accept="image/*" style="display: none;" onchange="previewAvatar(this)">
-                            </div>
-                        </div>
                         
                         <div class="form-group">
                             <label for="first_name">Имя</label>
@@ -1854,7 +1832,7 @@
                         
                         <div class="form-group">
                             <label for="phone">Телефон</label>
-                            <input type="tel" id="phone" name="phone" value="{{ profile.phone }}" placeholder="+7 (___) ___-__-__">
+                            <input type="tel" id="phone" name="phone" value="{{ profile.phone|default:user.username }}" placeholder="+7 (___) ___-__-__">
                         </div>
                         
                         <div class="form-group">
@@ -2446,24 +2424,6 @@
             window.location.href = '/';
         }
 
-        // ========== УПРАВЛЕНИЕ ПРОФИЛЕМ ==========
-        // Предпросмотр аватара
-        function previewAvatar(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var preview = document.getElementById('avatarPreview');
-                    var placeholder = document.getElementById('avatarPlaceholder');
-                    if (preview) {
-                        preview.src = e.target.result;
-                        preview.style.display = 'block';
-                    }
-                    if (placeholder) placeholder.style.display = 'none';
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    
         
         // ========== УПРАВЛЕНИЕ АДРЕСАМИ ==========
         function showAddAddressModal() {

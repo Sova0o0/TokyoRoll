@@ -24,11 +24,30 @@ def profile_view(request):
     # Получаем или создаем профиль
     profile, created = UserProfile.objects.get_or_create(user=request.user)
     
+    # Если профиль только что создан, заполняем телефон из username
+    if created and request.user.username:
+        profile.phone = request.user.username
+        profile.save()
+    
+    # Проверяем, что аватар существует физически (если есть в БД)
+    if profile.avatar and profile.avatar.name:
+        import os
+        from django.conf import settings
+        avatar_path = os.path.join(settings.MEDIA_ROOT, profile.avatar.name)
+        if not os.path.exists(avatar_path):
+            profile.avatar = None
+            profile.save()
+    
     # Получаем заказы пользователя
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     
     # Получаем адреса пользователя
     addresses = Address.objects.filter(user=request.user)
+    
+    # Обновляем username из телефона, если он пустой (для старых пользователей)
+    if not request.user.username and profile.phone:
+        request.user.username = profile.phone
+        request.user.save()
     
     return render(request, 'accounts/profile.html', {
         'user': request.user,
@@ -50,19 +69,17 @@ def update_profile(request):
         # Обновляем профиль
         profile = request.user.profile
         profile.phone = request.POST.get('phone', '')
-        
-        # Обновляем аватар
-        if request.FILES.get('avatar'):
-            profile.avatar = request.FILES['avatar']
-        
         profile.save()
         
         # Обновляем пароль
         new_password = request.POST.get('new_password')
         if new_password:
-            request.user.set_password(new_password)
-            request.user.save()
-            update_session_auth_hash(request, request.user)
+            confirm_password = request.POST.get('confirm_password')
+            if new_password == confirm_password:
+                request.user.set_password(new_password)
+                request.user.save()
+                from django.contrib.auth import update_session_auth_hash
+                update_session_auth_hash(request, request.user)
         
         return JsonResponse({'success': True, 'message': 'Профиль обновлен'})
     
@@ -186,11 +203,20 @@ def register_view(request):
             return JsonResponse({'success': False, 'message': 'Пользователь с таким телефоном уже существует'})
         
         try:
+            # Создаём пользователя
             user = User.objects.create_user(
                 username=phone,
                 password=password,
                 first_name=name
             )
+            
+            # Автоматически создаём профиль (телефон уже есть в username)
+            # Сигнал create_user_profile должен сработать, но на всякий случай проверим
+            profile, created = UserProfile.objects.get_or_create(user=user)
+            if created:
+                profile.phone = phone
+                profile.save()
+            
             login(request, user)
             return JsonResponse({'success': True, 'message': 'Регистрация успешна!'})
         except Exception as e:
