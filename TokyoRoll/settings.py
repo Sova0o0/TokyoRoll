@@ -22,11 +22,9 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    '192.168.1.*',
-    # Добавь сюда свои домены при деплое
-    # '.onrender.com',  # для Render.com
-    # '.pythonanywhere.com',  # для PythonAnywhere
-    # 'tokyoroll.ru',  # свой домен
+    'tokyoroll.onrender.com',      # Основной домен на Render
+    '.onrender.com',               # Добавит все *.onrender.com адреса
+    'www.tokyoroll.onrender.com',
 ]
 
 # CSRF доверенные источники
