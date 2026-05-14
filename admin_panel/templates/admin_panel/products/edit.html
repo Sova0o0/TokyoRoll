@@ -48,7 +48,7 @@
             {% load static %}
             {% if product.image %}
                 <div style="margin-bottom: 10px;">
-                    <img src="{% static 'images/' %}{{ product.image.name|cut:'products/' }}" alt="{{ product.name }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+                    <img src="{% static 'images/products/' %}{{ product.image.name|cut:'products/' }}" alt="{{ product.name }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
                 </div>
             {% else %}
                 <div style="margin-bottom: 10px; padding: 10px; background: #2a2a2a; border-radius: 8px; text-align: center;">Нет изображения</div>

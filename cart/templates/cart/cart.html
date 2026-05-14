@@ -1837,7 +1837,7 @@
                     {% load static %}
                     <div class="item-image">
                         {% if item.product.image %}
-                            <img src="{% static 'images/' %}{{ item.product.image.name|cut:'products/' }}" alt="{{ item.product.name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                            <img src="{% static 'images/products/' %}{{ item.product.image.name|cut:'products/' }}" alt="{{ item.product.name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
                         {% else %}
                             <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px;">🍱</div>
                         {% endif %}
@@ -3213,61 +3213,162 @@
 </div>
 
 <script>
-// Функция для обновления количества товара
-function updateQuantity(itemId, action) {
-    fetch(`/cart/update/${itemId}/`, {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken'),
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({action: action})
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            location.reload();
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Ошибка при обновлении корзины');
-    });
-}
-
-// Функция для выбора типа доставки
+// Функция для выбора способа получения (доставка/самовывоз)
 function selectDeliveryType(type) {
-    // Убираем выделение со всех
-    document.querySelectorAll('.delivery-option').forEach(opt => {
+    const deliveryAddress = document.getElementById('addressField');
+    const pickupAddress = document.getElementById('pickupAddressField');
+    const deliveryOptions = document.querySelectorAll('.delivery-option');
+    
+    // Обновляем активный класс
+    deliveryOptions.forEach(opt => {
         opt.classList.remove('selected');
     });
-    // Выделяем выбранный
-    const selected = document.querySelector(`.delivery-option[data-type="${type}"]`);
-    if (selected) selected.classList.add('selected');
-    
-    // Показываем/скрываем адрес доставки
-    const addressBlock = document.getElementById('address-block');
-    const pickupBlock = document.getElementById('pickup-block');
-    
     if (type === 'delivery') {
-        if (addressBlock) addressBlock.style.display = 'block';
-        if (pickupBlock) pickupBlock.style.display = 'none';
+        deliveryOptions[0].classList.add('selected');
     } else {
-        if (addressBlock) addressBlock.style.display = 'none';
-        if (pickupBlock) pickupBlock.style.display = 'block';
+        deliveryOptions[1].classList.add('selected');
+    }
+    
+    // Показываем/скрываем блоки
+    if (type === 'delivery') {
+        if (deliveryAddress) deliveryAddress.style.display = 'block';
+        if (pickupAddress) pickupAddress.style.display = 'none';
+    } else {
+        if (deliveryAddress) deliveryAddress.style.display = 'none';
+        if (pickupAddress) pickupAddress.style.display = 'block';
     }
 }
 
 // Функция для выбора способа оплаты
 function selectPayment(method) {
-    document.querySelectorAll('.payment-method').forEach(el => {
-        el.classList.remove('selected');
-    });
-    const selected = document.querySelector(`.payment-method[data-method="${method}"]`);
-    if (selected) selected.classList.add('selected');
+    const paymentMethods = document.querySelectorAll('.payment-method');
+    paymentMethods.forEach(m => m.classList.remove('selected'));
+    
+    if (method === 'cash') {
+        paymentMethods[0].classList.add('selected');
+        document.querySelector('input[name="payment"][value="cash"]').checked = true;
+    } else {
+        paymentMethods[1].classList.add('selected');
+        document.querySelector('input[name="payment"][value="card"]').checked = true;
+    }
 }
 
-// Функция для получения CSRF токена
+// Функция для применения промокода
+function applyPromoCode() {
+    const promocode = document.getElementById('promocode').value.trim();
+    const messageDiv = document.getElementById('promoMessage');
+    
+    if (!promocode) {
+        messageDiv.innerHTML = '<span style="color: #e74c3c;">Введите промокод</span>';
+        return;
+    }
+    
+    fetch('/orders/apply-promocode/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({code: promocode})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            messageDiv.innerHTML = '<span style="color: #27ae60;">✅ Промокод применён! Скидка: ' + (data.discount_amount || '') + '₽</span>';
+            location.reload(); // Перезагружаем для обновления суммы
+        } else {
+            messageDiv.innerHTML = '<span style="color: #e74c3c;">❌ ' + (data.message || 'Промокод не действителен') + '</span>';
+        }
+    })
+    .catch(error => {
+        messageDiv.innerHTML = '<span style="color: #e74c3c;">❌ Ошибка при проверке промокода</span>';
+    });
+}
+
+// Функция для выбора адреса самовывоза
+function selectPickupAddress(addressId) {
+    // Убираем выделение со всех
+    document.querySelectorAll('.pickup-address-card').forEach(card => {
+        card.classList.remove('selected');
+        const check = card.querySelector('.pickup-address-check');
+        if (check) check.style.display = 'none';
+    });
+    
+    // Выделяем выбранный
+    const selectedCard = document.querySelector(`.pickup-address-card[data-address-id="${addressId}"]`);
+    if (selectedCard) {
+        selectedCard.classList.add('selected');
+        const check = selectedCard.querySelector('.pickup-address-check');
+        if (check) check.style.display = 'block';
+    }
+    
+    document.getElementById('selected_pickup_address').value = addressId;
+}
+
+// Функция для работы с сохранёнными адресами
+function toggleAddressForm() {
+    const select = document.getElementById('savedAddressSelect');
+    const manualForm = document.getElementById('manualAddressForm');
+    const selectedDisplay = document.getElementById('selectedAddressDisplay');
+    
+    if (select.value === '') {
+        manualForm.style.display = 'block';
+        selectedDisplay.style.display = 'none';
+    } else {
+        manualForm.style.display = 'none';
+        selectedDisplay.style.display = 'block';
+        
+        const option = select.options[select.selectedIndex];
+        const address = option.getAttribute('data-address');
+        const entrance = option.getAttribute('data-entrance');
+        const floor = option.getAttribute('data-floor');
+        const apartment = option.getAttribute('data-apartment');
+        const comment = option.getAttribute('data-comment');
+        
+        document.getElementById('selectedAddressText').innerHTML = address;
+        let details = '';
+        if (entrance) details += `Подъезд: ${entrance} `;
+        if (floor) details += `Этаж: ${floor} `;
+        if (apartment) details += `Кв: ${apartment}`;
+        if (details) document.getElementById('selectedAddressDetails').innerHTML = details;
+        
+        // Сохраняем в скрытое поле
+        document.getElementById('address').value = address;
+        if (entrance) document.getElementById('address_entrance').value = entrance;
+        if (floor) document.getElementById('address_floor').value = floor;
+        if (apartment) document.getElementById('address_apartment').value = apartment;
+        if (comment) document.getElementById('address_comment').value = comment;
+    }
+}
+
+// Функция для оформления заказа
+function submitOrder() {
+    const form = document.getElementById('orderForm');
+    if (form) {
+        // Собираем адрес из полей или сохранённого
+        const manualForm = document.getElementById('manualAddressForm');
+        const selectedDisplay = document.getElementById('selectedAddressDisplay');
+        
+        if (manualForm.style.display === 'block') {
+            const street = document.getElementById('address_street').value;
+            const entrance = document.getElementById('address_entrance').value;
+            const floor = document.getElementById('address_floor').value;
+            const apartment = document.getElementById('address_apartment').value;
+            const comment = document.getElementById('address_comment').value;
+            
+            let fullAddress = street;
+            if (entrance) fullAddress += `, подъезд ${entrance}`;
+            if (floor) fullAddress += `, этаж ${floor}`;
+            if (apartment) fullAddress += `, кв ${apartment}`;
+            
+            document.getElementById('address').value = fullAddress;
+        }
+        
+        form.submit();
+    }
+}
+
+// Получение CSRF токена
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -3283,17 +3384,31 @@ function getCookie(name) {
     return cookieValue;
 }
 
-// Инициализация после загрузки страницы
+// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    // Устанавливаем начальное состояние
-    const deliveryRadios = document.querySelectorAll('input[name="delivery_type"]');
-    if (deliveryRadios.length) {
-        const checked = document.querySelector('input[name="delivery_type"]:checked');
-        if (checked) {
-            selectDeliveryType(checked.value);
-        }
+    // Определяем выбранный способ получения
+    const selectedDelivery = document.querySelector('.delivery-option.selected');
+    if (selectedDelivery && selectedDelivery.innerHTML.includes('Доставка')) {
+        selectDeliveryType('delivery');
+    } else {
+        selectDeliveryType('pickup');
+    }
+    
+    // Если есть выбранный адрес самовывоза по умолчанию
+    const defaultPickup = document.querySelector('.pickup-address-card.selected');
+    if (defaultPickup) {
+        const id = defaultPickup.getAttribute('data-address-id');
+        if (id) selectPickupAddress(parseInt(id));
     }
 });
+
+// Глобальная функция для оформления заказа (для кнопки)
+window.submitOrder = submitOrder;
+window.selectDeliveryType = selectDeliveryType;
+window.selectPayment = selectPayment;
+window.applyPromoCode = applyPromoCode;
+window.selectPickupAddress = selectPickupAddress;
+window.toggleAddressForm = toggleAddressForm;
 </script>
 
 </body>

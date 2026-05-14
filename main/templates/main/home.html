@@ -2396,7 +2396,7 @@
                 <div class="set-image" onclick="openFullImageUniversal(this)">
                     {% load static %}
                     {% if product.image %}
-                        <img src="{% static 'images/' %}{{ product.image.name|cut:'products/' }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="{% static 'images/products/' %}{{ product.image.name|cut:'products/' }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover;">
                     {% else %}
                         <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 64px;">🍱</div>
                     {% endif %}
@@ -2428,7 +2428,7 @@
                 {% load static %}
                 <div class="category-image">
                     {% if category.image %}
-                        <img src="{% static 'images/' %}{{ category.image.name|cut:'categories/' }}" alt="{{ category.name }}">
+                        <img src="{% static 'images/categories/' %}{{ category.image.name|cut:'categories/' }}" alt="{{ category.name }}">
                     {% else %}
                         <img src="{% static 'images/categories/default.jpg' %}" alt="{{ category.name }}">
                     {% endif %}
@@ -2473,7 +2473,7 @@
                             {% load static %}
                             <div class="product-image-wrapper">
                                 {% if product.image %}
-                                    <img src="{% static 'images/' %}{{ product.image.name|cut:'products/' }}" alt="{{ product.name }}" class="product-image" onclick="openFullImage(this)">
+                                    <img src="{% static 'images/products/' %}{{ product.image.name|cut:'products/' }}" alt="{{ product.name }}" class="product-image" onclick="openFullImage(this)">
                                 {% else %}
                                     <div class="product-no-image">🍣</div>
                                 {% endif %}
