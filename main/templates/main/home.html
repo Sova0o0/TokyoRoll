@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TokyoRoll - Доставка суши и роллов</title>
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    {% load static %}
     <style>
         * {
             margin: 0;
@@ -2330,7 +2331,8 @@
         <div class="container">
             <a href="{% url 'home' %}" class="logo-section">
                 <div class="logo">
-                    <img src="/media/logo1.png" alt="TokyoRoll" style="width: 120%; height: 120%; object-fit: contain;">
+                    {% load static %}
+                    <img src="{% static 'images/logo1.png' %}" alt="TokyoRoll" style="width: 120%; height: 120%; object-fit: contain;">
                 </div>
                 <div class="brand-name">
                     <div class="brand-main">TokyoRoll</div>
@@ -2359,13 +2361,13 @@
 
     <!-- Слайдер -->
     <section class="slider">
-        <div class="slide active" style="background-image: url('/media/slider/slide11.jpg');">
+        <div class="slide active" style="background-image: url('{% static 'images/' %}slider/slide11.jpg');">
             <div class="slide-content"></div>
         </div>
-        <div class="slide" style="background-image: url('/media/slider/slide2.jpg');">
+        <div class="slide" style="background-image: url('{% static 'images/' %}slider/slide2.jpg');">
             <div class="slide-content"></div>
         </div>
-        <div class="slide" style="background-image: url('/media/slider/slide3.jpg');">
+        <div class="slide" style="background-image: url('{% static 'images/' %}slider/slide3.jpg');">
             <div class="slide-content"></div>
         </div>
         <div class="slider-dots">
@@ -2392,8 +2394,9 @@
             {% for product in popular_sets %}
             <div class="set-card" data-product-id="{{ product.id }}">
                 <div class="set-image" onclick="openFullImageUniversal(this)">
+                    {% load static %}
                     {% if product.image %}
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="{% static 'images/' %}{{ product.image.name|cut:'products/' }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover;">
                     {% else %}
                         <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 64px;">🍱</div>
                     {% endif %}
@@ -2422,12 +2425,12 @@
         <div class="categories-grid" id="categoriesGrid">
             {% for category in categories %}
             <div class="category-card" data-cat-id="{{ category.id }}" data-cat-name="{{ category.name }}">
+                {% load static %}
                 <div class="category-image">
                     {% if category.image %}
-                        <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                        <img src="{% static 'images/' %}{{ category.image.name|cut:'categories/' }}" alt="{{ category.name }}">
                     {% else %}
-                        <img src="/media/categories/{{ category.name|lower }}.jpg" alt="{{ category.name }}" 
-                            onerror="this.src='/media/categories/default.jpg'">
+                        <img src="{% static 'images/categories/default.jpg' %}" alt="{{ category.name }}">
                     {% endif %}
                 </div>
                 <div class="category-info">
@@ -2467,9 +2470,10 @@
                     {% for product in category.product_set.all %}
                         {% if product.available %}
                         <div class="product-card-accordion" data-product-id="{{ product.id }}" onclick="openFullImage(this)">
+                            {% load static %}
                             <div class="product-image-wrapper">
                                 {% if product.image %}
-                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" onclick="openFullImage(this)">
+                                    <img src="{% static 'images/' %}{{ product.image.name|cut:'products/' }}" alt="{{ product.name }}" class="product-image" onclick="openFullImage(this)">
                                 {% else %}
                                     <div class="product-no-image">🍣</div>
                                 {% endif %}

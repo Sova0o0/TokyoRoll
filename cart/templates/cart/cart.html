@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Корзина - TokyoRoll</title>
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    {% load static %}
     <style>
         /* Все стили из главной страницы + дополнительные для корзины */
         * {
@@ -1790,7 +1791,8 @@
         <div class="container">
             <a href="{% url 'home' %}" class="logo-section">
                 <div class="logo">
-                    <img src="/media/logo1.png" alt="TokyoRoll" style="width: 120%; height: 120%; object-fit: contain;">
+                    {% load static %}
+                    <img src="{% static 'images/logo1.png' %}" alt="TokyoRoll" style="width: 120%; height: 120%; object-fit: contain;">
                 </div>
                 <div class="brand-name">
                     <div class="brand-main">TokyoRoll</div>
@@ -1832,9 +1834,10 @@
             {% for item in cart_items %}
             <div class="cart-item" id="item-{{ item.id }}">
                 <div class="item-content">
+                    {% load static %}
                     <div class="item-image">
                         {% if item.product.image %}
-                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                            <img src="{% static 'images/' %}{{ item.product.image.name|cut:'products/' }}" alt="{{ item.product.name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
                         {% else %}
                             <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px;">🍱</div>
                         {% endif %}
@@ -3208,6 +3211,90 @@
         </div>
     </div>
 </div>
+
+<script>
+// Функция для обновления количества товара
+function updateQuantity(itemId, action) {
+    fetch(`/cart/update/${itemId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({action: action})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Ошибка при обновлении корзины');
+    });
+}
+
+// Функция для выбора типа доставки
+function selectDeliveryType(type) {
+    // Убираем выделение со всех
+    document.querySelectorAll('.delivery-option').forEach(opt => {
+        opt.classList.remove('selected');
+    });
+    // Выделяем выбранный
+    const selected = document.querySelector(`.delivery-option[data-type="${type}"]`);
+    if (selected) selected.classList.add('selected');
+    
+    // Показываем/скрываем адрес доставки
+    const addressBlock = document.getElementById('address-block');
+    const pickupBlock = document.getElementById('pickup-block');
+    
+    if (type === 'delivery') {
+        if (addressBlock) addressBlock.style.display = 'block';
+        if (pickupBlock) pickupBlock.style.display = 'none';
+    } else {
+        if (addressBlock) addressBlock.style.display = 'none';
+        if (pickupBlock) pickupBlock.style.display = 'block';
+    }
+}
+
+// Функция для выбора способа оплаты
+function selectPayment(method) {
+    document.querySelectorAll('.payment-method').forEach(el => {
+        el.classList.remove('selected');
+    });
+    const selected = document.querySelector(`.payment-method[data-method="${method}"]`);
+    if (selected) selected.classList.add('selected');
+}
+
+// Функция для получения CSRF токена
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Инициализация после загрузки страницы
+document.addEventListener('DOMContentLoaded', function() {
+    // Устанавливаем начальное состояние
+    const deliveryRadios = document.querySelectorAll('input[name="delivery_type"]');
+    if (deliveryRadios.length) {
+        const checked = document.querySelector('input[name="delivery_type"]:checked');
+        if (checked) {
+            selectDeliveryType(checked.value);
+        }
+    }
+});
+</script>
 
 </body>
 </html>

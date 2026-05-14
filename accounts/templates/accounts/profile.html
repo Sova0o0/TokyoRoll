@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Личный кабинет - TokyoRoll</title>
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    {% load static %}
     <style>
         * {
             margin: 0;
@@ -1729,7 +1730,8 @@
         <div class="container">
             <a href="{% url 'home' %}" class="logo-section">
                 <div class="logo">
-                    <img src="/media/logo1.png" alt="TokyoRoll" style="width: 120%; height: 120%; object-fit: contain;">
+                    {% load static %}
+                    <img src="{% static 'images/logo1.png' %}" alt="TokyoRoll" style="width: 120%; height: 120%; object-fit: contain;">
                 </div>
                 <div class="brand-name">
                     <div class="brand-main">TokyoRoll</div>
@@ -1770,9 +1772,10 @@
         <div class="profile-content">
             <div class="profile-sidebar">
                 <div class="user-info">
+                    {% load static %}
                     <div class="user-avatar" id="userAvatar">
                         {% if profile.avatar %}
-                            <img src="{{ profile.avatar.url }}" alt="Аватар">
+                            <img src="{% static 'images/avatars/' %}{{ profile.avatar.name|cut:'avatars/' }}" alt="Аватар">
                         {% else %}
                             <div>👤</div>
                         {% endif %}
@@ -1826,10 +1829,11 @@
                     <form id="profileEditForm" class="profile-edit-form" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="avatar-preview-container" style="text-align: center;">
+                            {% load static %}
                             {% if profile.avatar %}
-                                <img src="{{ profile.avatar.url }}" alt="Аватар" class="avatar-preview" id="avatarPreview">
+                                <img src="{% static 'images/avatars/' %}{{ profile.avatar.name|cut:'avatars/' }}" alt="Аватар" class="avatar-preview" id="avatarPreview">
                             {% else %}
-                                <img src="/media/avatars/default.png" alt="Аватар" class="avatar-preview" id="avatarPreview" style="display: none;">
+                                <img src="{% static 'images/avatars/default.png' %}" alt="Аватар" class="avatar-preview" id="avatarPreview" style="display: none;">
                                 <div class="avatar-preview" id="avatarPlaceholder" style="display: flex; align-items: center; justify-content: center; font-size: 40px;">👤</div>
                             {% endif %}
                             <div class="avatar-upload">
