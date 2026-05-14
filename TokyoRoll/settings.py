@@ -22,19 +22,19 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'tokyoroll.onrender.com',      # Основной домен на Render
-    'tokyoroll.vercel.app'         # Основной домен на Vercel
-    '.onrender.com',               # Добавит все *.onrender.com адреса
+    'tokyoroll.onrender.com',
+    'tokyoroll.vercel.app',
+    '.onrender.com',
+    '.vercel.app',
     'www.tokyoroll.onrender.com',
 ]
 
-# CSRF доверенные источники
 CSRF_TRUSTED_ORIGINS = [
     'https://127.0.0.1',
     'https://localhost',
-    'tokyoroll.vercel.app',
     'https://tokyoroll.onrender.com',
-    'https://tokyoroll.ru',
+    'https://tokyoroll.vercel.app',
+    'https://www.tokyoroll.onrender.com',
 ]
 
 # Application definition
