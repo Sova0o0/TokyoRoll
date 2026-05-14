@@ -1,5 +1,3 @@
-# menu_data.py
-
 FULL_MENU_TEXT = """
 🍣 ПОЛНОЕ МЕНЮ TOKYOROLL 🍣
 

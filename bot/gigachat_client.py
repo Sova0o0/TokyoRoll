@@ -1,8 +1,39 @@
 # bot/gigachat_client.py
 import requests
 import json
+import logging
 from datetime import datetime, timedelta
-from menu_data import FULL_MENU_TEXT  
+
+# Настройка логирования
+logger = logging.getLogger(__name__)
+
+# Пробуем импортировать меню, если ошибка — используем резервное меню
+try:
+    from menu_data import FULL_MENU_TEXT
+    logger.info(f"✅ Меню загружено из menu_data.py, длина: {len(FULL_MENU_TEXT)} символов")
+    MENU_LOADED = True
+except ImportError as e:
+    logger.error(f"❌ Ошибка импорта menu_data.py: {e}")
+    # Резервное меню (минимальное)
+    FULL_MENU_TEXT = """
+🍣 МЕНЮ TOKYOROLL 🍣
+
+🥗 ЗАКУСКИ:
+• Мидии в соусе — 220₽
+• Креветки в панировке — 260₽
+• Наггетсы — 250₽
+• Картофель фри — 150₽
+• Салат Чука — 190₽
+
+🍣 СУШИ:
+• Суши с лососем — 90₽
+• Суши с угрем — 110₽
+
+🍱 СЕТЫ:
+• Сет «Детский» — 890₽
+• Сет «Филадельфия» — 1890₽
+"""
+    MENU_LOADED = False
 
 class GigaChatClient:
     def __init__(self):
@@ -10,6 +41,7 @@ class GigaChatClient:
         self.client_secret = "be586d50-abc7-48fd-9bb2-00781f34d921"  
         self.access_token = None
         self.token_expires_at = None
+        print(f"🔧 GigaChatClient инициализирован, меню загружено: {MENU_LOADED}")
         
     def get_access_token(self):
         """Получаем токен доступа"""
@@ -37,16 +69,19 @@ class GigaChatClient:
                 self.access_token = token_data.get('access_token')
                 expires_in = token_data.get('expires_in', 3600)
                 self.token_expires_at = datetime.now() + timedelta(seconds=expires_in)
+                print(f"✅ Токен получен, expires_in: {expires_in}")
                 return self.access_token
             else:
-                print(f"Ошибка получения токена: {response.status_code}")
+                print(f"❌ Ошибка получения токена: {response.status_code}")
                 return None
         except Exception as e:
-            print(f"Ошибка: {e}")
+            print(f"❌ Ошибка: {e}")
             return None
     
     def ask_gigachat(self, question):
         """Задаем вопрос GigaChat с полным меню"""
+        print(f"📝 Вопрос пользователя: {question[:100]}...")
+        
         access_token = self.get_access_token()
         if not access_token:
             return "Извините, сейчас не могу ответить. Попробуйте позже. 🤖"
@@ -59,21 +94,20 @@ class GigaChatClient:
             'Authorization': f'Bearer {access_token}'
         }
         
-        # Используем полное меню из файла menu_data.py
+        # Формируем промпт
         system_prompt = f"""Ты - консультант ресторана доставки суши TokyoRoll.
 
-Вот ПОЛНОЕ МЕНЮ ресторана (все цены актуальны):
+Вот ПОЛНОЕ МЕНЮ ресторана (все цены актуальны, ОБЯЗАТЕЛЬНО используй эти данные):
 
 {FULL_MENU_TEXT}
 
-ВАЖНЫЕ ПРАВИЛА:
-1. При вопросе про ЗАКУСКИ обязательно назови: МИДИИ В СОУСЕ (220₽), Креветки в панировке (260₽), Наггетсы (250₽), Картофель фри (150₽), Салат Чука (190₽), Осьминог (280₽)
-2. При вопросе про СОУСЫ перечисли все соусы с ценами из меню
-3. При вопросе про РОЛЛЫ назови конкретные названия и цены из меню
-4. При вопросе про СЕТЫ перечисли все сеты с ценами из меню
-5. Если блюда нет в меню - так и скажи, не выдумывай
-6. Отвечай кратко, по делу (2-4 предложения), используй эмодзи 🍣
-7. Все цены указывай в рублях (₽)
+ВАЖНЫЕ ПРАВИЛА (нарушай их только если данных нет в меню):
+1. Никогда не выдумывай блюда, которых нет в меню выше
+2. Если спрашивают про "Детский сет" — он есть в меню за 890₽
+3. Если спрашивают про "Сет Премиум" — он есть в меню за 2890₽
+4. Если спрашивают про закуски — назови МИДИИ В СОУСЕ (220₽)
+5. Отвечай кратко, используй эмодзи 🍣
+6. Все цены бери ТОЛЬКО из меню выше
 
 Теперь ответь на вопрос клиента:"""
 
@@ -88,22 +122,24 @@ class GigaChatClient:
         }
         
         try:
-            response = requests.post(url, headers=headers, json=data, timeout=30, verify=False)
+            response = requests.post(url, headers=headers, json=data, timeout=60, verify=False)
             if response.status_code == 200:
                 result = response.json()
-                return result['choices'][0]['message']['content']
+                answer = result['choices'][0]['message']['content']
+                print(f"✅ Ответ получен, длина: {len(answer)}")
+                return answer
             elif response.status_code == 401:
-                # Токен устарел, пробуем обновить
                 self.access_token = None
                 self.token_expires_at = None
                 return self.ask_gigachat(question)
             else:
-                print(f"Ошибка GigaChat: {response.status_code} - {response.text}")
+                print(f"❌ Ошибка GigaChat: {response.status_code} - {response.text[:200]}")
                 return "Извините, сервис временно недоступен. Попробуйте позже. 🍣"
         except requests.Timeout:
+            print("❌ Таймаут запроса")
             return "Превышено время ожидания ответа. Попробуйте спросить что-то ещё! ⏱️"
         except Exception as e:
-            print(f"Ошибка: {e}")
+            print(f"❌ Ошибка: {e}")
             return "Произошла ошибка. Пожалуйста, попробуйте переформулировать вопрос. 🤗"
 
 # Создаем глобальный экземпляр
