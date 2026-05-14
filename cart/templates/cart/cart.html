@@ -2190,302 +2190,92 @@
     </div>
 
 <script>
-// === 1. ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ===
-function getCSRFToken() {
-    let token = document.querySelector('[name=csrfmiddlewaretoken]');
-    return token ? token.value : '';
-}
+    // Простая проверка - работает ли JavaScript
+    console.log('✅ Скрипт загрузился!');
 
-function showNotification(message, type) {
-    let notification = document.createElement('div');
-    notification.style.position = 'fixed';
-    notification.style.bottom = '20px';
-    notification.style.right = '20px';
-    notification.style.padding = '12px 20px';
-    notification.style.backgroundColor = type === 'success' ? '#27ae60' : '#e74c3c';
-    notification.style.color = 'white';
-    notification.style.borderRadius = '8px';
-    notification.style.zIndex = '1000';
-    notification.innerText = message;
-    document.body.appendChild(notification);
-    setTimeout(() => notification.remove(), 3000);
-}
+    // Функция для теста кнопок
+    window.testFunction = function() {
+        alert('Кнопка работает!');
+    };
 
-// === 2. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ===
-var subtotal = {{ total }};
-var deliveryType = 'delivery';
-var deliveryCost = 0;
-var promoDiscount = 0;
-var appliedPromoCode = null;
+    // Глобальная функция для обновления количества
+    window.updateQuantity = function(itemId, action) {
+        alert('updateQuantity вызвана! ID: ' + itemId + ', action: ' + action);
+        // Временно просто показываем уведомление
+        fetch('/cart/update/' + itemId + '/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]')?.value || ''
+            },
+            body: JSON.stringify({action: action})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Ошибка');
+            }
+        })
+        .catch(() => alert('Ошибка сервера'));
+    };
 
-// === 3. РАСЧЁТ СУММЫ ===
-function calculateAll() {
-    let total = subtotal;
-    let totalDiscount = 0;
-    deliveryCost = 0;
-
-    if (deliveryType === 'delivery') {
-        deliveryCost = subtotal >= 1500 ? 0 : 400;
-        document.getElementById('deliveryPriceText').innerHTML = deliveryCost === 0 ? 'Бесплатно' : '400 ₽';
-        document.getElementById('deliveryRow').style.display = 'flex';
-        document.getElementById('deliveryCost').innerHTML = deliveryCost + ' ₽';
-        total += deliveryCost;
-    } else {
-        totalDiscount = subtotal * 0.1;
-        document.getElementById('deliveryRow').style.display = 'none';
-        total = total - totalDiscount;
-    }
-
-    if (promoDiscount > 0) {
-        totalDiscount += promoDiscount;
-        total = total - promoDiscount;
-    }
-
-    document.getElementById('discountRow').style.display = totalDiscount > 0 ? 'flex' : 'none';
-    if (totalDiscount > 0) {
-        document.getElementById('discountAmount').innerHTML = '-' + Math.round(totalDiscount) + ' ₽';
-    }
-
-    if (total < 0) total = 0;
-    document.getElementById('totalAmount').innerHTML = Math.round(total) + ' ₽';
-    document.getElementById('finalTotal').value = Math.round(total);
-}
-
-// === 4. ВЫБОР ТИПА ДОСТАВКИ ===
-window.selectDeliveryType = function(type) {
-    deliveryType = type;
-    document.getElementById('deliveryTypeInput').value = type;
-
-    let options = document.querySelectorAll('.delivery-option');
-    options.forEach(opt => opt.classList.remove('selected'));
-
-    if (type === 'delivery') {
-        options[0].classList.add('selected');
-        document.getElementById('addressField').style.display = 'block';
-        document.getElementById('pickupAddressField').style.display = 'none';
-        document.getElementById('address').required = true;
-    } else {
-        options[1].classList.add('selected');
-        document.getElementById('addressField').style.display = 'none';
-        document.getElementById('pickupAddressField').style.display = 'block';
-        document.getElementById('address').required = false;
-        document.getElementById('address').value = '';
-    }
-    calculateAll();
-};
-
-// === 5. ВЫБОР СПОСОБА ОПЛАТЫ ===
-window.selectPayment = function(method) {
-    let methods = document.querySelectorAll('.payment-method');
-    methods.forEach(m => m.classList.remove('selected'));
-
-    if (method === 'cash') {
-        methods[0].classList.add('selected');
-        document.querySelector('input[value="cash"]').checked = true;
-    } else {
-        methods[1].classList.add('selected');
-        document.querySelector('input[value="card"]').checked = true;
-    }
-};
-
-// === 6. ВЫБОР АДРЕСА САМОВЫВОЗА ===
-window.selectPickupAddress = function(addressId) {
-    document.querySelectorAll('.pickup-address-card').forEach(card => {
-        card.classList.remove('selected');
-        let check = card.querySelector('.pickup-address-check');
-        if (check) check.style.display = 'none';
-    });
-
-    let selectedCard = document.querySelector(`.pickup-address-card[data-address-id="${addressId}"]`);
-    if (selectedCard) {
-        selectedCard.classList.add('selected');
-        let check = selectedCard.querySelector('.pickup-address-check');
-        if (check) check.style.display = 'block';
-        document.getElementById('selected_pickup_address').value = addressId;
-        let addressText = selectedCard.querySelector('.pickup-address-text').textContent;
-        document.getElementById('address').value = 'Самовывоз: ' + addressText;
-    }
-};
-
-// === 7. ПЕРЕКЛЮЧЕНИЕ ФОРМЫ АДРЕСА ===
-window.toggleAddressForm = function() {
-    let select = document.getElementById('savedAddressSelect');
-    let manualForm = document.getElementById('manualAddressForm');
-    let selectedDisplay = document.getElementById('selectedAddressDisplay');
-
-    if (!select) return;
-
-    if (select.value === '') {
-        if (manualForm) manualForm.style.display = 'block';
-        if (selectedDisplay) selectedDisplay.style.display = 'none';
-    } else {
-        if (manualForm) manualForm.style.display = 'none';
-        if (selectedDisplay) selectedDisplay.style.display = 'block';
-
-        let option = select.options[select.selectedIndex];
-        let address = option.getAttribute('data-address') || '';
-        let entrance = option.getAttribute('data-entrance') || '';
-        let floor = option.getAttribute('data-floor') || '';
-        let apartment = option.getAttribute('data-apartment') || '';
-
-        document.getElementById('selectedAddressText').innerHTML = address;
-        let details = [];
-        if (entrance) details.push('подъезд ' + entrance);
-        if (floor) details.push('этаж ' + floor);
-        if (apartment) details.push('кв. ' + apartment);
-        document.getElementById('selectedAddressDetails').innerHTML = details.join(', ');
-        document.getElementById('address').value = address;
-    }
-};
-
-// === 8. ОБНОВЛЕНИЕ КОЛИЧЕСТВА ===
-window.updateQuantity = function(itemId, action) {
-    fetch('/cart/update/' + itemId + '/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCSRFToken() },
-        body: JSON.stringify({ action: action })
-    })
-    .then(response => response.json())
-    .then(data => { if (data.success) location.reload(); else alert('Ошибка при обновлении'); })
-    .catch(() => alert('Ошибка при обновлении корзины'));
-};
-
-// === 9. ПРИМЕНЕНИЕ ПРОМОКОДА ===
-window.applyPromoCode = function() {
-    let promocode = document.getElementById('promocode').value.trim();
-    let promoMessage = document.getElementById('promoMessage');
-
-    if (!promocode) {
-        promoMessage.innerHTML = 'Введите промокод';
-        promoMessage.className = 'promo-error';
-        return;
-    }
-
-    let applyBtn = document.querySelector('.apply-promo-btn');
-    applyBtn.disabled = true;
-    applyBtn.textContent = 'Проверка...';
-
-    fetch('/orders/check_promo/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCSRFToken() },
-        body: JSON.stringify({ promocode: promocode, order_amount: subtotal })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.valid) {
-            appliedPromoCode = promocode;
-            promoDiscount = data.discount;
-            promoMessage.innerHTML = '✓ Промокод применен! Скидка: ' + Math.round(data.discount) + ' ₽';
-            promoMessage.className = 'promo-success';
-            document.getElementById('promocode').disabled = true;
-            document.getElementById('appliedPromo').value = promocode;
-            calculateAll();
+    // Глобальная функция для доставки
+    window.selectDeliveryType = function(type) {
+        alert('Выбрана доставка: ' + type);
+        console.log('Выбрана доставка:', type);
+        
+        const addressField = document.getElementById('addressField');
+        const pickupField = document.getElementById('pickupAddressField');
+        
+        if (type === 'delivery') {
+            if (addressField) addressField.style.display = 'block';
+            if (pickupField) pickupField.style.display = 'none';
         } else {
-            promoMessage.innerHTML = data.message;
-            promoMessage.className = 'promo-error';
+            if (addressField) addressField.style.display = 'none';
+            if (pickupField) pickupField.style.display = 'block';
         }
-    })
-    .catch(() => promoMessage.innerHTML = 'Ошибка при проверке промокода')
-    .finally(() => {
-        applyBtn.disabled = false;
-        applyBtn.textContent = 'Применить';
-    });
-};
+    };
 
-// === 10. ОФОРМЛЕНИЕ ЗАКАЗА ===
-window.submitOrder = function() {
-    let name = document.getElementById('name').value;
-    let phone = document.getElementById('phone').value;
-    let comment = document.getElementById('comment')?.value || '';
-    let deliveryType = document.getElementById('deliveryTypeInput').value;
-    let finalTotal = document.getElementById('finalTotal').value;
-    let promocode = appliedPromoCode || '';
-    let address = '';
-
-    if (deliveryType === 'pickup') {
-        let selectedPickupId = document.getElementById('selected_pickup_address').value;
-        if (!selectedPickupId) {
-            alert('Пожалуйста, выберите ресторан для самовывоза');
-            return;
-        }
-        address = 'Самовывоз';
-    } else {
-        let select = document.getElementById('savedAddressSelect');
-        if (select && select.value !== '') {
-            address = select.options[select.selectedIndex].getAttribute('data-address') || '';
+    // Глобальная функция для оплаты
+    window.selectPayment = function(method) {
+        alert('Выбран способ оплаты: ' + method);
+        console.log('Способ оплаты:', method);
+        
+        const methods = document.querySelectorAll('.payment-method');
+        methods.forEach(m => m.classList.remove('selected'));
+        
+        if (method === 'cash') {
+            if (methods[0]) methods[0].classList.add('selected');
         } else {
-            address = document.getElementById('address_street')?.value || '';
+            if (methods[1]) methods[1].classList.add('selected');
         }
-    }
+    };
 
-    if (!name || !phone) {
-        alert('Пожалуйста, заполните имя и телефон');
-        return;
-    }
+    // Глобальная функция для промокода
+    window.applyPromoCode = function() {
+        alert('Применяем промокод');
+        const code = document.getElementById('promocode')?.value || '';
+        console.log('Промокод:', code);
+    };
 
-    if (deliveryType === 'delivery' && !address) {
-        alert('Пожалуйста, укажите адрес доставки');
-        return;
-    }
+    // Глобальная функция для оформления заказа
+    window.submitOrder = function() {
+        alert('Оформляем заказ (тест)');
+    };
 
-    let formData = new FormData();
-    formData.append('name', name);
-    formData.append('phone', phone);
-    formData.append('address', address);
-    formData.append('comment', comment);
-    formData.append('delivery_type', deliveryType);
-    formData.append('total', finalTotal);
-    formData.append('promocode', promocode);
-    formData.append('csrfmiddlewaretoken', getCSRFToken());
+    // Глобальная функция для адреса самовывоза
+    window.selectPickupAddress = function(addressId) {
+        alert('Выбран адрес самовывоза: ' + addressId);
+    };
 
-    fetch('/orders/create/', { method: 'POST', body: formData })
-    .then(response => response.json())
-    .then(data => {
-        if (data.closed) {
-            alert(data.message);
-        } else if (data.success) {
-            alert('Заказ оформлен! Номер заказа: ' + data.order_id);
-            window.location.href = '/cart/clear/';
-        } else {
-            alert('Ошибка: ' + data.message);
-        }
-    })
-    .catch(() => alert('Произошла ошибка при оформлении заказа'));
-};
+    // Глобальная функция для формы адреса
+    window.toggleAddressForm = function() {
+        console.log('toggleAddressForm вызвана');
+    };
 
-// === 11. АВТОЗАПОЛНЕНИЕ ===
-document.addEventListener('DOMContentLoaded', function() {
-    // Заполнение данных пользователя
-    const userData = {{ user_data|safe }};
-    if (userData.name) {
-        let nameInput = document.getElementById('name');
-        if (nameInput && !nameInput.value) nameInput.value = userData.name;
-    }
-    if (userData.phone) {
-        let phoneInput = document.getElementById('phone');
-        if (phoneInput && !phoneInput.value) phoneInput.value = userData.phone;
-    }
-
-    // Инициализация
-    window.selectDeliveryType('delivery');
-    calculateAll();
-    window.selectPayment('cash');
-
-    // Обработчики для адресов
-    let select = document.getElementById('savedAddressSelect');
-    if (select) {
-        if (select.value !== '') window.toggleAddressForm();
-        select.addEventListener('change', window.toggleAddressForm);
-    }
-
-    // Кнопка наверх
-    let scrollBtn = document.getElementById('scrollToTop');
-    if (scrollBtn) {
-        scrollBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-        window.onscroll = () => scrollBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
-    }
-});
-
+    console.log('✅ Все функции зарегистрированы');
 </script>
 <!-- Модальное окно для адресов -->
 <div id="addressModal" class="modal">
