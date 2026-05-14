@@ -1,0 +1,82 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Редактировать промокод {{ promo.code }} | Панель администратора{% endblock %}
+{% block page_title %}Редактировать промокод: {{ promo.code }}{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="code">Код промокода *</label>
+            <input type="text" id="code" name="code" value="{{ promo.code }}" required>
+            <small style="color: #666;">Только латиница и цифры, будет преобразован в верхний регистр</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="discount_type">Тип скидки *</label>
+            <select id="discount_type" name="discount_type" required>
+                <option value="percent" {% if promo.discount_type == 'percent' %}selected{% endif %}>Процент (%)</option>
+                <option value="fixed" {% if promo.discount_type == 'fixed' %}selected{% endif %}>Фиксированная сумма (₽)</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="discount_value">Значение скидки *</label>
+            <input type="number" id="discount_value" name="discount_value" step="0.01" value="{{ promo.discount_value }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="min_order_amount">Минимальная сумма заказа</label>
+            <input type="number" id="min_order_amount" name="min_order_amount" step="0.01" value="{{ promo.min_order_amount }}">
+        </div>
+        
+        <div class="form-group">
+            <label for="max_discount">Максимальная скидка (только для процентов)</label>
+            <input type="number" id="max_discount" name="max_discount" step="0.01" value="{{ promo.max_discount }}">
+        </div>
+        
+        <div class="form-group">
+            <label for="valid_from">Действует с *</label>
+            <input type="datetime-local" id="valid_from" name="valid_from" value="{{ promo.valid_from|date:'Y-m-d\TH:i' }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="valid_to">Действует до *</label>
+            <input type="datetime-local" id="valid_to" name="valid_to" value="{{ promo.valid_to|date:'Y-m-d\TH:i' }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="max_uses">Максимум использований</label>
+            <input type="number" id="max_uses" name="max_uses" value="{{ promo.max_uses }}">
+        </div>
+        
+        <div class="form-group">
+            <label class="checkbox-label">
+                <input type="checkbox" id="is_active" name="is_active" {% if promo.is_active %}checked{% endif %}>
+                <span>Активен</span>
+            </label>
+        </div>
+        
+        <div class="form-group">
+            <label class="checkbox-label">
+                <input type="checkbox" id="only_first_order" name="only_first_order" {% if promo.only_first_order %}checked{% endif %}>
+                <span>Только для первого заказа</span>
+            </label>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+            <div style="display: flex; justify-content: space-between; color: #666; font-size: 12px;">
+                <span>Создан: {{ promo.created_at|date:"d.m.Y H:i" }}</span>
+                <span>Использован: {{ promo.used_count }} раз</span>
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 15px; margin-top: 30px;">
+            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            <a href="{% url 'admin_panel:promocodes_list' %}" class="btn btn-warning">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

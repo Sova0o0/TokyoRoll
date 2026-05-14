@@ -1,0 +1,2681 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - TokyoRoll</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .auth-btn {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            border: none;
+            padding: 15px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Фоновый дракон */
+        .dragon-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(120, 0, 0, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .dragon-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path d="M30,20 Q50,10 70,20 Q85,30 80,50 Q75,70 50,80 Q25,70 20,50 Q15,30 30,20Z" fill="none" stroke="%23FFD700" stroke-width="0.5"/></svg>');
+            z-index: -1;
+        }
+
+        /* Верхняя информационная панель */
+        .top-info {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            color: #d4af37;
+            padding: 12px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #d4af37;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .top-info .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .phone-order .phone {
+            font-size: 20px;
+            font-weight: bold;
+            color: #d4af37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Основная шапка */
+        .main-header {
+            background: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #d4af37;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: transparent;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #d4af37;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-main {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .brand-sub {
+            font-size: 13px;
+            color: #b8b8b8;
+            margin-top: -5px;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .user-icon, .cart-icon {
+            position: relative;
+            text-decoration: none;
+            color: #d4af37;
+            font-size: 24px;
+            padding: 12px;
+            transition: all 0.3s;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-icon:hover, .cart-icon:hover {
+            color: #ffd700;
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: scale(1.1);
+        }
+
+        /* Верхняя информационная панель - стили как на главной */
+        .schedule {
+            display: flex;
+            gap: 25px;
+        }
+
+        .schedule-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .schedule-days {
+            font-weight: bold;
+            font-size: 13px;
+            color: #d4af37;
+        }
+
+        .schedule-time {
+            font-size: 12px;
+            color: #b8b8b8;
+        }
+
+        .phone-order {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .phone-order .phone {
+            font-size: 20px;
+            font-weight: bold;
+            color: #d4af37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .brand-main {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-sub {
+            font-size: 13px;
+            color: #b8b8b8;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .nav-item:hover {
+            color: #d4af37;
+            border: 1px solid #d4af37;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .cart-icon, .user-icon {
+            text-decoration: none;
+            color: #d4af37;
+            font-size: 24px;
+            padding: 12px;
+            transition: all 0.3s;
+        }
+
+        /* Контейнер профиля */
+        .profile-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            min-height: 70vh;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        .profile-header h1 {
+            background: linear-gradient(45deg, #d4af37, #ffd700, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 36px;
+        }
+
+        .logout-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .welcome-message {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #d4af37;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .welcome-message h3 {
+            color: #d4af37;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .welcome-message p {
+            color: #b8b8b8;
+            font-size: 16px;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+        }
+
+        .profile-sidebar {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid #333;
+            height: fit-content;
+        }
+
+        .user-info {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        /* Аватар в боковой панели */
+        .user-avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #d4af37;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-avatar div {
+            font-size: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Превью аватарки при загрузке */
+        .avatar-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid #d4af37;
+        }
+
+        .user-details h3 {
+            color: #d4af37;
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+
+        .user-details p {
+            color: #b8b8b8;
+            margin-bottom: 10px;
+        }
+
+        .status-badge {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .profile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .profile-nav .nav-item {
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #b8b8b8;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .profile-nav .nav-item:hover,
+        .profile-nav .nav-item.active {
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            border-color: #d4af37;
+        }
+
+        .profile-main {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid #333;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content h2 {
+            color: #d4af37;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        /* Стили для заказов */
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .order-card {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .order-card:hover {
+            border-color: #d4af37;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .order-number {
+            color: #d4af37;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .order-date {
+            color: #b8b8b8;
+            font-size: 14px;
+        }
+
+        .order-status {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .order-status.preparing {
+            background: #f39c12;
+            color: white;
+        }
+
+        .order-status.delivering {
+            background: #9b59b6;
+            color: white;
+        }
+
+        .order-status.completed {
+            background: #27ae60;
+            color: white;
+        }
+
+        .order-status.cancelled {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .order-items {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+
+        .order-items p {
+            color: #b8b8b8;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-total {
+            color: #d4af37;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .order-repeat {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .order-repeat:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .empty-orders {
+            text-align: center;
+            padding: 60px 20px;
+            color: #b8b8b8;
+        }
+
+        /* Футер */
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            color: #e0e0e0;
+            padding: 60px 20px 30px;
+            margin-top: 60px;
+            border-top: 3px solid #d4af37;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+        }
+
+        .footer-section h3 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .footer-section p {
+            color: #b8b8b8;
+            margin-bottom: 10px;
+        }
+
+        .footer-phone {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d4af37;
+            margin: 10px 0;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            margin-bottom: 10px;
+        }
+
+        .info-list li a {
+            color: #b8b8b8;
+            text-decoration: none;
+        }
+
+        .info-list li a:hover {
+            color: #d4af37;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+            color: #666;
+        }
+
+        /* Чат виджет */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 120px;
+            width: 380px;
+            height: 550px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 15px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .chat-header {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            padding: 12px 15px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+        }
+
+        .chat-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #1a1a1a;
+            font-weight: bold;
+        }
+
+        .chat-icon {
+            font-size: 20px;
+        }
+
+        .chat-name {
+            font-size: 16px;
+        }
+
+        .chat-status {
+            font-size: 10px;
+            color: #27ae60;
+            background: rgba(0,0,0,0.1);
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        .chat-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-minimize, .chat-close {
+            background: rgba(0,0,0,0.2);
+            border: none;
+            color: #1a1a1a;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .chat-minimize:hover, .chat-close:hover {
+            background: rgba(0,0,0,0.4);
+            transform: scale(1.1);
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 450px;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 3px;
+        }
+
+        .message {
+            padding: 10px 12px;
+            border-radius: 12px;
+            max-width: 85%;
+            word-wrap: break-word;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .message.user {
+            background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+            color: #d4af37;
+            align-self: flex-end;
+            border: 1px solid #d4af37;
+        }
+
+        .message.bot {
+            background: #1a1a1a;
+            color: #e0e0e0;
+            align-self: flex-start;
+            border: 1px solid #333;
+        }
+
+        .message.bot strong {
+            color: #d4af37;
+        }
+
+        .chat-input {
+            padding: 12px;
+            border-top: 1px solid #333;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 20px;
+            color: #e0e0e0;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .chat-input input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .chat-input button {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .chat-input button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .glowing-text {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.6); }
+        }
+
+        @media (max-width: 768px) {
+            .chat-widget {
+                width: 320px;
+                height: 500px;
+                right: 10px;
+                bottom: 10px;
+            }
+        }
+
+        /* Модальные окна с плавной анимацией */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 15px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .modal-header h2 {
+            color: #d4af37;
+            margin: 0;
+        }
+
+        .close {
+            color: #d4af37;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close:hover {
+            color: #ffd700;
+            transform: scale(1.1);
+        }
+
+        .address-modal-list {
+            padding: 20px;
+        }
+
+        .address-modal-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        .address-modal-item h4 {
+            color: #d4af37;
+            margin-bottom: 8px;
+        }
+
+        .address-modal-item p {
+            color: #b8b8b8;
+            margin: 5px 0;
+        }
+
+        .modal-text {
+            padding: 20px;
+        }
+
+        .modal-text p {
+            color: #b8b8b8;
+            line-height: 1.6;
+        }
+
+        /* Социальные ссылки */
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Список адресов в футере */
+        .address-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .address-list li {
+            margin-bottom: 15px;
+            color: #b8b8b8;
+            line-height: 1.5;
+        }
+
+        .address-phone {
+            color: #d4af37;
+            font-weight: bold;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        /* Свечение текста */
+        .glowing-text {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.6); }
+        }
+
+        /* Информационные ссылки */
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            margin-bottom: 12px;
+        }
+
+        .info-list li a {
+            color: #b8b8b8;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .info-list li a:hover {
+            color: #d4af37;
+        }
+
+        /* Социальные ссылки в контактах */
+        .social-links p {
+            margin-bottom: 8px;
+            color: #b8b8b8;
+        }
+
+        /* Стили для иконок пользователя и корзины */
+        .user-icon, .cart-icon {
+            text-decoration: none;
+            color: #d4af37;
+            font-size: 24px;
+            padding: 12px;
+            transition: all 0.3s;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-icon:hover, .cart-icon:hover {
+            color: #ffd700;
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: scale(1.1);
+        }
+
+        /* Модальное окно акций */
+        .promotions-list {
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .promotion-card {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            border-radius: 15px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .promotion-card:hover {
+            border-color: #d4af37;
+            transform: translateX(5px);
+        }
+
+        .promotion-icon {
+            font-size: 48px;
+        }
+
+        .promotion-details h3 {
+            color: #d4af37;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .promotion-details p {
+            color: #b8b8b8;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .promotion-date {
+            color: #27ae60;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Стили для редактирования профиля */
+        .profile-edit-form {
+            max-width: 500px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            color: #e0e0e0;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .save-btn {
+            background: linear-gradient(45deg, #27ae60, #219653);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        /* Стили для адресов */
+        .addresses-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .address-card {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .address-card.default {
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .address-card:hover {
+            border-color: #d4af37;
+        }
+
+        .address-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .address-title h4 {
+            color: #d4af37;
+            font-size: 18px;
+        }
+
+        .default-badge {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .address-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .address-actions button {
+            background: none;
+            border: 1px solid #333;
+            color: #b8b8b8;
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .address-actions button:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+
+        .address-actions .delete-btn:hover {
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+
+        .add-address-btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .add-address-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Модальное окно для адресов */
+        .address-form-modal .modal-content {
+            max-width: 550px;
+            width: 90%;
+            padding: 0;
+        }
+
+        .address-form-modal .auth-form {
+            padding: 20px 25px 25px 25px;
+        }
+
+        .address-form-modal .form-group {
+            margin-bottom: 15px;
+        }
+
+        .address-form-modal .form-group label {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .address-form-modal .form-group input,
+        .address-form-modal .form-group textarea,
+        .address-form-modal .form-group select {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .address-form-modal .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* Чекбокс */
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .checkbox-label input {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+        }
+
+        .checkmark {
+            display: none;
+        }
+
+        .address-card .address-comment {
+            margin-top: 8px;
+            padding-top: 5px;
+            color: #d4af37;
+            font-size: 12px;
+        }
+
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid #d4af37;
+        }
+
+        .avatar-upload {
+            position: relative;
+            display: inline-block;
+        }
+
+        .avatar-upload input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ДЛЯ ПРОФИЛЯ ===== */
+        /* Для планшетов (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .profile-container {
+                max-width: 95%;
+                margin: 30px auto;
+            }
+            
+            .profile-content {
+                gap: 25px;
+            }
+            
+            .profile-sidebar {
+                padding: 20px;
+            }
+            
+            .profile-main {
+                padding: 20px;
+            }
+        }
+
+        /* Для мобильных телефонов (до 768px) */
+        @media (max-width: 768px) {
+            /* Шапка */
+            .main-header .container {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 15px;
+                gap: 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .logo-section {
+                order: 1;
+                flex: 0 0 auto;
+            }
+            
+            .logo {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .brand-main {
+                font-size: 16px;
+            }
+            
+            .brand-sub {
+                font-size: 8px;
+            }
+            
+            .user-actions {
+                order: 2;
+                flex: 0 0 auto;
+            }
+            
+            .nav-menu {
+                order: 3;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 5px;
+            }
+            
+            .nav-item {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+            
+            /* Верхняя панель */
+            .top-info .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+                padding: 8px 15px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            /* Контейнер профиля */
+            .profile-container {
+                margin: 15px auto;
+                padding: 0 15px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .profile-header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            
+            .profile-header h1 {
+                font-size: 22px;
+            }
+            
+            .logout-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            /* Переставляем блоки: боковое меню СВЕРХУ, история заказов СНИЗУ */
+            .profile-content {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            /* Боковая панель - ПЕРВАЯ (сверху) */
+            .profile-sidebar {
+                order: 1;
+                margin-bottom: 0;
+                padding: 20px;
+            }
+            
+            /* Основной контент - ВТОРОЙ (снизу) */
+            .profile-main {
+                order: 2;
+                margin-bottom: 0;
+                padding: 20px;
+            }
+            
+            /* Аватар и информация - горизонтально */
+            .user-info {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                text-align: left;
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+                border-bottom: 1px solid #333;
+            }
+            
+            .user-avatar {
+                width: 60px;
+                height: 60px;
+                margin: 0;
+                flex-shrink: 0;
+            }
+            
+            .user-details h3 {
+                font-size: 18px;
+                margin-bottom: 3px;
+            }
+            
+            .user-details p {
+                font-size: 13px;
+                margin-bottom: 0;
+            }
+            
+            /* Навигация по вкладкам - горизонтально */
+            .profile-nav {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+            
+            .profile-nav .nav-item {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+            
+            /* Вкладки */
+            .tab-content h2 {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+            
+            /* Приветственное сообщение */
+            .welcome-message {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .welcome-message h3 {
+                font-size: 18px;
+            }
+            
+            .welcome-message p {
+                font-size: 13px;
+            }
+            
+            /* Заказы */
+            .orders-list {
+                gap: 15px;
+            }
+            
+            .order-card {
+                padding: 12px;
+            }
+            
+            .order-header {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .order-number {
+                font-size: 14px;
+            }
+            
+            .order-date {
+                font-size: 11px;
+            }
+            
+            .order-items p {
+                font-size: 12px;
+            }
+            
+            .order-footer {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .order-total {
+                font-size: 16px;
+            }
+            
+            .order-repeat {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+            
+            /* Адреса */
+            .addresses-list {
+                gap: 15px;
+            }
+            
+            .address-card {
+                padding: 12px;
+            }
+            
+            .address-title {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .address-title h4 {
+                font-size: 15px;
+            }
+            
+            .address-text {
+                font-size: 13px;
+            }
+            
+            .address-actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: 10px;
+            }
+            
+            .address-actions button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .add-address-btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            /* Форма профиля */
+            .avatar-preview-container {
+                margin-bottom: 20px;
+            }
+            
+            .avatar-preview {
+                width: 100px;
+                height: 100px;
+                margin: 0 auto 15px;
+            }
+            
+            .profile-edit-form .form-group {
+                margin-bottom: 12px;
+            }
+            
+            .profile-edit-form .form-group label {
+                font-size: 13px;
+            }
+            
+            .profile-edit-form .form-group input {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+            
+            .save-btn {
+                padding: 10px;
+                font-size: 14px;
+                width: 100%;
+            }
+            
+            /* Чат виджет */
+            .chat-widget {
+                position: fixed;
+                bottom: 20px;
+                right: 10px;
+                width: 320px;
+                height: 480px;
+                z-index: 1000;
+                left: auto;
+            }
+        }
+
+        /* Для маленьких телефонов */
+        @media (max-width: 480px) {
+            .profile-header h1 {
+                font-size: 18px;
+            }
+            
+            .logout-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .user-avatar {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .user-details h3 {
+                font-size: 16px;
+            }
+            
+            .profile-nav .nav-item {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .chat-widget {
+                width: calc(100% - 20px);
+                right: 10px;
+                left: 10px;
+                height: 450px;
+            }
+        }
+
+        /* Отключаем hover эффекты на мобильных */
+        @media (max-width: 768px) {
+            .nav-item:hover,
+            .cart-icon:hover,
+            .user-icon:hover,
+            .order-card:hover,
+            .address-card:hover,
+            .logout-btn:hover,
+            .save-btn:hover,
+            .add-address-btn:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+
+        /* Увеличенные области для тач-экранов */
+        @media (max-width: 768px) {
+            button,
+            .nav-item,
+            .order-repeat,
+            .edit-address,
+            .delete-btn,
+            .add-address-btn,
+            .save-btn,
+            .logout-btn,
+            .auth-btn,
+            .close-products-btn,
+            .chat-minimize,
+            .chat-close,
+            .profile-nav .nav-item {
+                cursor: pointer;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .profile-nav .nav-item {
+                min-height: 40px;
+            }
+            
+            input, textarea, select {
+                font-size: 16px !important;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Фоновые элементы -->
+    <div class="dragon-bg"></div>
+    <div class="dragon-pattern"></div>
+
+    <!-- Верхняя информационная панель -->
+    <div class="top-info">
+        <div class="container">
+            <div class="phone-order">
+                <span>Заказать по телефону:</span>
+                <span class="phone glowing-text">8 (800) 555-35-35</span>
+            </div>
+            <div class="schedule">
+                <div class="schedule-item">
+                    <span class="schedule-days">Режим работы</span>
+                    <span class="schedule-time">Ежедневно с 10:00 до 23:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основная шапка -->
+    <header class="main-header">
+        <div class="container">
+            <a href="{% url 'home' %}" class="logo-section">
+                <div class="logo">
+                    <img src="/media/logo1.png" alt="TokyoRoll" style="width: 120%; height: 120%; object-fit: contain;">
+                </div>
+                <div class="brand-name">
+                    <div class="brand-main">TokyoRoll</div>
+                    <div class="brand-sub">Императорские суши и роллы</div>
+                </div>
+            </a>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item" onclick="showPromotionsModal(); return false;">Акции</a>
+                <a href="/#menu-section" class="nav-item" onclick="goToMenu(); return false;">Меню</a>
+                <a href="#" class="nav-item" onclick="showAddressModal(); return false;">Адреса</a>
+            </nav>
+
+            <div class="user-actions">
+                {% if user.is_authenticated %}
+                    <a href="/accounts/profile/" class="user-icon" title="Личный кабинет">
+                        👤 {{ user.first_name|default:user.username }}
+                    </a>
+                {% else %}
+                    <a href="#" class="user-icon" id="userIcon">👤</a>
+                {% endif %}
+                <a href="{% url 'cart' %}" class="cart-icon">🛒</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Личный кабинет</h1>
+            <button class="logout-btn" onclick="logout()">Выйти</button>
+        </div>
+        
+        <div class="welcome-message">
+            <h3>Добро пожаловать, {{ user.first_name|default:"уважаемый клиент" }}! 🎉</h3>
+            <p>Мы рады видеть вас в личном кабинете TokyoRoll. Здесь вы можете управлять своими заказами и настройками профиля.</p>
+        </div>
+        
+        <div class="profile-content">
+            <div class="profile-sidebar">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">
+                        {% if profile.avatar %}
+                            <img src="{{ profile.avatar.url }}" alt="Аватар">
+                        {% else %}
+                            <div>👤</div>
+                        {% endif %}
+                    </div>
+                    <div class="user-details">
+                        <h3>{{ user.first_name|default:"Пользователь" }}</h3>
+                        <p>{% if user.username %}+7 ({{ user.username|slice:":3" }}) {{ user.username|slice:"3:6" }}-{{ user.username|slice:"6:8" }}-{{ user.username|slice:"8:10" }}{% endif %}</p>
+                    </div>
+                </div>
+                
+                <nav class="profile-nav">
+                    <a href="#" class="nav-item active" data-tab="orders">Мои заказы</a>
+                    <a href="#" class="nav-item" data-tab="profile">Профиль</a>
+                    <a href="#" class="nav-item" data-tab="addresses">Адреса доставки</a>
+                </nav>
+            </div>
+            
+            <div class="profile-main">
+                <div class="tab-content active" id="orders-tab">
+                    <h2>История заказов</h2>
+                    {% if orders %}
+                    <div class="orders-list">
+                        {% for order in orders %}
+                        <div class="order-card">
+                            <div class="order-header">
+                                <span class="order-number">Заказ #{{ order.id }}</span>
+                                <span class="order-date">{{ order.created_at|date:"d.m.Y H:i" }}</span>
+                            </div>
+                            <div class="order-items">
+                                {% for item in order.items.all %}
+                                <p>• {{ item.product.name }} x {{ item.quantity }} = {{ item.price|floatformat:0 }} ₽</p>
+                                {% endfor %}
+                            </div>
+                            <div class="order-footer">
+                                <span class="order-total">{{ order.total_price|floatformat:0 }} ₽</span>
+                                <button class="order-repeat" onclick="repeatOrder({{ order.id }})">Повторить заказ</button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="empty-orders">
+                        <p>У вас пока нет заказов</p>
+                        <p>Перейдите в <a href="/" onclick="goToMenu(); return false;" style="color: #d4af37;">меню</a>, чтобы сделать первый заказ! 🍣</p>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="tab-content" id="profile-tab">
+                    <h2>Личные данные</h2>
+                    <form id="profileEditForm" class="profile-edit-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="avatar-preview-container" style="text-align: center;">
+                            {% if profile.avatar %}
+                                <img src="{{ profile.avatar.url }}" alt="Аватар" class="avatar-preview" id="avatarPreview">
+                            {% else %}
+                                <img src="/media/avatars/default.png" alt="Аватар" class="avatar-preview" id="avatarPreview" style="display: none;">
+                                <div class="avatar-preview" id="avatarPlaceholder" style="display: flex; align-items: center; justify-content: center; font-size: 40px;">👤</div>
+                            {% endif %}
+                            <div class="avatar-upload">
+                                <button type="button" class="auth-btn" onclick="document.getElementById('avatarInput').click();" style="width: auto; padding: 8px 20px; margin-top: 10px;">Загрузить фото</button>
+                                <input type="file" id="avatarInput" name="avatar" accept="image/*" style="display: none;" onchange="previewAvatar(this)">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="first_name">Имя</label>
+                            <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="last_name">Фамилия</label>
+                            <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" name="phone" value="{{ profile.phone }}" placeholder="+7 (___) ___-__-__">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" value="{{ user.email }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new_password">Новый пароль (оставьте пустым, если не хотите менять)</label>
+                            <input type="password" id="new_password" name="new_password" placeholder="Введите новый пароль">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirm_password">Подтверждение пароля</label>
+                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Повторите пароль">
+                        </div>
+                        
+                        <button type="submit" class="save-btn">Сохранить изменения</button>
+                    </form>
+                </div>
+                
+                <div class="tab-content" id="addresses-tab">
+                    <h2>Мои адреса доставки</h2>
+                    <div id="addressesList" class="addresses-list">
+                        {% for address in addresses %}
+                        <div class="address-card {% if address.is_default %}default{% endif %}" data-address-id="{{ address.id }}">
+                            <div class="address-title">
+                                <h4>{{ address.title }}</h4>
+                                {% if address.is_default %}
+                                    <span class="default-badge">По умолчанию</span>
+                                {% endif %}
+                            </div>
+                            <div class="address-text">{{ address.address }}</div>
+                            {% if address.entrance %}
+                                <div class="address-entrance">Подъезд: {{ address.entrance }}</div>
+                            {% endif %}
+                            {% if address.floor %}
+                                <div class="address-floor">Этаж: {{ address.floor }}</div>
+                            {% endif %}
+                            {% if address.apartment %}
+                                <div class="address-apartment">Квартира: {{ address.apartment }}</div>
+                            {% endif %}
+                            {% if address.comment %}
+                                <div class="address-comment">Комментарий: {{ address.comment }}</div>
+                            {% endif %}
+                            <div class="address-actions">
+                                <button class="edit-address" onclick="editAddress({{ address.id }})">✏️ Редактировать</button>
+                                <button class="delete-btn" onclick="deleteAddress({{ address.id }})">🗑️ Удалить</button>
+                                {% if not address.is_default %}
+                                    <button onclick="setDefaultAddress({{ address.id }})">⭐ Сделать основным</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p style="color: #b8b8b8; text-align: center;">У вас пока нет сохраненных адресов</p>
+                        {% endfor %}
+                    </div>
+                    <button class="add-address-btn" onclick="showAddAddressModal()">+ Добавить новый адрес</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>Город: Курск</p>
+                <div class="footer-phone glowing-text">📞 8 (800) 555-35-35</div>
+                <p>Доставка с 10:00 до 23:00</p>
+                <p>Email: TokyoRoll46@mail.ru</p>
+                <div class="social-links" style="margin-top: 15px;">
+                    <p>Следите за нами в ВК:</p>
+                    <a href="https://vk.com/TokyoRoll46" target="_blank" class="social-link" style="display: inline-flex; margin-top: 5px;">
+                        <span>ВКонтакте</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Наши адреса</h3>
+                <ul class="address-list">
+                    <li>
+                        <strong>Улица Ленина 23</strong><br>
+                        Пн-Вс с 10:00 до 23:00<br>
+                        <span class="address-phone">📞 8-920-267-11-44</span>
+                    </li>
+                    <li>
+                        <strong>Улица Садовая 11</strong><br>
+                        Пн-Вс с 10:00 до 22:00<br>
+                        <span class="address-phone">📞 8-920-729-22-77</span>
+                    </li>
+                    <li>
+                        <strong>Проспект Кулакова 4</strong><br>
+                        Пн-Вс с 10:00 до 23:00<br>
+                        <span class="address-phone">📞 8-920-708-22-88</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Информация</h3>
+                <ul class="info-list">
+                    <li><a href="#" onclick="showAgreementModal(); return false;">Пользовательское соглашение</a></li>
+                    <li><a href="#" onclick="showPrivacyModal(); return false;">Политика конфиденциальности</a></li>
+                    <li><a href="#" onclick="showNewsletterModal(); return false;">Согласие на информационную рассылку</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TokyoRoll. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно для адресов -->
+    <div id="addressModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Наши адреса</h2>
+                <span class="close" onclick="closeAddressModal()">&times;</span>
+            </div>
+            <div class="address-modal-list">
+                <div class="address-modal-item">
+                    <div class="address-icon"></div>
+                    <div class="address-details">
+                        <h4>Улица Ленина 23</h4>
+                        <p>Пн-Вс: 10:00 - 23:00</p>
+                        <p>📞 8-920-267-11-44</p>
+                        <p class="address-desc"></p>
+                    </div>
+                </div>
+                <div class="address-modal-item">
+                    <div class="address-icon"></div>
+                    <div class="address-details">
+                        <h4>Улица Садовая 11</h4>
+                        <p>Пн-Вс: 10:00 - 22:00</p>
+                        <p>📞 8-920-729-22-77</p>
+                        <p class="address-desc"></p>
+                    </div>
+                </div>
+                <div class="address-modal-item">
+                    <div class="address-icon"></div>
+                    <div class="address-details">
+                        <h4>Проспект Кулакова 4</h4>
+                        <p>Пн-Вс: 10:00 - 23:00</p>
+                        <p>📞 8-920-708-22-88</p>
+                        <p class="address-desc"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="agreementModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Пользовательское соглашение</h2>
+                <span class="close" onclick="closeAgreementModal()">&times;</span>
+            </div>
+            <div class="modal-text">
+                <p>Пользовательское соглашение интернет-магазина TokyoRoll</p>
+                <p>1. Общие положения<br>
+                1.1. Настоящее Соглашение регулирует отношения между интернет-магазином TokyoRoll и пользователем сайта.<br>
+                1.2. Оформляя заказ, пользователь соглашается с условиями настоящего Соглашения.<br>
+                1.3. Магазин оставляет за собой право изменять условия Соглашения без уведомления пользователя.</p>
+                <p>2. Оформление заказа<br>
+                2.1. Заказ оформляется через корзину на сайте.<br>
+                2.2. После оформления заказа с вами свяжется оператор для подтверждения.</p>
+                <p>3. Оплата и доставка<br>
+                3.1. Оплата производится наличными или картой при получении.<br>
+                3.2. Доставка осуществляется в пределах города Курск.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Политика конфиденциальности</h2>
+                <span class="close" onclick="closePrivacyModal()">&times;</span>
+            </div>
+            <div class="modal-text">
+                <p>Политика конфиденциальности персональных данных</p>
+                <p>1. Сбор персональных данных<br>
+                1.1. Мы собираем только те данные, которые необходимы для обработки заказа (имя, телефон, адрес).<br>
+                1.2. Ваши данные не передаются третьим лицам без вашего согласия.</p>
+                <p>2. Использование данных<br>
+                2.1. Данные используются только для обработки заказов и информирования о статусе доставки.<br>
+                2.2. Вы можете отказаться от рассылки в любой момент.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="newsletterModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Согласие на рассылку</h2>
+                <span class="close" onclick="closeNewsletterModal()">&times;</span>
+            </div>
+            <div class="modal-text">
+                <p>Согласие на получение информационных сообщений</p>
+            <p>Я даю согласие на получение информационных сообщений от интернет-магазина TokyoRoll.<br>
+            Сообщения могут содержать информацию об акциях, скидках, новых блюдах и специальных предложениях.<br><br>
+            Вы можете отписаться от рассылки в любой момент, отправив письмо на адрес TokyoRoll46@mail.ru с темой "ОТПИСКА".</p>
+            <button class="auth-btn" onclick="closeNewsletterModal()" style="margin-top: 20px;">Понятно</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно с акциями -->
+    <div id="promotionsModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2>Наши акции</h2>
+                <span class="close" onclick="closePromotionsModal()">&times;</span>
+            </div>
+            <div class="promotions-list">
+                <div class="promotion-card">
+                    <div class="promotion-icon">🔥</div>
+                    <div class="promotion-details">
+                        <h3>Скидка 20% на первый заказ</h3>
+                        <p>При первом заказе от 1000₽ получите скидку 20% по промокоду <strong>FIRST20</strong></p>
+                        <span class="promotion-date">Действует бессрочно</span>
+                    </div>
+                </div>
+                <div class="promotion-card">
+                    <div class="promotion-icon">🚚</div>
+                    <div class="promotion-details">
+                        <h3>Бесплатная доставка</h3>
+                        <p>При заказе от 1500₽ доставка бесплатно в любой район города</p>
+                        <span class="promotion-date">Постоянная акция</span>
+                    </div>
+                </div>
+                <div class="promotion-card">
+                    <div class="promotion-icon">🎂</div>
+                    <div class="promotion-details">
+                        <h3>Скидка 15% в день рождения</h3>
+                        <p>Предъявите документ курьеру и получите скидку 15% на весь заказ</p>
+                        <span class="promotion-date">Активна всегда</span>
+                    </div>
+                </div>
+                <div class="promotion-card">
+                    <div class="promotion-icon">🍱</div>
+                    <div class="promotion-details">
+                        <h3>Сет "Токио" со скидкой 25%</h3>
+                        <p>Премиум сет из 40 суши всего за 2190₽ вместо 2790₽</p>
+                        <span class="promotion-date">До конца месяца</span>
+                    </div>
+                </div>
+                <div class="promotion-card">
+                    <div class="promotion-icon">👥</div>
+                    <div class="promotion-details">
+                        <h3>Приведи друга</h3>
+                        <p>Приведи друга и получи скидку 10% на следующий заказ</p>
+                        <span class="promotion-date">Постоянная акция</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Виджет чата -->
+    <div id="chatWidget" class="chat-widget">
+        <div class="chat-header">
+            <div class="chat-title">
+                <span class="chat-icon">🤖</span>
+                <span class="chat-name">TokyoBot</span>
+                <span class="chat-status">● онлайн</span>
+            </div>
+            <div class="chat-buttons">
+                <button class="chat-minimize" onclick="toggleChat()">−</button>
+                <button class="chat-close" onclick="closeChat()">✕</button>
+            </div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                Привет! Я TokyoBot 🤖<br>
+                Я помогу вам выбрать блюда, расскажу о составе и посоветую сеты!<br><br>
+                <strong>Что я умею:</strong><br>
+                • Рассказывать о роллах и суши<br>
+                • Описывать состав блюд<br>
+                • Рекомендовать сеты<br>
+                • Отвечать на вопросы о меню<br><br>
+                Просто спросите меня! 🍣
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Спросите TokyoBot..." onkeypress="handleChatKeyPress(event)">
+            <button onclick="sendChatMessage()">📤</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно для адреса -->
+    <div id="addressFormModal" class="modal address-form-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="addressModalTitle">Добавить адрес</h2>
+                <span class="close" onclick="closeAddressFormModal()">&times;</span>
+            </div>
+            <form id="addressForm" class="auth-form">
+                {% csrf_token %}
+                <input type="hidden" id="addressId" name="address_id" value="">
+                <div class="form-group">
+                    <label for="address_title">Название (Дом, Работа, Дача)</label>
+                    <input type="text" id="address_title" name="title" placeholder="Например: Дом" required>
+                </div>
+                <div class="form-group">
+                    <label for="address_text">Улица, дом</label>
+                    <input type="text" id="address_text" name="address" placeholder="ул. Ленина, д. 1" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="address_entrance">Подъезд</label>
+                        <input type="text" id="address_entrance" name="entrance" placeholder="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="address_floor">Этаж</label>
+                        <input type="text" id="address_floor" name="floor" placeholder="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="address_apartment">Квартира</label>
+                        <input type="text" id="address_apartment" name="apartment" placeholder="42">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address_comment">Комментарий для курьера</label>
+                    <textarea id="address_comment" name="comment" rows="2" placeholder="Код домофона, ориентиры и т.д."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="address_is_default" name="is_default">
+                        <span>Сделать адресом по умолчанию</span>
+                    </label>
+                </div>
+                <button type="submit" class="auth-btn">Сохранить адрес</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let chatMinimized = false;
+
+        function toggleChat() {
+            const widget = document.getElementById('chatWidget');
+            const messages = document.getElementById('chatMessages');
+            const input = document.querySelector('.chat-input');
+            
+            if (!chatMinimized) {
+                widget.style.height = '60px';
+                messages.style.display = 'none';
+                input.style.display = 'none';
+                chatMinimized = true;
+            } else {
+                widget.style.height = '550px';
+                messages.style.display = 'flex';
+                input.style.display = 'flex';
+                chatMinimized = false;
+            }
+        }
+
+        function closeChat() {
+            document.getElementById('chatWidget').style.display = 'none';
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addChatMessage(message, 'user');
+            input.value = '';
+            
+            fetch('/bot/api/chat/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({message: message})
+            })
+            .then(response => response.json())
+            .then(data => {
+                addChatMessage(data.response, 'bot');
+            })
+            .catch(error => {
+                addChatMessage('Извините, произошла ошибка. Попробуйте позже.', 'bot');
+            });
+        }
+
+        function addChatMessage(text, sender) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.style.cssText = sender === 'user' 
+                ? 'background: #2a2a2a; color: #d4af37; align-self: flex-end; padding: 10px 12px; border-radius: 12px; max-width: 85%; border: 1px solid #d4af37;' 
+                : 'background: #1a1a1a; color: #e0e0e0; align-self: flex-start; padding: 10px 12px; border-radius: 12px; max-width: 85%; border: 1px solid #333;';
+            messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function logout() {
+            fetch('/accounts/logout/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                window.location.href = '/';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function repeatOrder(orderId) {
+            fetch('/orders/repeat/' + orderId + '/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Товары добавлены в корзину');
+                    window.location.href = '/cart/';
+                } else {
+                    alert('Ошибка при повторении заказа');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function showAddressModal() {
+            const modal = document.getElementById('addressModal');
+            if (modal) {
+                modal.style.display = 'block';
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            }
+        }
+
+        function closeAddressModal() {
+            const modal = document.getElementById('addressModal');
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
+            }
+        }
+
+        function showAgreementModal() {
+            const modal = document.getElementById('agreementModal');
+            if (modal) {
+                modal.style.display = 'block';
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            }
+        }
+
+        function closeAgreementModal() {
+            const modal = document.getElementById('agreementModal');
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
+            }
+        }
+
+        function showPrivacyModal() {
+            const modal = document.getElementById('privacyModal');
+            if (modal) {
+                modal.style.display = 'block';
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            }
+        }
+
+        function closePrivacyModal() {
+            const modal = document.getElementById('privacyModal');
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
+            }
+        }
+
+        function showNewsletterModal() {
+            const modal = document.getElementById('newsletterModal');
+            if (modal) {
+                modal.style.display = 'block';
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            }
+        }
+
+        function closeNewsletterModal() {
+            const modal = document.getElementById('newsletterModal');
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
+            }
+        }
+
+        // Навигация по вкладкам
+        document.querySelectorAll('.profile-nav .nav-item').forEach(function(navItem) {
+            navItem.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelectorAll('.profile-nav .nav-item').forEach(function(item) {
+                    item.classList.remove('active');
+                });
+                
+                this.classList.add('active');
+                
+                document.querySelectorAll('.tab-content').forEach(function(tab) {
+                    tab.classList.remove('active');
+                });
+                
+                var tabId = this.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        window.onclick = function(event) {
+            if (event.target.classList && event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Функции для модальных окон
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            }
+            return false;
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
+            }
+            return false;
+        }
+
+        // Функция для показа модального окна акций
+        function showPromotionsModal() {
+            return showModal('promotionsModal');
+        }
+
+        function closePromotionsModal() {
+            return closeModal('promotionsModal');
+        }
+
+        // Переход на главную и прокрутка к меню
+        function goToMenu() {
+            // Запоминаем, что нужно прокрутить к меню
+            sessionStorage.setItem('scrollToMenu', 'true');
+            window.location.href = '/';
+        }
+
+        // ========== УПРАВЛЕНИЕ ПРОФИЛЕМ ==========
+        // Предпросмотр аватара
+        function previewAvatar(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var preview = document.getElementById('avatarPreview');
+                    var placeholder = document.getElementById('avatarPlaceholder');
+                    if (preview) {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                    }
+                    if (placeholder) placeholder.style.display = 'none';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    
+        
+        // ========== УПРАВЛЕНИЕ АДРЕСАМИ ==========
+        function showAddAddressModal() {
+            console.log('showAddAddressModal вызван');
+            var modal = document.getElementById('addressFormModal');
+            if (modal) {
+                document.getElementById('addressModalTitle').textContent = 'Добавить адрес';
+                document.getElementById('addressId').value = '';
+                document.getElementById('address_title').value = '';
+                document.getElementById('address_text').value = '';
+                document.getElementById('address_entrance').value = '';
+                document.getElementById('address_floor').value = '';
+                document.getElementById('address_apartment').value = '';
+                document.getElementById('address_comment').value = '';
+                document.getElementById('address_is_default').checked = false;
+                modal.style.display = 'block';
+                setTimeout(function() {
+                    modal.classList.add('show');
+                }, 10);
+            }
+        }
+        
+        function closeAddressFormModal() {
+            var modal = document.getElementById('addressFormModal');
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(function() {
+                    modal.style.display = 'none';
+                }, 300);
+            }
+        }
+        
+        function deleteAddress(addressId) {
+            if (confirm('Вы уверены, что хотите удалить этот адрес?')) {
+                fetch('/accounts/delete_address/' + addressId + '/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCSRFToken()
+                    }
+                })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    alert(data.message);
+                    if (data.success) {
+                        sessionStorage.setItem('activeTab', 'addresses');
+                        location.reload();
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                });
+            }
+        }
+        
+        function setDefaultAddress(addressId) {
+            fetch('/accounts/set_default_address/' + addressId + '/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCSRFToken()
+                }
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                alert(data.message);
+                if (data.success) {
+                    location.reload();
+                }
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+            });
+        }
+        
+        function editAddress(addressId) {
+            var card = document.querySelector('.address-card[data-address-id="' + addressId + '"]');
+            if (card) {
+                document.getElementById('addressModalTitle').textContent = 'Редактировать адрес';
+                document.getElementById('addressId').value = addressId;
+                document.getElementById('address_title').value = card.querySelector('.address-title h4').textContent;
+                document.getElementById('address_text').value = card.querySelector('.address-text').textContent;
+                
+                // Парсим детали
+                var entranceSpan = card.querySelector('.address-entrance');
+                var floorSpan = card.querySelector('.address-floor');
+                var apartmentSpan = card.querySelector('.address-apartment');
+                var commentSpan = card.querySelector('.address-comment');
+                
+                document.getElementById('address_entrance').value = entranceSpan ? entranceSpan.textContent.replace('Подъезд: ', '') : '';
+                document.getElementById('address_floor').value = floorSpan ? floorSpan.textContent.replace('Этаж: ', '') : '';
+                document.getElementById('address_apartment').value = apartmentSpan ? apartmentSpan.textContent.replace('Квартира: ', '') : '';
+                document.getElementById('address_comment').value = commentSpan ? commentSpan.textContent.replace('Комментарий: ', '') : '';
+                document.getElementById('address_is_default').checked = card.classList.contains('default');
+                
+                var modal = document.getElementById('addressFormModal');
+                if (modal) {
+                    modal.style.display = 'block';
+                    setTimeout(function() {
+                        modal.classList.add('show');
+                    }, 10);
+                }
+            }
+        }
+        
+        function getCSRFToken() {
+            var token = document.querySelector('[name=csrfmiddlewaretoken]');
+            return token ? token.value : '';
+        }
+        
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Восстановление активной вкладки после перезагрузки
+            var savedTab = sessionStorage.getItem('activeTab');
+            if (savedTab) {
+                var tabLink = document.querySelector('.profile-nav .nav-item[data-tab="' + savedTab + '"]');
+                if (tabLink) {
+                    document.querySelectorAll('.profile-nav .nav-item').forEach(function(item) {
+                        item.classList.remove('active');
+                    });
+                    tabLink.classList.add('active');
+                    document.querySelectorAll('.tab-content').forEach(function(tab) {
+                        tab.classList.remove('active');
+                    });
+                    document.getElementById(savedTab + '-tab').classList.add('active');
+                }
+                sessionStorage.removeItem('activeTab');
+            }
+            
+            // Обработка формы адреса (только один раз)
+            var addressForm = document.getElementById('addressForm');
+            if (addressForm) {
+                // Убираем старые обработчики
+                addressForm.onsubmit = null;
+                
+                addressForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    var addressId = document.getElementById('addressId').value;
+                    var url = addressId ? '/accounts/edit_address/' + addressId + '/' : '/accounts/add_address/';
+                    
+                    var formData = new FormData(this);
+                    formData.append('csrfmiddlewaretoken', getCSRFToken());
+                    
+                    fetch(url, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        alert(data.message);
+                        if (data.success) {
+                            sessionStorage.setItem('activeTab', 'addresses');
+                            location.reload();
+                        }
+                    })
+                    .catch(function(error) {
+                        console.error('Error:', error);
+                        alert('Ошибка при сохранении адреса');
+                    });
+                });
+            }
+            
+            // Обработка формы профиля
+            var profileForm = document.getElementById('profileEditForm');
+            if (profileForm) {
+                profileForm.onsubmit = function(e) {
+                    e.preventDefault();
+                    
+                    var formData = new FormData(this);
+                    formData.append('csrfmiddlewaretoken', getCSRFToken());
+                    
+                    fetch('/accounts/update_profile/', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        alert(data.message);
+                        if (data.success) {
+                            sessionStorage.setItem('activeTab', 'profile');
+                            location.reload();
+                        }
+                    })
+                    .catch(function(error) {
+                        console.error('Error:', error);
+                        alert('Ошибка при сохранении профиля');
+                    });
+                };
+            }
+        });
+        
+        // Маска для телефона
+        function formatPhoneNumber(input) {
+            var cleaned = input.value.replace(/\D/g, '');
+            if (cleaned.startsWith('7')) cleaned = cleaned.substring(1);
+            var match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})$/);
+            if (match) {
+                input.value = '+7(' + (match[1] ? match[1] : '') + ')' + 
+                            (match[2] ? match[2] : '') + 
+                            (match[3] ? '-' + match[3] : '') + 
+                            (match[4] ? '-' + match[4] : '');
+            }
+        }
+        
+        var phoneInput = document.getElementById('phone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() { formatPhoneNumber(this); });
+        }
+    </script>
+</body>
+</html>

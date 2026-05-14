@@ -1,0 +1,24 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Удаление пользователя | Панель администратора{% endblock %}
+{% block page_title %}Удаление пользователя{% endblock %}
+
+{% block content %}
+<div class="form-card" style="max-width: 500px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <div style="font-size: 64px; margin-bottom: 15px;">⚠️</div>
+        <h2 style="color: #e74c3c; margin-bottom: 15px;">Подтверждение удаления</h2>
+        <p style="color: #7f8c8d; margin-bottom: 10px;">Вы действительно хотите удалить пользователя:</p>
+        <p style="font-size: 18px; font-weight: bold; color: #2c3e50;">{{ user.get_full_name|default:user.username }}</p>
+        <p style="color: #e74c3c; font-size: 14px; margin-top: 15px;">Это действие нельзя отменить! Все заказы пользователя останутся в системе.</p>
+    </div>
+    
+    <div style="display: flex; gap: 15px; justify-content: center;">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" style="padding: 12px 30px;">Да, удалить</button>
+        </form>
+        <a href="{% url 'admin_panel:user_detail' user.id %}" class="btn btn-warning" style="padding: 12px 30px; text-decoration: none;">Отмена</a>
+    </div>
+</div>
+{% endblock %}

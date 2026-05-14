@@ -1,0 +1,132 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Пользователь {{ user.first_name|default:user.username }} | Панель администратора{% endblock %}
+{% block page_title %}Пользователь: {{ user.first_name|default:user.username }}{% endblock %}
+
+{% block content %}
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <!-- Информация о пользователе -->
+    <div class="stat-card">
+        <div class="stat-title">Личная информация</div>
+        <div style="margin-top: 15px;">
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333;">
+                <span style="color: #b8b8b8;">Имя:</span>
+                <span>{{ user.first_name|default:"-" }} {{ user.last_name|default:"" }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333;">
+                <span style="color: #b8b8b8;">Телефон:</span>
+                <span>
+                    {% if user.username|length == 10 %}
+                        +7 ({{ user.username|slice:":3" }}) {{ user.username|slice:"3:6" }}-{{ user.username|slice:"6:8" }}-{{ user.username|slice:"8:10" }}
+                    {% else %}
+                        {{ user.username }}
+                    {% endif %}
+                </span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333;">
+                <span style="color: #b8b8b8;">Email:</span>
+                <span>{{ user.email|default:"-" }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333;">
+                <span style="color: #b8b8b8;">Дата регистрации:</span>
+                <span>{{ user.date_joined|date:"d.m.Y H:i" }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                <span style="color: #b8b8b8;">Последний вход:</span>
+                <span>{{ user.last_login|date:"d.m.Y H:i"|default:"Никогда" }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Статистика -->
+    <div class="stat-card">
+        <div class="stat-title">Статистика</div>
+        <div style="margin-top: 15px;">
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333;">
+                <span style="color: #b8b8b8;">Всего заказов:</span>
+                <span style="color: #d4af37; font-weight: bold;">{{ orders.count }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333;">
+                <span style="color: #b8b8b8;">Сумма всех заказов:</span>
+                <span style="color: #d4af37; font-weight: bold; font-size: 18px;">{{ total_spent|floatformat:0 }} ₽</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Адреса доставки -->
+<div class="stat-card" style="margin-top: 20px;">
+    <div class="stat-title">Адреса доставки</div>
+    <div style="margin-top: 15px;">
+        {% with addresses=user.addresses.all %}
+            {% if addresses %}
+                {% for address in addresses %}
+                <div style="padding: 12px; border-bottom: 1px solid #333; {% if address.is_default %}background: rgba(212, 175, 55, 0.1);{% endif %}">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong style="color: #d4af37;">{{ address.title }}</strong>
+                            {% if address.is_default %}
+                                <span style="background: #d4af37; color: #1a1a1a; padding: 2px 8px; border-radius: 12px; font-size: 10px; margin-left: 8px;">По умолчанию</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div style="margin-top: 5px; color: #b8b8b8;">{{ address.address }}</div>
+                    {% if address.entrance or address.floor or address.apartment %}
+                        <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                            {% if address.entrance %}Подъезд: {{ address.entrance }} {% endif %}
+                            {% if address.floor %}Этаж: {{ address.floor }} {% endif %}
+                            {% if address.apartment %}Кв: {{ address.apartment }} {% endif %}
+                        </div>
+                    {% endif %}
+                    {% if address.comment %}
+                        <div style="font-size: 12px; color: #666; margin-top: 5px;">{{ address.comment }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <div style="text-align: center; padding: 20px; color: #666;">Нет сохраненных адресов</div>
+            {% endif %}
+        {% endwith %}
+    </div>
+</div>
+
+<!-- История заказов -->
+<div class="stat-card" style="margin-top: 20px;">
+    <div class="stat-title">История заказов</div>
+    <div style="overflow-x: auto; margin-top: 15px;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Сумма</th>
+                    <th>Статус</th>
+                    <th>Дата</th>
+                    <th>Тип</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.total_price|floatformat:0 }} ₽</td>
+                    <td><span class="status-badge status-{{ order.status }}">{{ order.get_status_display }}</span></td>
+                    <td>{{ order.created_at|date:"d.m.Y H:i" }}</td>
+                    <td>{% if order.delivery_type == 'pickup' %}Самовывоз{% else %}Доставка{% endif %}</td>
+                    <td><a href="{% url 'admin_panel:order_detail' order.id %}" class="btn btn-primary" style="padding: 4px 12px;">Детали</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" style="text-align: center;">Нет заказов</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Кнопки действий -->
+<div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+    <a href="{% url 'admin_panel:users_list' %}" class="btn btn-warning" style="text-decoration: none; text-align: center; padding: 10px 24px;">← Назад к списку</a>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Промокоды | Панель администратора{% endblock %}
+{% block page_title %}Промокоды{% endblock %}
+
+{% block content %}
+<div class="stat-card" style="margin-bottom: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+        <div class="stat-title">Список промокодов</div>
+        <a href="{% url 'admin_panel:promocode_add' %}" class="btn btn-primary">➕ Добавить промокод</a>
+    </div>
+</div>
+
+<div class="stat-card">
+    <div style="overflow-x: auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Код</th>
+                    <th>Тип скидки</th>
+                    <th>Значение</th>
+                    <th>Мин. сумма</th>
+                    <th>Срок действия</th>
+                    <th>Использовано</th>
+                    <th>Статус</th>
+                    <th>Первый заказ</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for promo in promocodes %}
+                <tr>
+                    <td><strong style="color: #d4af37;">{{ promo.code }}</strong></td>
+                    <td>{% if promo.discount_type == 'percent' %}Процент{% else %}Фиксированная{% endif %}</td>
+                    <td>
+                        {% if promo.discount_type == 'percent' %}
+                            {{ promo.discount_value|floatformat:0 }}%
+                        {% else %}
+                            {{ promo.discount_value|floatformat:0 }} ₽
+                        {% endif %}
+                    </td>
+                    <td>{% if promo.min_order_amount > 0 %}{{ promo.min_order_amount|floatformat:0 }} ₽{% else %}—{% endif %}</td>
+                    <td style="font-size: 12px;">
+                        {{ promo.valid_from|date:"d.m.Y" }}<br>
+                        → {{ promo.valid_to|date:"d.m.Y" }}
+                    </td>
+                    <td>{{ promo.used_count }} / {{ promo.max_uses }}</td>
+                    <td>
+                        {% if promo.is_active %}
+                            <span class="status-badge" style="background: #27ae60;">Активен</span>
+                        {% else %}
+                            <span class="status-badge" style="background: #e74c3c;">Неактивен</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if promo.only_first_order %}
+                            <span class="status-badge" style="background: #f39c12;">Только первый</span>
+                        {% else %}
+                            <span style="color: #666;">—</span>
+                        {% endif %}
+                    </td>
+                    <td style="display: flex; gap: 8px;">
+                        <a href="{% url 'admin_panel:promocode_edit' promo.id %}" class="btn btn-primary" style="padding: 6px 12px;">✏️</a>
+                        <a href="{% url 'admin_panel:promocode_delete' promo.id %}" class="btn btn-danger" style="padding: 6px 12px;" onclick="return confirm('Удалить промокод {{ promo.code }}?')">🗑️</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="9" style="text-align: center; padding: 40px;">Промокоды не найдены</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

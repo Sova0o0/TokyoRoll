@@ -1,0 +1,110 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Заказ #{{ order.id }} | Панель администратора{% endblock %}
+{% block page_title %}Заказ #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <!-- Информация о заказе -->
+    <div class="stat-card">
+        <div class="stat-title">Информация о заказе</div>
+        <div style="margin-top: 15px;">
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333;">
+                <span style="color: #b8b8b8;">Статус:</span>
+                <span class="status-badge status-{{ order.status }}">{{ order.get_status_display }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333;">
+                <span style="color: #b8b8b8;">Тип заказа:</span>
+                <span>{% if order.delivery_type == 'pickup' %}🏪 Самовывоз{% else %}🚚 Доставка{% endif %}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333;">
+                <span style="color: #b8b8b8;">Дата создания:</span>
+                <span>{{ order.created_at|date:"d.m.Y H:i" }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                <span style="color: #b8b8b8;">Промокод:</span>
+                <span>{% if order.promocode %}{{ order.promocode }}{% else %}—{% endif %}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Информация о клиенте -->
+    <div class="stat-card">
+        <div class="stat-title">Информация о клиенте</div>
+        <div style="margin-top: 15px;">
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333;">
+                <span style="color: #b8b8b8;">Имя:</span>
+                <span>{{ order.customer_name }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333;">
+                <span style="color: #b8b8b8;">Телефон:</span>
+                <span>{{ order.phone }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                <span style="color: #b8b8b8;">Пользователь:</span>
+                <span>{% if order.user %}{{ order.user.first_name|default:order.user.username }}{% else %}Гость{% endif %}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Адрес доставки -->
+<div class="stat-card" style="margin-top: 20px;">
+    <div class="stat-title">{% if order.delivery_type == 'pickup' %}Адрес самовывоза{% else %}Адрес доставки{% endif %}</div>
+    <div style="margin-top: 15px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+        <p style="color: #b8b8b8; line-height: 1.5;">{{ order.address|linebreaksbr }}</p>
+    </div>
+    {% if order.comment %}
+    <div style="margin-top: 10px;">
+        <div class="stat-title" style="font-size: 14px;">Комментарий</div>
+        <div style="margin-top: 8px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+            <p style="color: #b8b8b8;">{{ order.comment }}</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Товары в заказе -->
+<div class="stat-card" style="margin-top: 20px;">
+    <div class="stat-title">Товары в заказе</div>
+    <div style="overflow-x: auto; margin-top: 15px;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Товар</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items.all %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.price|floatformat:0 }} ₽</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price|floatformat:0|add:item.quantity|floatformat:0 }} ₽</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr style="background: rgba(212, 175, 55, 0.1);">
+                    <td colspan="3" style="text-align: right; font-weight: bold;">Итого:</td>
+                    <td style="color: #d4af37; font-weight: bold;">{{ order.total_price|floatformat:0 }} ₽</td>
+                </tr>
+                {% if order.discount_amount > 0 %}
+                <tr>
+                    <td colspan="3" style="text-align: right;">Скидка:</td>
+                    <td style="color: #27ae60;">-{{ order.discount_amount|floatformat:0 }} ₽</td>
+                </tr>
+                {% endif %}
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div style="display: flex; gap: 15px; margin-top: 20px; justify-content: flex-end;">
+    <a href="{% url 'admin_panel:order_edit' order.id %}" class="btn btn-primary">✏️ Редактировать статус</a>
+    <a href="{% url 'admin_panel:orders_list' %}" class="btn btn-warning">↩️ Назад к списку</a>
+</div>
+{% endblock %}

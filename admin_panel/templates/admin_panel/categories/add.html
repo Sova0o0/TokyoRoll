@@ -1,0 +1,34 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Добавить категорию | Панель администратора{% endblock %}
+{% block page_title %}Добавить категорию{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="name">Название категории *</label>
+            <input type="text" id="name" name="name" required placeholder="Например: Суши, Роллы, Сеты...">
+        </div>
+        
+        <div class="form-group">
+            <label for="order">Порядок сортировки</label>
+            <input type="number" id="order" name="order" value="0" placeholder="Меньше число - выше в списке">
+            <small style="display: block; margin-top: 5px; color: #7f8c8d;">Чем меньше число, тем выше категория в списке</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="image">Изображение категории</label>
+            <input type="file" id="image" name="image" accept="image/*">
+            <small style="display: block; margin-top: 5px; color: #7f8c8d;">Рекомендуемый размер: 800x600px</small>
+        </div>
+        
+        <div style="display: flex; gap: 15px; margin-top: 30px;">
+            <button type="submit" class="btn btn-primary">💾 Сохранить категорию</button>
+            <a href="{% url 'admin_panel:categories_list' %}" class="btn btn-warning">↩️ Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

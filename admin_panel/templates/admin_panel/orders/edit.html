@@ -1,0 +1,43 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Редактировать заказ #{{ order.id }} | Панель администратора{% endblock %}
+{% block page_title %}Редактировать заказ #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="status">Статус заказа</label>
+            <select id="status" name="status" required>
+                <option value="new" {% if order.status == 'new' %}selected{% endif %}>🆕 Новый</option>
+                <option value="preparing" {% if order.status == 'preparing' %}selected{% endif %}>🍳 Готовится</option>
+                <option value="delivering" {% if order.status == 'delivering' %}selected{% endif %}>🚚 Доставляется</option>
+                <option value="completed" {% if order.status == 'completed' %}selected{% endif %}>✅ Завершен</option>
+                <option value="cancelled" {% if order.status == 'cancelled' %}selected{% endif %}>❌ Отменен</option>
+            </select>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="color: #b8b8b8;">Клиент:</span>
+                <span>{{ order.customer_name }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="color: #b8b8b8;">Телефон:</span>
+                <span>{{ order.phone }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span style="color: #b8b8b8;">Сумма:</span>
+                <span style="color: #d4af37; font-weight: bold;">{{ order.total_price|floatformat:0 }} ₽</span>
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 15px; margin-top: 30px;">
+            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            <a href="{% url 'admin_panel:order_detail' order.id %}" class="btn btn-warning">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

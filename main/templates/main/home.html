@@ -1,0 +1,4304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TokyoRoll - Доставка суши и роллов</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .dragon-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(120, 0, 0, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .dragon-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path d="M30,20 Q50,10 70,20 Q85,30 80,50 Q75,70 50,80 Q25,70 20,50 Q15,30 30,20Z" fill="none" stroke="%23FFD700" stroke-width="0.5"/></svg>');
+            z-index: -1;
+        }
+
+        .top-info {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            color: #d4af37;
+            padding: 12px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #d4af37;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .top-info .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .phone-order {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .phone-order .phone {
+            font-size: 20px;
+            font-weight: bold;
+            color: #d4af37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .schedule {
+            display: flex;
+            gap: 25px;
+        }
+
+        .schedule-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .schedule-days {
+            font-weight: bold;
+            font-size: 13px;
+            color: #d4af37;
+        }
+
+        .schedule-time {
+            font-size: 12px;
+            color: #b8b8b8;
+        }
+
+        .main-header {
+            background: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #d4af37;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: transparent; 
+            border-radius: 15px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            border-radius: 13px; 
+        }
+
+        .brand-name {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-main {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .brand-sub {
+            font-size: 13px;
+            color: #b8b8b8;
+            margin-top: -5px;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .cart-icon, .user-icon {
+            position: relative;
+            text-decoration: none;
+            color: #d4af37;
+            font-size: 24px;
+            padding: 12px;
+            transition: all 0.3s;
+            border-radius: 50%;
+            border: 1px solid transparent;
+        }
+
+        .cart-icon:hover, .user-icon:hover {
+            color: #ffd700;
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: scale(1.1);
+        }
+
+        .slider {
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-bottom: 3px solid #d4af37;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            max-width: 700px;
+            padding: 0 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .slide h2 {
+            font-size: 52px;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .slide p {
+            font-size: 22px;
+            margin-bottom: 35px;
+            color: #e0e0e0;
+        }
+
+        .slide-btn {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            padding: 18px 35px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .slide-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(45deg, #ffd700, #d4af37);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background: #d4af37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+            transform: scale(1.2);
+        }
+
+        .popular-sets {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 60px;
+            position: relative;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        .sets-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .set-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.3s;
+            border: 1px solid #333;
+            position: relative;
+        }
+
+        .set-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #d4af37, #ffd700, #d4af37);
+        }
+
+        .set-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
+
+        .set-image {
+            height: 220px;
+            background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            color: #d4af37;
+            border-bottom: 2px solid #333;
+        }
+
+        .set-content {
+            padding: 25px;
+        }
+
+        .set-name {
+            font-size: 22px;
+            color: #d4af37;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .set-description {
+            color: #b8b8b8;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .set-price {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .current-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d4af37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .old-price {
+            font-size: 20px;
+            color: #666;
+            text-decoration: line-through;
+        }
+
+        .discount {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .menu-categories {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .categories-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            overflow: hidden;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid #333;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .category-card:hover::before {
+            left: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: #d4af37;
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Изображение категории (верхняя часть 60%) */
+        .category-image {
+            height: 60%;
+            min-height: 160px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .category-card:hover .category-image img {
+            transform: scale(1.1);
+        }
+
+        /* Затемнение для лучшей читаемости (опционально) */
+        .category-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+            pointer-events: none;
+        }
+
+        /* Нижняя часть с текстом */
+        .category-info {
+            padding: 12px 14px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .category-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 5px;
+        }
+
+        .category-count {
+            font-size: 16px;
+            color: #b8b8b8;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .category-image {
+                min-height: 120px;
+            }
+            
+            .category-name {
+                font-size: 16px;
+            }
+            
+            .category-count {
+                font-size: 11px;
+            }
+            
+            .category-info {
+                padding: 12px 10px;
+            }
+        }
+
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #d4af37;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+            display: none;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        .address-modal-list {
+            padding: 20px;
+        }
+
+        .address-modal-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .address-modal-item:hover {
+            border-color: #d4af37;
+        }
+
+        .address-details h4 {
+            color: #d4af37;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .address-details p {
+            color: #b8b8b8;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        /* Модальное окно с адресами */
+        .address-modal-list {
+            padding: 20px;
+        }
+
+        .address-modal-item {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 15px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .address-modal-item:hover {
+            border-color: #d4af37;
+            transform: translateX(5px);
+        }
+
+        .address-icon {
+            font-size: 40px;
+        }
+
+        .address-details h4 {
+            color: #d4af37;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .address-details p {
+            color: #b8b8b8;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .address-desc {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #333;
+        }
+
+        .modal-text {
+            padding: 25px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .modal-text p {
+            color: #b8b8b8;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            color: #e0e0e0;
+            padding: 60px 20px 30px;
+            border-top: 3px solid #d4af37;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #d4af37;
+            margin-bottom: 25px;
+            font-size: 22px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-section p {
+            margin-bottom: 12px;
+            color: #b8b8b8;
+            line-height: 1.6;
+        }
+
+        .footer-phone {
+            font-size: 26px;
+            font-weight: bold;
+            color: #d4af37;
+            margin: 15px 0;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .address-list {
+            list-style: none;
+        }
+
+        .address-list li {
+            margin-bottom: 15px;
+            color: #b8b8b8;
+            line-height: 1.5;
+        }
+
+        .address-phone {
+            color: #d4af37;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            padding: 15px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 15px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #333;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .product-details {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0;
+            color: #b8b8b8;
+            font-size: 14px;
+        }
+
+        .product-composition {
+            color: #b8b8b8;
+            font-size: 13px;
+            margin: 10px 0;
+            line-height: 1.4;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+
+        /* Аккордеон для категорий */
+        .category-accordion {
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            border-radius: 15px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+        }
+
+        .accordion-header {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .accordion-header:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .accordion-header.active {
+            border-bottom-color: #d4af37;
+        }
+
+        .category-title-accordion {
+            font-size: 24px;
+            color: #d4af37;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-icon-large {
+            font-size: 32px;
+        }
+
+        .category-count-badge {
+            background: rgba(212, 175, 55, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #d4af37;
+        }
+
+        .accordion-icon {
+            font-size: 24px;
+            transition: transform 0.3s;
+            color: #d4af37;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: #0a0a0a;
+        }
+
+        .accordion-content.active {
+            max-height: 2000px;
+            transition: max-height 0.6s ease-in;
+        }
+
+        .products-grid-accordion {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 25px;
+        }
+
+        .product-card-accordion {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .product-card-accordion:hover {
+            border-color: #d4af37;
+            transform: translateY(-3px);
+        }
+
+        .product-name-accordion {
+            font-size: 18px;
+            color: #d4af37;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-price-accordion {
+            font-size: 22px;
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            color: #b8b8b8;
+            font-size: 13px;
+        }
+
+        .product-composition-accordion {
+            color: #b8b8b8;
+            font-size: 12px;
+            margin: 10px 0;
+            padding: 8px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            line-height: 1.4;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            margin-bottom: 12px;
+        }
+
+        .info-list li a {
+            color: #b8b8b8;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .info-list li a:hover {
+            color: #d4af37;
+        }
+
+        .social-links p {
+            margin-bottom: 8px;
+            color: #b8b8b8;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.6); }
+        }
+
+        .glowing-text {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            .top-info .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .main-header .container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-menu {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .slide h2 {
+                font-size: 36px;
+            }
+
+            .slide p {
+                font-size: 18px;
+            }
+
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+
+        /* Модальные окна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 15px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid #333;
+        }
+
+        .modal-header h2 {
+            color: #d4af37;
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .close {
+            color: #d4af37;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            line-height: 1;
+            padding: 0 5px;
+        }
+
+        .close:hover {
+            color: #ffd700;
+            transform: scale(1.1);
+        }
+
+        .modal-text {
+            padding: 25px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .modal-text p {
+            color: #b8b8b8;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .welcome-text {
+            color: #b8b8b8;
+            margin: 10px 0 0 0;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .auth-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            color: #e0e0e0;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .phone-input {
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+
+        .phone-input::placeholder {
+            color: #666;
+            opacity: 1;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #b8b8b8;
+        }
+
+        .checkbox-label input {
+            display: none;
+        }
+
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d4af37;
+            border-radius: 4px;
+            margin-right: 10px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .checkbox-label input:checked + .checkmark {
+            background: #d4af37;
+        }
+
+        .checkbox-label input:checked + .checkmark::after {
+            content: '✓';
+            position: absolute;
+            color: #1a1a1a;
+            font-size: 14px;
+            font-weight: bold;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .forgot-password {
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password:hover {
+            color: #ffd700;
+        }
+
+        .auth-btn {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            border: none;
+            padding: 15px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .auth-agreement {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #b8b8b8;
+        }
+
+        .auth-agreement a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        .auth-switch {
+            text-align: center;
+            color: #b8b8b8;
+        }
+
+        .auth-switch a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .auth-switch a:hover {
+            color: #ffd700;
+        }
+
+        .code-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        /* Счетчик корзины */
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-counter {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+
+        /* Слайдер с картинками */
+        .slider {
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* Контейнер для кнопки */
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .slide h2 {
+            font-size: 52px;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .slide p {
+            font-size: 22px;
+            margin-bottom: 35px;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .slide-btn {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            padding: 18px 35px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .slide-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(45deg, #ffd700, #d4af37);
+        }
+
+        /* Стрелки навигации */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 24px;
+            color: #d4af37;
+        }
+
+        .slider-arrow:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-arrow.prev {
+            left: 20px;
+        }
+
+        .slider-arrow.next {
+            right: 20px;
+        }
+
+        /* Точки слайдера */
+        .slider-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background: #d4af37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .slider {
+                height: 400px;
+            }
+            
+            .slide h2 {
+                font-size: 32px;
+            }
+            
+            .slide p {
+                font-size: 16px;
+            }
+            
+            .slider-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .slider-arrow.prev {
+                left: 10px;
+            }
+            
+            .slider-arrow.next {
+                right: 10px;
+            }
+        }
+
+        /* Контейнер с товарами категории */
+        #categoryProductsContainer {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 1200px;
+            width: 90%;
+            border: 2px solid #d4af37;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .category-products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        .category-products-header h3 {
+            color: #d4af37;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .close-products-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .close-products-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+        }
+
+        /* Сетка товаров */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: #d4af37;
+            transform: translateY(-5px);
+        }
+
+        .product-name {
+            font-size: 20px;
+            color: #d4af37;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 24px;
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            color: #b8b8b8;
+            font-size: 13px;
+        }
+
+        .product-composition {
+            color: #b8b8b8;
+            font-size: 13px;
+            margin: 10px 0;
+            padding: 8px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            line-height: 1.4;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Подсветка выбранной категории */
+        .category-card.active-category {
+            border-color: #d4af37;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        }
+
+        .category-card.active-category .category-name {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .category-card.active-category .category-icon {
+            transform: scale(1.1);
+            transition: transform 0.3s;
+        }
+
+        .category-products-container {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 1200px;
+            width: 90%;
+            border: 2px solid #d4af37;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+            clear: both;
+        }
+
+        /* Модальное окно акций */
+        .promotions-list {
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .promotion-card {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            border-radius: 15px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .promotion-card:hover {
+            border-color: #d4af37;
+            transform: translateX(5px);
+        }
+
+        .promotion-icon {
+            font-size: 48px;
+        }
+
+        .promotion-details h3 {
+            color: #d4af37;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .promotion-details p {
+            color: #b8b8b8;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .promotion-date {
+            color: #27ae60;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Контролы количества товара */
+        .product-quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .qty-minus, .qty-plus {
+            background: linear-gradient(45deg, #d4af37, #b8941f);
+            color: #1a1a1a;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .qty-minus:hover, .qty-plus:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .qty-count {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d4af37;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        /* Стили для карточки товара с фото */
+        .product-card-accordion {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .product-image-wrapper {
+            flex-shrink: 0;
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #1a1a1a;
+            border: 1px solid #333;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-no-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #d4af37;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name-accordion {
+            font-size: 18px;
+            color: #d4af37;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .product-price-accordion {
+            font-size: 20px;
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 8px;
+            color: #b8b8b8;
+            font-size: 12px;
+        }
+
+        .product-composition-accordion {
+            color: #b8b8b8;
+            font-size: 12px;
+            margin: 8px 0;
+            padding: 6px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 6px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .product-card-accordion {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .product-image-wrapper {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .product-meta {
+                justify-content: center;
+            }
+        }
+
+        /* Модальное окно для увеличенного фото */
+        .full-image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .full-image-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            border: 3px solid #d4af37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            cursor: default;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .full-image-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #d4af37;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10002;
+        }
+
+        .full-image-close:hover {
+            color: #ffd700;
+            transform: scale(1.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .product-image:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+    /* === АДАПТИВНЫЕ СТИЛИ === */
+    /* Для планшетов (768px - 1024px) */
+    @media (max-width: 1024px) {
+        .container, .main-header .container, .top-info .container {
+            padding: 0 20px;
+        }
+        
+        .categories-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .sets-grid {
+            gap: 20px;
+        }
+        
+        .products-grid-accordion {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* Для мобильных телефонов (до 768px) */
+    @media (max-width: 768px) {
+        /* Шапка - горизонтальное расположение */
+        .main-header .container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            gap: 10px;
+        }
+        
+        .logo-section {
+            order: 1;
+            flex: 0 0 auto;
+        }
+        
+        .logo {
+            width: 45px;
+            height: 45px;
+        }
+        
+        .brand-main {
+            font-size: 16px;
+        }
+        
+        .brand-sub {
+            font-size: 8px;
+        }
+        
+        .user-actions {
+            order: 2;
+            flex: 0 0 auto;
+        }
+        
+        .nav-menu {
+            order: 3;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        
+        .nav-item {
+            padding: 5px 10px;
+            font-size: 11px;
+        }
+        
+        /* Верхняя панель */
+        .top-info .container {
+            flex-direction: column;
+            text-align: center;
+            gap: 5px;
+            padding: 8px 15px;
+        }
+        
+        .phone-order {
+            justify-content: center;
+        }
+        
+        .phone-order .phone {
+            font-size: 16px;
+        }
+        
+        .schedule-days {
+            font-size: 12px;
+        }
+        
+        .schedule-time {
+            font-size: 11px;
+        }
+        
+        /* Слайдер */
+        .slider {
+            height: 250px;
+        }
+        
+        .slider-arrow {
+            width: 35px;
+            height: 35px;
+            font-size: 18px;
+        }
+        
+        .slider-arrow.prev {
+            left: 10px;
+        }
+        
+        .slider-arrow.next {
+            right: 10px;
+        }
+        
+        .slide h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .slide p {
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .slide-btn {
+            padding: 8px 20px;
+            font-size: 12px;
+        }
+        
+        /* Популярные сеты */
+        .popular-sets {
+            padding: 50px 15px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+        
+        .sets-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .set-card {
+            max-width: 100%;
+        }
+        
+        .set-image {
+            height: 180px;
+        }
+        
+        .set-name {
+            font-size: 18px;
+        }
+        
+        .set-description {
+            font-size: 12px;
+        }
+        
+        .current-price {
+            font-size: 22px;
+        }
+        
+        /* Категории (плитки) */
+        .menu-categories {
+            padding: 50px 15px;
+        }
+        
+        .categories-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .category-card {
+            padding: 20px 10px;
+        }
+        
+        .category-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .category-name {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .category-count {
+            font-size: 11px;
+        }
+        
+        /* Аккордеон */
+        .menu-accordion {
+            padding: 0 15px 50px;
+        }
+        
+        .accordion-header {
+            padding: 12px 15px;
+        }
+        
+        .category-title-accordion {
+            font-size: 16px;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .category-icon-large {
+            font-size: 24px;
+        }
+        
+        .category-count-badge {
+            font-size: 11px;
+            padding: 2px 8px;
+        }
+        
+        .accordion-icon {
+            font-size: 20px;
+        }
+        
+        /* Товары в аккордеоне */
+        .products-grid-accordion {
+            grid-template-columns: 1fr;
+            gap: 15px;
+            padding: 15px;
+        }
+        
+        .product-card-accordion {
+            flex-direction: row;
+            text-align: left;
+            gap: 12px;
+            padding: 12px;
+        }
+        
+        .product-image-wrapper {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+        
+        .product-info {
+            flex: 1;
+        }
+        
+        .product-name-accordion {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .product-price-accordion {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .product-meta {
+            font-size: 11px;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .product-composition-accordion {
+            font-size: 11px;
+            margin: 5px 0;
+            padding: 4px;
+        }
+        
+        .add-to-cart-btn {
+            padding: 8px 12px;
+            font-size: 12px;
+        }
+        
+        /* Контролы количества */
+        .product-quantity-control {
+            margin-top: 8px;
+            gap: 10px;
+        }
+        
+        .qty-minus, .qty-plus {
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+        }
+        
+        .qty-count {
+            font-size: 14px;
+            min-width: 25px;
+        }
+        
+        /* Модальное окно с адресами */
+        .address-modal-list {
+            padding: 15px;
+        }
+        
+        .address-modal-item {
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+            padding: 15px;
+        }
+        
+        /* Футер */
+        .footer {
+            padding: 40px 15px 20px;
+        }
+        
+        .footer-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-phone {
+            font-size: 20px;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            justify-content: center;
+        }
+        
+        /* Модальные окна */
+        .modal-content {
+            width: 95%;
+            margin: 30px auto;
+            max-width: 450px;
+        }
+        
+        .modal-header {
+            padding: 15px 20px;
+        }
+        
+        .modal-header h2 {
+            font-size: 18px;
+        }
+        
+        .auth-form {
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            font-size: 13px;
+        }
+        
+        .form-group input {
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        .auth-btn {
+            padding: 12px;
+            font-size: 14px;
+        }
+        
+        /* Чат виджет */
+        .chat-widget {
+            width: 320px;
+            height: 480px;
+            right: 10px;
+            bottom: 10px;
+            left: auto;
+        }
+        
+        .chat-header {
+            padding: 10px 12px;
+        }
+        
+        .chat-name {
+            font-size: 14px;
+        }
+        
+        .chat-messages {
+            padding: 12px;
+        }
+        
+        .message {
+            font-size: 12px;
+            padding: 8px 10px;
+        }
+        
+        .chat-input input {
+            padding: 8px 12px;
+            font-size: 12px;
+        }
+        
+        .chat-input button {
+            width: 35px;
+            height: 35px;
+        }
+        
+        /* Кнопка наверх */
+        .scroll-to-top {
+            bottom: 70px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+        }
+    }
+
+    /* Для маленьких телефонов (до 480px) */
+    @media (max-width: 480px) {
+        .logo {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .brand-main {
+            font-size: 14px;
+        }
+        
+        .brand-sub {
+            font-size: 7px;
+        }
+        
+        .nav-item {
+            padding: 4px 8px;
+            font-size: 10px;
+        }
+        
+        .categories-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .category-card {
+            padding: 15px 5px;
+        }
+        
+        .category-icon {
+            font-size: 28px;
+        }
+        
+        .category-name {
+            font-size: 12px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+        }
+        
+        .product-card-accordion {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .product-image-wrapper {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+        }
+        
+        .product-meta {
+            justify-content: center;
+        }
+        
+        .chat-widget {
+            width: calc(100% - 20px);
+            right: 10px;
+            left: 10px;
+            height: 450px;
+        }
+    }
+
+    /* Горизонтальная ориентация на телефонах */
+    @media (max-width: 768px) and (orientation: landscape) {
+        .slider {
+            height: 200px;
+        }
+        
+        .categories-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .products-grid-accordion {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .chat-widget {
+            height: 350px;
+        }
+    }
+
+    /* Отключаем hover эффекты на мобильных */
+    @media (max-width: 768px) {
+        .category-card:hover,
+        .set-card:hover,
+        .product-card-accordion:hover,
+        .nav-item:hover,
+        .cart-icon:hover,
+        .user-icon:hover,
+        .slide-btn:hover,
+        .add-to-cart-btn:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .category-card:hover::before {
+            left: -100%;
+        }
+    }
+
+    .welcome-text {
+        color: #b8b8b8;
+        margin: 0 30px 10px 30px;
+        font-size: 14px;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    
+
+
+    </style>
+</head>
+<body>
+    <!-- Фоновые элементы -->
+    <div class="dragon-bg"></div>
+    <div class="dragon-pattern"></div>
+
+    <!-- Верхняя информационная панель -->
+    <div class="top-info">
+        <div class="container">
+            <div class="phone-order">
+                <span>Заказать по телефону:</span>
+                <span class="phone glowing-text">8 (800) 555-35-35</span>
+            </div>
+            <div class="schedule">
+                <div class="schedule-item">
+                    <span class="schedule-days">Режим работы</span>
+                    <span class="schedule-time">Ежедневно с 10:00 до 23:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основная шапка -->
+    <header class="main-header">
+        <div class="container">
+            <a href="{% url 'home' %}" class="logo-section">
+                <div class="logo">
+                    <img src="/media/logo1.png" alt="TokyoRoll" style="width: 120%; height: 120%; object-fit: contain;">
+                </div>
+                <div class="brand-name">
+                    <div class="brand-main">TokyoRoll</div>
+                    <div class="brand-sub">Императорские суши и роллы</div>
+                </div>
+            </a>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item" onclick="showPromotionsModal(); return false;">Акции</a>
+                <a href="#" class="nav-item" id="menuLink">Меню</a>
+                <a href="#" class="nav-item" onclick="showAddressModal(); return false;">Адреса</a>
+            </nav>
+
+            <div class="user-actions">
+                {% if user.is_authenticated %}
+                    <a href="/accounts/profile/" class="user-icon" title="Личный кабинет">
+                        👤 {{ user.first_name|default:user.username }}
+                    </a>
+                {% else %}
+                    <a href="#" class="user-icon" onclick="showLoginModal(); return false;">👤</a>
+                {% endif %}
+                <a href="{% url 'cart' %}" class="cart-icon">🛒</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Слайдер -->
+    <section class="slider">
+        <div class="slide active" style="background-image: url('/media/slider/slide11.jpg');">
+            <div class="slide-content"></div>
+        </div>
+        <div class="slide" style="background-image: url('/media/slider/slide2.jpg');">
+            <div class="slide-content"></div>
+        </div>
+        <div class="slide" style="background-image: url('/media/slider/slide3.jpg');">
+            <div class="slide-content"></div>
+        </div>
+        <div class="slider-dots">
+            <div class="dot active" data-slide="0"></div>
+            <div class="dot" data-slide="1"></div>
+            <div class="dot" data-slide="2"></div>
+        </div>
+
+        <!-- Стрелки навигации -->
+        <div class="slider-arrow prev" onclick="prevSlide()">‹</div>
+        <div class="slider-arrow next" onclick="nextSlide()">›</div>
+        
+        <div class="slider-dots">
+            <div class="dot active" data-slide="0"></div>
+            <div class="dot" data-slide="1"></div>
+            <div class="dot" data-slide="2"></div>
+        </div>
+    </section>
+
+    <!-- Популярные сеты -->
+    <section class="popular-sets">
+        <h2 class="section-title">ПОПУЛЯРНЫЕ СЕТЫ</h2>
+        <div class="sets-grid">
+            {% for product in popular_sets %}
+            <div class="set-card" data-product-id="{{ product.id }}">
+                <div class="set-image" onclick="openFullImageUniversal(this)">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    {% else %}
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 64px;">🍱</div>
+                    {% endif %}
+                </div>
+                <div class="set-content">
+                    <h3 class="set-name">{{ product.name }}</h3>
+                    <p class="set-description">{{ product.composition|truncatechars:80 }}</p>
+                    <div class="set-price">
+                        <span class="current-price">{{ product.price }} ₽</span>
+                    </div>
+                    <div class="product-quantity-control" style="display: none;">
+                        <button class="qty-minus" data-product-id="{{ product.id }}">-</button>
+                        <span class="qty-count" id="qty-{{ product.id }}">1</span>
+                        <button class="qty-plus" data-product-id="{{ product.id }}">+</button>
+                    </div>
+                    <button class="add-to-cart-btn slide-btn" style="width: 100%;" data-product-id="{{ product.id }}">В КОРЗИНУ</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Плитки категорий -->
+    <section class="menu-categories">
+        <h2 class="section-title">НАШЕ МЕНЮ</h2>
+        <div class="categories-grid" id="categoriesGrid">
+            {% for category in categories %}
+            <div class="category-card" data-cat-id="{{ category.id }}" data-cat-name="{{ category.name }}">
+                <div class="category-image">
+                    {% if category.image %}
+                        <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                    {% else %}
+                        <img src="/media/categories/{{ category.name|lower }}.jpg" alt="{{ category.name }}" 
+                            onerror="this.src='/media/categories/default.jpg'">
+                    {% endif %}
+                </div>
+                <div class="category-info">
+                    <div class="category-name">{{ category.name }}</div>
+                    <div class="category-count">{{ category.product_set.count }} позиций</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Аккордеон с товарами по категориям (скрыт, используется для данных) -->
+    <div class="menu-accordion" style="display: none;">
+        {% for category in categories %}
+        <div class="category-accordion" data-cat-id="{{ category.id }}">
+            <div class="accordion-header">
+                <div class="category-title-accordion">
+                    <span class="category-icon-large">
+                        {% if category.name == 'Сеты' %}🍱
+                        {% elif category.name == 'Роллы' %}🍣
+                        {% elif category.name == 'Жареные роллы' %}🔥
+                        {% elif category.name == 'Запеченные роллы' %}🧀
+                        {% elif category.name == 'Классические роллы' %}🍚
+                        {% elif category.name == 'Суши' %}🐟
+                        {% elif category.name == 'Закуски' %}🍤
+                        {% elif category.name == 'Соусы и дополнения' %}🥫
+                        {% else %}🍽️
+                        {% endif %}
+                    </span>
+                    <span>{{ category.name }}</span>
+                    <span class="category-count-badge">{{ category.product_set.count }} позиций</span>
+                </div>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="products-grid-accordion">
+                    {% for product in category.product_set.all %}
+                        {% if product.available %}
+                        <div class="product-card-accordion" data-product-id="{{ product.id }}" onclick="openFullImage(this)">
+                            <div class="product-image-wrapper">
+                                {% if product.image %}
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" onclick="openFullImage(this)">
+                                {% else %}
+                                    <div class="product-no-image">🍣</div>
+                                {% endif %}
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name-accordion">{{ product.name }}</div>
+                                <div class="product-price-accordion">{{ product.price }} ₽</div>
+                                <div class="product-meta">
+                                    <span> {{ product.weight }} г</span>
+                                    <span> {{ product.pieces }} шт.</span>
+                                </div>
+                                <div class="product-composition-accordion">{{ product.composition }}</div>
+                                <div class="product-quantity-control" style="display: none;">
+                                    <button class="qty-minus" data-product-id="{{ product.id }}">-</button>
+                                    <span class="qty-count" id="qty-{{ product.id }}">1</span>
+                                    <button class="qty-plus" data-product-id="{{ product.id }}">+</button>
+                                </div>
+                                <button class="add-to-cart-btn" data-product-id="{{ product.id }}">🛒 В корзину</button>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Контейнер для отображения товаров выбранной категории -->
+    <div id="categoryProductsContainer" class="category-products-container" style="display: none;">
+        <div class="category-products-header">
+            <h3 id="selectedCategoryTitle" class="category-title"></h3>
+            <button class="close-products-btn" onclick="closeCategoryProducts()">✕</button>
+        </div>
+        <div id="categoryProductsList" class="products-grid">
+        </div>
+    </div>
+
+    <!-- Кнопка наверх -->
+    <button class="scroll-to-top" id="scrollToTop">↑</button>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>Город: Курск</p>
+                <div class="footer-phone glowing-text">📞 8 (800) 555-35-35</div>
+                <p>Доставка с 10:00 до 23:00</p>
+                <p>Email: TokyoRoll46@mail.ru</p>
+                <div class="social-links" style="margin-top: 15px;">
+                    <p>Следите за нами в ВК:</p>
+                    <a href="https://vk.com/TokyoRoll46" target="_blank" class="social-link" style="display: inline-flex; margin-top: 5px;">
+                        <span>ВКонтакте</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Наши адреса</h3>
+                <ul class="address-list">
+                    <li>
+                        <strong>Улица Ленина 23</strong><br>
+                        Пн-Вс с 10:00 до 23:00<br>
+                        <span class="address-phone">📞 8-920-267-11-44</span>
+                    </li>
+                    <li>
+                        <strong>Улица Садовая 11</strong><br>
+                        Пн-Вс с 10:00 до 22:00<br>
+                        <span class="address-phone">📞 8-920-729-22-77</span>
+                    </li>
+                    <li>
+                        <strong>Проспект Кулакова 4</strong><br>
+                        Пн-Вс с 10:00 до 23:00<br>
+                        <span class="address-phone">📞 8-920-708-22-88</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Информация</h3>
+                <ul class="info-list">
+                    <li><a href="#" onclick="showAgreementModal(); return false;">Пользовательское соглашение</a></li>
+                    <li><a href="#" onclick="showPrivacyModal(); return false;">Политика конфиденциальности</a></li>
+                    <li><a href="#" onclick="showNewsletterModal(); return false;">Согласие на информационную рассылку</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TokyoRoll. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Модальные окна -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <h2>Вход в личный кабинет</h2>
+            </div>
+            <form class="auth-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="login-phone">Номер телефона</label>
+                    <input type="tel" id="login-phone" class="phone-input" placeholder="+7(***)***-**-**" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" placeholder="Введите пароль" required>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me">
+                        <span class="checkmark"></span>
+                        Запомнить меня
+                    </label>
+                    <a href="#" class="forgot-password" onclick="showForgotPasswordModal(); return false;">Забыли пароль?</a>
+                </div>
+                <button type="submit" class="auth-btn">Войти</button>
+            </form>
+            <div class="auth-switch">
+                <p>Нет аккаунта? <a href="#" onclick="showRegisterModal(); return false;">Зарегистрироваться</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <h2>Регистрация</h2>
+            </div>
+            <div class="welcome-text">
+                <p>Добро пожаловать в TokyoRoll! Создайте аккаунт для доступа к персональным скидкам и быстрому оформлению заказов.</p>
+            </div>
+            <form class="auth-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="register-name">Ваше имя</label>
+                    <input type="text" id="register-name" name="name" placeholder="Введите ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-phone">Номер телефона</label>
+                    <input type="tel" id="register-phone" name="phone" class="phone-input" placeholder="+7(***)***-**-**" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Пароль</label>
+                    <input type="password" id="register-password" name="password" placeholder="Придумайте пароль" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm">Подтверждение пароля</label>
+                    <input type="password" id="register-confirm" name="confirm_password" placeholder="Повторите пароль" required>
+                </div>
+                <button type="submit" class="auth-btn">Зарегистрироваться</button>
+            </form>
+            <div class="auth-agreement">
+                <p>При нажатии на кнопку "Зарегистрироваться" вы соглашаетесь с <a href="#">политикой обработки персональных данных</a></p>
+            </div>
+            <div class="auth-switch">
+                <p>Уже есть аккаунт? <a href="#" onclick="closeModal('registerModal'); showLoginModal(); return false;">Войти</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <h2>Восстановление пароля</h2>
+            </div>
+            <form class="auth-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="recovery-phone">Номер телефона</label>
+                    <input type="tel" id="recovery-phone" class="phone-input" placeholder="+7(***)***-**-**" required>
+                </div>
+                <button type="button" class="auth-btn" id="sendRecoveryCode">Отправить код</button>
+                
+                <div class="code-section" id="codeSection" style="display: none;">
+                    <div class="form-group">
+                        <label for="recovery-code">Код подтверждения</label>
+                        <input type="text" id="recovery-code" placeholder="Введите код из SMS" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Новый пароль</label>
+                        <input type="password" id="new-password" placeholder="Придумайте новый пароль" required>
+                    </div>
+                    <button type="submit" class="auth-btn">Сохранить новый пароль</button>
+                </div>
+            </form>
+            <div class="auth-switch">
+                <p>Вспомнили пароль? <a href="#" onclick="showLoginModal(); return false;">Войти</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно с акциями -->
+    <div id="promotionsModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2>Наши акции</h2>
+                <span class="close" onclick="closePromotionsModal()">&times;</span>
+            </div>
+            <div class="promotions-list">
+                <div class="promotion-card">
+                    <div class="promotion-icon">🔥</div>
+                    <div class="promotion-details">
+                        <h3>Скидка 20% на первый заказ</h3>
+                        <p>При первом заказе от 1000₽ получите скидку 20% по промокоду <strong>FIRST20</strong></p>
+                        <span class="promotion-date">Действует бессрочно</span>
+                    </div>
+                </div>
+                <div class="promotion-card">
+                    <div class="promotion-icon">🚚</div>
+                    <div class="promotion-details">
+                        <h3>Бесплатная доставка</h3>
+                        <p>При заказе от 1500₽ доставка бесплатно в любой район города</p>
+                        <span class="promotion-date">Постоянная акция</span>
+                    </div>
+                </div>
+                <div class="promotion-card">
+                    <div class="promotion-icon">🎂</div>
+                    <div class="promotion-details">
+                        <h3>Скидка 15% в день рождения</h3>
+                        <p>Предъявите документ курьеру и получите скидку 15% на весь заказ</p>
+                        <span class="promotion-date">Активна всегда</span>
+                    </div>
+                </div>
+                <div class="promotion-card">
+                    <div class="promotion-icon">🍱</div>
+                    <div class="promotion-details">
+                        <h3>Сет "Токио" со скидкой 25%</h3>
+                        <p>Премиум сет из 40 суши всего за 2190₽ вместо 2790₽</p>
+                        <span class="promotion-date">До конца месяца</span>
+                    </div>
+                </div>
+                <div class="promotion-card">
+                    <div class="promotion-icon">👥</div>
+                    <div class="promotion-details">
+                        <h3>Приведи друга</h3>
+                        <p>Приведи друга и получи скидку 10% на следующий заказ</p>
+                        <span class="promotion-date">Постоянная акция</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для увеличенного фото -->
+    <div id="fullImageModal" class="full-image-modal" onclick="closeFullImage()">
+        <span class="full-image-close" onclick="closeFullImage()">&times;</span>
+        <img class="full-image-content" id="fullImage" onclick="event.stopPropagation()">
+    </div>
+
+    <script>
+    // Получение CSRF токена
+    function getCSRFToken() {
+        var token = document.querySelector('[name=csrfmiddlewaretoken]');
+        return token ? token.value : '';
+    }
+
+    // Слайдер
+    var homeSlider = {
+        currentSlideIndex: 0,
+        slides: [],
+        dots: [],
+        autoInterval: null,
+        
+        init: function() {
+            this.slides = document.querySelectorAll('.slide');
+            this.dots = document.querySelectorAll('.dot');
+            this.startAutoSlide();
+            this.bindEvents();
+            this.showSlide(0);
+        },
+        
+        startAutoSlide: function() {
+            var self = this;
+            if (this.autoInterval) clearInterval(this.autoInterval);
+            this.autoInterval = setInterval(function() {
+                self.nextSlide();
+            }, 3000); 
+        },
+        
+        showSlide: function(index) {
+            // Нормализуем индекс (чтобы не выходить за границы)
+            if (index < 0) index = this.slides.length - 1;
+            if (index >= this.slides.length) index = 0;
+            
+            // Скрываем все слайды
+            for (var i = 0; i < this.slides.length; i++) {
+                this.slides[i].classList.remove('active');
+                this.slides[i].style.opacity = '0';
+            }
+            // Отключаем все точки
+            for (var i = 0; i < this.dots.length; i++) {
+                this.dots[i].classList.remove('active');
+            }
+            
+            // Показываем текущий слайд
+            this.slides[index].classList.add('active');
+            this.slides[index].style.opacity = '1';
+            this.dots[index].classList.add('active');
+            this.currentSlideIndex = index;
+        },
+    
+        nextSlide: function() {
+            var nextIndex = this.currentSlideIndex + 1;
+            if (nextIndex >= this.slides.length) {
+                nextIndex = 0;
+            }
+            this.showSlide(nextIndex);
+            this.resetAutoSlide();
+        },
+        
+        prevSlide: function() {
+            var prevIndex = this.currentSlideIndex - 1;
+            if (prevIndex < 0) {
+                prevIndex = this.slides.length - 1;
+            }
+            this.showSlide(prevIndex);
+            this.resetAutoSlide();
+        },
+        
+        resetAutoSlide: function() {
+            var self = this;
+            if (this.autoInterval) clearInterval(this.autoInterval);
+            this.autoInterval = setInterval(function() {
+                self.nextSlide();
+            }, 3000);
+        },
+        
+        bindEvents: function() {
+            var self = this;
+            for (var i = 0; i < this.dots.length; i++) {
+                (function(idx) {
+                    self.dots[idx].addEventListener('click', function() {
+                        self.showSlide(idx);
+                        self.resetAutoSlide();
+                    });
+                })(i);
+            }
+        }
+
+    };
+
+    // Функции для стрелок
+    function nextSlide() {
+        homeSlider.nextSlide();
+    }
+
+    function prevSlide() {
+        homeSlider.prevSlide();
+    }
+
+    // Управление категориями
+    var openCategoryId = null;
+    var allCategories = [];
+
+    // Сохраняем все категории при загрузке
+    function initCategories() {
+        var cards = document.querySelectorAll('.category-card');
+        allCategories = [];
+        
+        for (var i = 0; i < cards.length; i++) {
+            allCategories.push(cards[i]);
+        }
+        
+        // Очищаем и заполняем сетку
+        var grid = document.getElementById('categoriesGrid');
+        grid.innerHTML = '';
+        for (var i = 0; i < allCategories.length; i++) {
+            grid.appendChild(allCategories[i].cloneNode(true));
+        }
+        
+        rebindCategoryEvents();
+    }
+
+    // Перепривязываем события клика на плитки
+    function rebindCategoryEvents() {
+        var cards = document.querySelectorAll('.category-card');
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            var catId = card.getAttribute('data-cat-id');
+            var catName = card.getAttribute('data-cat-name');
+            
+            // Убираем старый обработчик
+            card.onclick = null;
+            // Добавляем новый
+            (function(id, name, elem, idx) {
+                elem.onclick = function(e) {
+                    e.preventDefault();
+                    toggleCategoryProducts(id, name, elem, idx);
+                };
+            })(catId, catName, card, i);
+        }
+    }
+
+    // Открыть/закрыть категорию
+    function toggleCategoryProducts(categoryId, categoryName, clickedCard, cardIndex) {
+        if (openCategoryId === parseInt(categoryId)) {
+            // Если та же категория - закрываем
+            closeCategoryProducts();
+            // Убираем подсветку
+            removeHighlightFromAllCards();
+        } else {
+            // Открываем новую категорию
+            openCategoryProducts(categoryId, categoryName, clickedCard, cardIndex);
+        }
+    }
+
+    // Открыть категорию
+    function openCategoryProducts(categoryId, categoryName, clickedCard, cardIndex) {
+        openCategoryId = parseInt(categoryId);
+        
+        // Убираем подсветку со всех карточек
+        removeHighlightFromAllCards();
+        
+        // Подсвечиваем выбранную карточку
+        clickedCard.classList.add('active-category');
+        
+        // Получаем контейнер
+        var container = document.getElementById('categoryProductsContainer');
+        var title = document.getElementById('selectedCategoryTitle');
+        
+        title.textContent = categoryName;
+        
+        // Показываем контейнер
+        container.style.display = 'block';
+        
+        // Загружаем товары
+        loadCategoryProducts(categoryId);
+        
+        // Прокручиваем с учетом позиции кликнутой плитки
+        setTimeout(function() {
+            var cardRect = clickedCard.getBoundingClientRect();
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Прокручиваем так, чтобы список был сразу под кликнутой плиткой
+            var offsetTop = cardRect.bottom + scrollTop + 20;
+            window.scrollTo({
+                top: offsetTop - 50,
+                behavior: 'smooth'
+            });
+        }, 100);
+    }
+
+    // Закрыть категорию
+    function closeCategoryProducts() {
+        openCategoryId = null;
+        var container = document.getElementById('categoryProductsContainer');
+        container.style.display = 'none';
+        
+        // Очищаем список товаров
+        document.getElementById('categoryProductsList').innerHTML = '';
+        
+        // Убираем подсветку со всех карточек
+        removeHighlightFromAllCards();
+    }
+
+    // Убрать подсветку со всех карточек
+    function removeHighlightFromAllCards() {
+        var cards = document.querySelectorAll('.category-card');
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].classList.remove('active-category');
+        }
+    }
+
+    // Переменная для хранения количества товаров перед добавлением
+    var tempQuantities = {};
+
+    // Обновление счетчика корзины
+    function updateCartCounter(count) {
+        var cartIcon = document.querySelector('.cart-icon');
+        var counter = document.querySelector('.cart-counter');
+        
+        if (count > 0) {
+            if (!counter) {
+                counter = document.createElement('span');
+                counter.className = 'cart-counter';
+                cartIcon.style.position = 'relative';
+                cartIcon.appendChild(counter);
+            }
+            counter.textContent = count;
+            counter.style.display = 'flex';
+        } else {
+            if (counter) {
+                counter.style.display = 'none';
+            }
+        }
+    }
+
+    // Обновление обработчиков для кнопок +/-
+    function bindQuantityHandlers() {
+        console.log('Привязываем обработчики +/-');
+        
+        // Кнопки минус
+        var minusBtns = document.querySelectorAll('.qty-minus');
+        for (var i = 0; i < minusBtns.length; i++) {
+            var btn = minusBtns[i];
+            var productId = btn.getAttribute('data-product-id');
+            if (productId && !btn.hasAttribute('data-bound')) {
+                btn.setAttribute('data-bound', 'true');
+                btn.onclick = (function(id) {
+                    return function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Минус для товара:', id);
+                        changeQuantity(id, 'decrease');
+                    };
+                })(productId);
+            }
+        }
+        
+        // Кнопки плюс
+        var plusBtns = document.querySelectorAll('.qty-plus');
+        for (var i = 0; i < plusBtns.length; i++) {
+            var btn = plusBtns[i];
+            var productId = btn.getAttribute('data-product-id');
+            if (productId && !btn.hasAttribute('data-bound')) {
+                btn.setAttribute('data-bound', 'true');
+                btn.onclick = (function(id) {
+                    return function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Плюс для товара:', id);
+                        changeQuantity(id, 'increase');
+                    };
+                })(productId);
+            }
+        }
+    }
+
+        // Функция изменения количества
+    function changeQuantity(productId, action) {
+        console.log('changeQuantity вызван! productId:', productId, 'action:', action);
+        
+        // Находим ВСЕ элементы с количеством для этого товара
+        var allSpans = document.querySelectorAll('#qty-' + productId);
+        
+        // Также ищем span внутри видимого контейнера, если по id не нашли
+        if (allSpans.length === 0) {
+            var visibleContainer = document.querySelector('#categoryProductsList .product-card-accordion[data-product-id="' + productId + '"] .product-quantity-control');
+            if (visibleContainer) {
+                allSpans = visibleContainer.querySelectorAll('.qty-count');
+            }
+        }
+        
+        // Также проверяем популярные сеты
+        if (allSpans.length === 0) {
+            var setContainer = document.querySelector('.set-card[data-product-id="' + productId + '"] .product-quantity-control');
+            if (setContainer) {
+                allSpans = setContainer.querySelectorAll('.qty-count');
+            }
+        }
+        
+        console.log('Найдено span для товара ' + productId + ':', allSpans.length);
+        
+        if (allSpans.length === 0) {
+            console.log('Span не найден для товара:', productId);
+            return;
+        }
+        
+        var newQty = 0;
+        
+        // Обновляем ВСЕ найденные span
+        for (var i = 0; i < allSpans.length; i++) {
+            var qtySpan = allSpans[i];
+            var currentQty = parseInt(qtySpan.textContent);
+            
+            if (action === 'increase') {
+                newQty = currentQty + 1;
+            } else if (action === 'decrease' && currentQty > 1) {
+                newQty = currentQty - 1;
+            } else {
+                newQty = currentQty;
+            }
+            
+            qtySpan.textContent = newQty;
+            tempQuantities[productId] = newQty;
+            
+            // Подсвечиваем обновленный элемент
+            qtySpan.style.transition = 'all 0.2s ease';
+            qtySpan.style.backgroundColor = '#d4af37';
+            qtySpan.style.color = '#1a1a1a';
+            qtySpan.style.padding = '2px 6px';
+            qtySpan.style.borderRadius = '10px';
+            qtySpan.style.transform = 'scale(1.2)';
+            
+            setTimeout(function(span) {
+                span.style.backgroundColor = '';
+                span.style.color = '';
+                span.style.padding = '';
+                span.style.transform = 'scale(1)';
+            }, 300, qtySpan);
+            
+            console.log('Обновлен span:', qtySpan, 'новое значение:', newQty);
+        }
+        
+        // Дополнительно обновляем количество в скрытом аккордеоне, если есть
+        var hiddenAccordion = document.querySelector('.category-accordion .product-card-accordion[data-product-id="' + productId + '"] .qty-count');
+        if (hiddenAccordion && hiddenAccordion !== allSpans[0]) {
+            hiddenAccordion.textContent = newQty;
+            console.log('Также обновлен скрытый span в аккордеоне');
+        }
+    }
+
+    // УНИВЕРСАЛЬНАЯ функция добавления в корзину
+    function addToCartUniversal(productId, button) {
+        console.log('addToCartUniversal вызван! ID:', productId);
+        
+        var card = button.closest('.set-card, .product-card-accordion');
+        if (!card) {
+            console.log('Карточка не найдена');
+            return;
+        }
+        
+        var quantityControl = card.querySelector('.product-quantity-control');
+        var addButton = card.querySelector('.add-to-cart-btn');
+        
+        // Если контролы уже видны - значит это повторный клик и нужно добавлять
+        if (quantityControl && quantityControl.style.display === 'flex') {
+            var quantity = tempQuantities[productId] || 1;
+            console.log('ОТПРАВКА В КОРЗИНУ! Количество:', quantity);
+            
+            fetch('/cart/add/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken()
+                },
+                body: JSON.stringify({ 
+                    product_id: parseInt(productId), 
+                    quantity: quantity 
+                })
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                console.log('Ответ сервера:', data);
+                if (data.success) {
+                    addButton.style.background = '#27ae60';
+                    addButton.innerHTML = '✓ ДОБАВЛЕНО!';
+                    updateCartCounter(data.cart_count);
+                    
+                    setTimeout(function() {
+                        addButton.style.display = 'block';
+                        addButton.style.background = '';
+                        addButton.innerHTML = 'В КОРЗИНУ';
+                        quantityControl.style.display = 'none';
+                        tempQuantities[productId] = 1;
+                        var qtySpan = document.getElementById('qty-' + productId);
+                        if (qtySpan) qtySpan.textContent = '1';
+                    }, 2000);
+                } else {
+                    alert('Ошибка: ' + data.message);
+                }
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+                alert('Ошибка при добавлении');
+            });
+        } else if (quantityControl) {
+            // Показываем контролы и МЕНЯЕМ ТЕКСТ КНОПКИ
+            console.log('Показываем контролы для товара:', productId);
+            addButton.style.display = 'none';
+            quantityControl.style.display = 'flex';
+            var qtySpan = document.getElementById('qty-' + productId);
+            if (qtySpan) {
+                qtySpan.textContent = tempQuantities[productId] || 1;
+            }
+            
+            // Меняем текст основной кнопки и показываем её
+            addButton.style.display = 'block';
+            addButton.innerHTML = '✓ ДОБАВИТЬ';
+            addButton.style.background = '#27ae60';
+            
+            // Назначаем обработчики для кнопок +/-
+            var minusBtn = quantityControl.querySelector('.qty-minus');
+            var plusBtn = quantityControl.querySelector('.qty-plus');
+            
+            // Сохраняем ID для обработчиков
+            minusBtn.onclick = (function(id) {
+                return function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    changeQuantity(id, 'decrease');
+                };
+            })(productId);
+            
+            plusBtn.onclick = (function(id) {
+                return function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    changeQuantity(id, 'increase');
+                };
+            })(productId);
+        } else {
+            // Нет контролов - просто добавляем 1 штуку
+            console.log('Нет контролов, добавляем 1 штуку');
+            fetch('/cart/add/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken()
+                },
+                body: JSON.stringify({ 
+                    product_id: parseInt(productId), 
+                    quantity: 1 
+                })
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                if (data.success) {
+                    addButton.style.background = '#27ae60';
+                    addButton.innerHTML = '✓ ДОБАВЛЕНО!';
+                    updateCartCounter(data.cart_count);
+                    setTimeout(function() {
+                        addButton.style.background = '';
+                        addButton.innerHTML = 'В КОРЗИНУ';
+                    }, 2000);
+                } else {
+                    alert('Ошибка: ' + data.message);
+                }
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+                alert('Ошибка при добавлении');
+            });
+        }
+
+        bindQuantityHandlers();
+    }
+
+    // Привязка всех кнопок (один раз при загрузке)
+    function bindAllButtons() {
+        console.log('=== ПРИВЯЗКА ВСЕХ КНОПОК ===');
+        
+        var allButtons = document.querySelectorAll('.add-to-cart-btn');
+        console.log('Всего кнопок найдено:', allButtons.length);
+        
+        for (var i = 0; i < allButtons.length; i++) {
+            var btn = allButtons[i];
+            var productId = btn.getAttribute('data-product-id');
+            if (productId) {
+                // Убираем все старые обработчики
+                btn.onclick = null;
+                btn.removeAttribute('onclick');
+                // Добавляем новый
+                btn.onclick = (function(id) {
+                    return function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Клик по кнопке, ID товара:', id);
+                        addToCartUniversal(id, this);
+                    };
+                })(productId);
+                console.log('Привязана кнопка для товара:', productId);
+            }
+        }
+    }
+
+        // Загрузить товары категории и привязать кнопки
+    function loadCategoryProducts(categoryId) {
+        var productsList = document.getElementById('categoryProductsList');
+        productsList.innerHTML = '<div style="text-align: center; padding: 50px;">Загрузка...</div>';
+        
+        var accordion = document.querySelector('.category-accordion[data-cat-id="' + categoryId + '"]');
+        if (accordion) {
+            var productsHtml = '';
+            var productCards = accordion.querySelectorAll('.product-card-accordion');
+            
+            if (productCards.length > 0) {
+                for (var i = 0; i < productCards.length; i++) {
+                    productsHtml += productCards[i].outerHTML;
+                }
+                productsList.innerHTML = productsHtml;
+                // После загрузки привязываем кнопки
+                setTimeout(function() {
+                    console.log('Привязываем кнопки для загруженных товаров...');
+                    var newButtons = document.querySelectorAll('#categoryProductsList .add-to-cart-btn');
+                    console.log('Новых кнопок:', newButtons.length);
+                    for (var j = 0; j < newButtons.length; j++) {
+                        var btn = newButtons[j];
+                        var pid = btn.getAttribute('data-product-id');
+                        if (pid) {
+                            btn.onclick = (function(id) {
+                                return function(e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    console.log('Клик по кнопке меню, ID товара:', id);
+                                    addToCartUniversal(id, this);
+                                };
+                            })(pid);
+                        }
+                    }
+                    // Привязываем обработчики +/-
+                    bindQuantityHandlers();
+                }, 100);
+            } else {
+                productsList.innerHTML = '<div style="text-align: center; padding: 50px;">В этой категории пока нет товаров</div>';
+            }
+        } else {
+            productsList.innerHTML = '<div style="text-align: center; padding: 50px;">В этой категории пока нет товаров</div>';
+        }
+    }
+
+    // Инициализация при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM загружен, инициализация...');
+        initCategories();
+        bindAllButtons();
+    });
+
+    // Модальные окна
+    var modalManager = {
+        init: function() {
+            this.bindEvents();
+        },
+        
+        bindEvents: function() {
+            var self = this;
+            
+            var userIcon = document.getElementById('userIcon');
+            if (userIcon) {
+                userIcon.onclick = function(e) {
+                    e.preventDefault();
+                    self.showLogin();
+                };
+            }
+            
+            var showRegisterLink = document.getElementById('showRegisterLink');
+            if (showRegisterLink) {
+                showRegisterLink.onclick = function(e) {
+                    e.preventDefault();
+                    self.showRegister();
+                };
+            }
+            
+            var showLoginLink = document.getElementById('showLoginLink');
+            if (showLoginLink) {
+                showLoginLink.onclick = function(e) {
+                    e.preventDefault();
+                    self.showLogin();
+                };
+            }
+            
+            var forgotPasswordLink = document.getElementById('forgotPasswordLink');
+            if (forgotPasswordLink) {
+                forgotPasswordLink.onclick = function(e) {
+                    e.preventDefault();
+                    self.showForgotPassword();
+                };
+            }
+            
+            var showLoginFromRecovery = document.getElementById('showLoginFromRecovery');
+            if (showLoginFromRecovery) {
+                showLoginFromRecovery.onclick = function(e) {
+                    e.preventDefault();
+                    self.showLogin();
+                };
+            }
+            
+            var sendRecoveryCode = document.getElementById('sendRecoveryCode');
+            if (sendRecoveryCode) {
+                sendRecoveryCode.onclick = function() {
+                    self.sendRecoveryCode();
+                };
+            }
+            
+            var closeButtons = document.querySelectorAll('.close');
+            for (var i = 0; i < closeButtons.length; i++) {
+                closeButtons[i].onclick = function() {
+                    var modal = this.closest('.modal');
+                    if (modal) modal.style.display = 'none';
+                };
+            }
+            
+            window.onclick = function(event) {
+                var modals = document.querySelectorAll('.modal');
+                for (var i = 0; i < modals.length; i++) {
+                    if (event.target === modals[i]) {
+                        modals[i].style.display = 'none';
+                    }
+                }
+            };
+            
+            var authForms = document.querySelectorAll('.auth-form');
+            for (var i = 0; i < authForms.length; i++) {
+                authForms[i].onsubmit = function(e) {
+                    e.preventDefault();
+                    self.handleFormSubmit(e);
+                };
+            }
+            
+            var phoneInputs = document.querySelectorAll('.phone-input');
+            for (var i = 0; i < phoneInputs.length; i++) {
+                phoneInputs[i].oninput = function(e) {
+                    self.formatPhone(e);
+                };
+                phoneInputs[i].placeholder = '+7(***)***-**-**';
+            }
+        },
+        
+        showLogin: function() {
+            var loginModal = document.getElementById('loginModal');
+            var registerModal = document.getElementById('registerModal');
+            var forgotModal = document.getElementById('forgotPasswordModal');
+            if (loginModal) loginModal.style.display = 'block';
+            if (registerModal) registerModal.style.display = 'none';
+            if (forgotModal) forgotModal.style.display = 'none';
+        },
+        
+        showRegister: function() {
+            var loginModal = document.getElementById('loginModal');
+            var registerModal = document.getElementById('registerModal');
+            var forgotModal = document.getElementById('forgotPasswordModal');
+            if (loginModal) loginModal.style.display = 'none';
+            if (registerModal) registerModal.style.display = 'block';
+            if (forgotModal) forgotModal.style.display = 'none';
+        },
+        
+        showForgotPassword: function() {
+            var loginModal = document.getElementById('loginModal');
+            var registerModal = document.getElementById('registerModal');
+            var forgotModal = document.getElementById('forgotPasswordModal');
+            if (loginModal) loginModal.style.display = 'none';
+            if (registerModal) registerModal.style.display = 'none';
+            if (forgotModal) forgotModal.style.display = 'block';
+        },
+        
+        sendRecoveryCode: function() {
+            var recoveryPhone = document.getElementById('recovery-phone');
+            var phone = recoveryPhone ? recoveryPhone.value : '';
+            
+            if (!phone || phone.length < 16) {
+                alert('Введите корректный номер телефона');
+                return;
+            }
+            
+            var formData = new FormData();
+            formData.append('phone', phone);
+            formData.append('csrfmiddlewaretoken', getCSRFToken());
+            
+            fetch('/accounts/send_recovery_code/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                alert(data.message);
+                if (data.success) {
+                    var codeSection = document.getElementById('codeSection');
+                    if (codeSection) codeSection.style.display = 'block';
+                }
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+                alert('Ошибка отправки кода');
+            });
+        },
+        
+        handleFormSubmit: function(e) {
+            e.preventDefault();
+            
+            var form = e.target;
+            var formData = new FormData();
+            
+            if (form.closest('#loginModal')) {
+                var phoneInput = document.getElementById('login-phone');
+                var passwordInput = document.getElementById('login-password');
+                
+                // Очищаем номер телефона от лишних символов
+                var rawPhone = phoneInput ? phoneInput.value : '';
+                var cleanPhone = rawPhone.replace(/\D/g, ''); // Удаляем всё кроме цифр
+                if (cleanPhone.startsWith('7')) {
+                    cleanPhone = cleanPhone.substring(1);
+                }
+                
+                formData.append('phone', cleanPhone);
+                formData.append('password', passwordInput ? passwordInput.value : '');
+            } else if (form.closest('#registerModal')) {
+                var nameInput = document.getElementById('register-name');
+                var phoneInput = document.getElementById('register-phone');
+                var passwordInput = document.getElementById('register-password');
+                var confirmInput = document.getElementById('register-confirm');
+                
+                // Очищаем номер телефона
+                var rawPhone = phoneInput ? phoneInput.value : '';
+                var cleanPhone = rawPhone.replace(/\D/g, '');
+                if (cleanPhone.startsWith('7')) {
+                    cleanPhone = cleanPhone.substring(1);
+                }
+                
+                formData.append('name', nameInput ? nameInput.value : '');
+                formData.append('phone', cleanPhone);
+                formData.append('password', passwordInput ? passwordInput.value : '');
+                formData.append('confirm_password', confirmInput ? confirmInput.value : '');
+            } else if (form.closest('#forgotPasswordModal')) {
+                var phoneInput = document.getElementById('recovery-phone');
+                var codeInput = document.getElementById('recovery-code');
+                var newPasswordInput = document.getElementById('new-password');
+                
+                var rawPhone = phoneInput ? phoneInput.value : '';
+                var cleanPhone = rawPhone.replace(/\D/g, '');
+                if (cleanPhone.startsWith('7')) {
+                    cleanPhone = cleanPhone.substring(1);
+                }
+                
+                formData.append('phone', cleanPhone);
+                formData.append('code', codeInput ? codeInput.value : '');
+                formData.append('new_password', newPasswordInput ? newPasswordInput.value : '');
+            }
+            
+            formData.append('csrfmiddlewaretoken', getCSRFToken());
+            
+            var url = '';
+            if (form.closest('#loginModal')) {
+                url = '/accounts/login/';
+            } else if (form.closest('#registerModal')) {
+                url = '/accounts/register/';
+            } else if (form.closest('#forgotPasswordModal')) {
+                url = '/accounts/reset_password/';
+            }
+            
+            console.log('Отправка на URL:', url);
+            console.log('Данные:', Object.fromEntries(formData));
+            
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                console.log('Ответ сервера:', data);
+                alert(data.message);
+                if (data.success) {
+                    var modals = document.querySelectorAll('.modal');
+                    for (var i = 0; i < modals.length; i++) {
+                        modals[i].style.display = 'none';
+                    }
+                    if (url === '/accounts/login/' || url === '/accounts/register/') {
+                        window.location.href = '/accounts/profile/';
+                    } else if (url === '/accounts/reset_password/') {
+                        modalManager.showLogin();
+                    }
+                }
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+                alert('Ошибка выполнения запроса');
+            });
+        },
+        
+        formatPhone: function(e) {
+            // Получаем значение и удаляем все нецифровые символы
+            var value = e.target.value.replace(/\D/g, '');
+            
+            // Убираем первую 7, если она есть (так как у нас всегда +7)
+            if (value.startsWith('7')) {
+                value = value.substring(1);
+            }
+            
+            // Ограничиваем максимум 10 цифрами
+            if (value.length > 10) {
+                value = value.substring(0, 10);
+            }
+            
+            var formatted = '+7';
+            
+            if (value.length > 0) {
+                formatted += '(' + value.substring(0, Math.min(3, value.length));
+            }
+            if (value.length > 3) {
+                formatted += ')' + value.substring(3, Math.min(6, value.length));
+            }
+            if (value.length > 6) {
+                formatted += '-' + value.substring(6, Math.min(8, value.length));
+            }
+            if (value.length > 8) {
+                formatted += '-' + value.substring(8, Math.min(10, value.length));
+            }
+            
+            // Дополняем скобками если нужно
+            if (value.length > 0 && value.length <= 3) {
+                formatted += ')';
+            }
+            
+            e.target.value = formatted;
+        }
+    };
+
+    // Кнопка наверх
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Универсальная функция открытия фото
+    function openFullImageUniversal(element) {
+        console.log('openFullImageUniversal вызван');
+        
+        var img = null;
+        
+        // Если элемент сам img
+        if (element.tagName === 'IMG') {
+            img = element;
+        }
+        // Если внутри элемента есть img
+        else if (element.querySelector('img')) {
+            img = element.querySelector('img');
+        }
+        
+        if (img && img.src && img.src !== 'undefined') {
+            var modal = document.getElementById('fullImageModal');
+            var fullImg = document.getElementById('fullImage');
+            if (modal && fullImg) {
+                fullImg.src = img.src;
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        } else {
+            console.log('Изображение не найдено для:', element);
+            alert('Изображение временно недоступно');
+        }
+    }
+
+    // Открытие увеличенного фото
+    function openFullImage(imgElement) {
+        console.log('openFullImage вызван');
+        console.log('imgElement:', imgElement);
+        console.log('src:', imgElement.src);
+        
+        if (!imgElement || !imgElement.src) {
+            console.error('Нет изображения');
+            return;
+        }
+        
+        var modal = document.getElementById('fullImageModal');
+        var fullImg = document.getElementById('fullImage');
+        
+        console.log('modal найден:', modal);
+        console.log('fullImg найден:', fullImg);
+        
+        if (modal && fullImg) {
+            fullImg.src = imgElement.src;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            console.log('Фото открыто, src:', fullImg.src);
+        } else {
+            console.error('Модальное окно не найдено');
+        }
+    }
+    
+
+    // Закрытие увеличенного фото
+    function closeFullImage() {
+        var modal = document.getElementById('fullImageModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+            console.log('Фото закрыто');
+        }
+    }
+
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        homeSlider.init();
+        modalManager.init();
+        
+        var scrollBtn = document.getElementById('scrollToTop');
+        if (scrollBtn) {
+            scrollBtn.onclick = scrollToTop;
+        }
+        
+        window.onscroll = function() {
+            var scrollBtn = document.getElementById('scrollToTop');
+            if (scrollBtn) {
+                if (window.pageYOffset > 300) {
+                    scrollBtn.style.display = 'block';
+                } else {
+                    scrollBtn.style.display = 'none';
+                }
+            }
+        };
+        
+        // Анимация появления элементов
+        var observer = new IntersectionObserver(function(entries) {
+            for (var i = 0; i < entries.length; i++) {
+                if (entries[i].isIntersecting) {
+                    entries[i].target.style.opacity = '1';
+                    entries[i].target.style.transform = 'translateY(0)';
+                }
+            }
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        var cards = document.querySelectorAll('.set-card, .category-card');
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].style.opacity = '0';
+            cards[i].style.transform = 'translateY(30px)';
+            cards[i].style.transition = 'all 0.6s ease-out';
+            observer.observe(cards[i]);
+        }
+    });
+
+    // Прокрутка к меню
+    document.getElementById('menuLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        var menuSection = document.querySelector('.menu-categories');
+        if (menuSection) {
+            menuSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+
+    // Проверяем, нужно ли прокрутить к меню после загрузки страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        if (sessionStorage.getItem('scrollToMenu') === 'true') {
+            sessionStorage.removeItem('scrollToMenu');
+            setTimeout(function() {
+                var menuSection = document.getElementById('menu-section');
+                if (menuSection) {
+                    menuSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 300);
+        }
+    });
+
+</script>
+<!-- Виджет чата -->
+<div id="chatWidget" class="chat-widget">
+    <div class="chat-header">
+        <div class="chat-title">
+            <span class="chat-icon">🤖</span>
+            <span class="chat-name">TokyoBot</span>
+            <span class="chat-status">● онлайн</span>
+        </div>
+        <div class="chat-buttons">
+            <button class="chat-minimize" onclick="toggleChat()">−</button>
+            <button class="chat-close" onclick="closeChat()">✕</button>
+        </div>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot">
+            Привет! Я TokyoBot 🤖<br>
+            Я помогу вам выбрать блюда, расскажу о составе и посоветую сеты!<br><br>
+            <strong>Что я умею:</strong><br>
+            • Рассказывать о роллах и суши<br>
+            • Описывать состав блюд<br>
+            • Рекомендовать сеты<br>
+            • Отвечать на вопросы о меню<br><br>
+            Просто спросите меня! 🍣
+        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Спросите TokyoBot..." onkeypress="handleChatKeyPress(event)">
+        <button onclick="sendChatMessage()">📤</button>
+    </div>
+</div>
+
+<style>
+.chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 120px;
+    width: 380px;
+    height: 550px;
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border-radius: 15px;
+    border: 2px solid #d4af37;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+.chat-header {
+    background: linear-gradient(45deg, #d4af37, #b8941f);
+    padding: 12px 15px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+}
+
+.chat-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1a1a1a;
+    font-weight: bold;
+}
+
+.chat-icon {
+    font-size: 20px;
+}
+
+.chat-name {
+    font-size: 16px;
+}
+
+.chat-status {
+    font-size: 10px;
+    color: #27ae60;
+    background: rgba(0,0,0,0.1);
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+.chat-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-minimize, .chat-close {
+    background: rgba(0,0,0,0.2);
+    border: none;
+    color: #1a1a1a;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.chat-minimize:hover, .chat-close:hover {
+    background: rgba(0,0,0,0.4);
+    transform: scale(1.1);
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 450px;
+}
+
+.message {
+    padding: 10px 12px;
+    border-radius: 12px;
+    max-width: 85%;
+    word-wrap: break-word;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.message.user {
+    background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+    color: #d4af37;
+    align-self: flex-end;
+    border: 1px solid #d4af37;
+}
+
+.message.bot {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    align-self: flex-start;
+    border: 1px solid #333;
+}
+
+.message.bot strong {
+    color: #d4af37;
+}
+
+.chat-input {
+    padding: 12px;
+    border-top: 1px solid #333;
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 20px;
+    color: #e0e0e0;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.chat-input input:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.chat-input button {
+    background: linear-gradient(45deg, #d4af37, #b8941f);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s;
+}
+
+.chat-input button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+/* Стили для скролла */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #d4af37;
+    border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+    .chat-widget {
+        width: 320px;
+        height: 500px;
+        right: 10px;
+        bottom: 10px;
+    }
+}
+</style>
+
+<script>
+let chatMinimized = false;
+
+function toggleChat() {
+    const widget = document.getElementById('chatWidget');
+    const messages = document.getElementById('chatMessages');
+    const input = document.querySelector('.chat-input');
+    
+    if (!chatMinimized) {
+        widget.style.height = '60px';
+        messages.style.display = 'none';
+        input.style.display = 'none';
+        chatMinimized = true;
+    } else {
+        widget.style.height = '550px';
+        messages.style.display = 'flex';
+        input.style.display = 'flex';
+        chatMinimized = false;
+    }
+}
+
+function closeChat() {
+    document.getElementById('chatWidget').style.display = 'none';
+}
+
+function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    addChatMessage(message, 'user');
+    input.value = '';
+    
+    // Показываем индикатор печати
+    addChatMessage('...', 'bot typing');
+    
+    fetch('/bot/api/chat/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({message: message})
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Удаляем индикатор печати
+        const typingMsg = document.querySelector('.message.typing');
+        if (typingMsg) typingMsg.remove();
+        addChatMessage(data.response, 'bot');
+    })
+    .catch(error => {
+        const typingMsg = document.querySelector('.message.typing');
+        if (typingMsg) typingMsg.remove();
+        addChatMessage('Извините, произошла ошибка. Попробуйте позже.', 'bot');
+    });
+}
+
+function addChatMessage(text, sender) {
+    const messagesDiv = document.getElementById('chatMessages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}`;
+    messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+    messagesDiv.appendChild(messageDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function handleChatKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendChatMessage();
+    }
+}
+
+// Функция для аккордеона
+function toggleCategory(header) {
+    const accordion = header.parentElement;
+    const content = accordion.querySelector('.accordion-content');
+    const isActive = header.classList.contains('active');
+    
+    // Закрываем все другие аккордеоны (опционально)
+    if (!isActive) {
+        document.querySelectorAll('.accordion-header').forEach(h => {
+            if (h !== header) {
+                h.classList.remove('active');
+                h.parentElement.querySelector('.accordion-content').classList.remove('active');
+            }
+        });
+    }
+    
+    // Переключаем текущий
+    header.classList.toggle('active');
+    content.classList.toggle('active');
+}
+
+// Скролл к категории при клике на иконку сверху
+document.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+        e.preventDefault();
+        const catId = this.getAttribute('data-cat-id');
+        const accordion = document.querySelector(`.category-accordion[data-cat-id="${catId}"]`);
+        const header = accordion.querySelector('.accordion-header');
+        const content = accordion.querySelector('.accordion-content');
+        
+        // Открываем аккордеон
+        header.classList.add('active');
+        content.classList.add('active');
+        
+        // Плавно скроллим к нему
+        accordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+
+// По умолчанию открыть первую категорию (Сеты)
+document.addEventListener('DOMContentLoaded', function() {
+    const firstAccordion = document.querySelector('.category-accordion');
+    if (firstAccordion) {
+        const header = firstAccordion.querySelector('.accordion-header');
+        const content = firstAccordion.querySelector('.accordion-content');
+        header.classList.add('active');
+        content.classList.add('active');
+    }
+});
+
+// Функции для модальных окон
+function showModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'block';
+        setTimeout(() => {
+            modal.classList.add('show');
+        }, 10);
+    }
+    return false;
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    }
+    return false;
+}
+
+// Функции для конкретных модальных окон
+function showAddressModal() {
+    return showModal('addressModal');
+}
+
+function closeAddressModal() {
+    return closeModal('addressModal');
+}
+
+function showAgreementModal() {
+    return showModal('agreementModal');
+}
+
+function closeAgreementModal() {
+    return closeModal('agreementModal');
+}
+
+function showPrivacyModal() {
+    return showModal('privacyModal');
+}
+
+function closePrivacyModal() {
+    return closeModal('privacyModal');
+}
+
+function showNewsletterModal() {
+    return showModal('newsletterModal');
+}
+
+function closeNewsletterModal() {
+    return closeModal('newsletterModal');
+}
+
+// Закрытие модального окна при клике вне его
+window.addEventListener('click', function(event) {
+    if (event.target.classList.contains('modal')) {
+        const modalId = event.target.id;
+        closeModal(modalId);
+    }
+});
+
+// Закрытие по Escape
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        document.querySelectorAll('.modal').forEach(modal => {
+            if (modal.style.display === 'block') {
+                closeModal(modal.id);
+            }
+        });
+    }
+});
+
+// Обновляем обработчик для кнопки "Адреса" в шапке
+document.querySelector('.nav-item[href="#"]').forEach(item => {
+    if (item.textContent.includes('Адреса')) {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            showAddressModal();
+        });
+    }
+});
+
+// Более точный обработчик для кнопки Адреса
+document.querySelectorAll('.nav-item').forEach(item => {
+    if (item.textContent.includes('Адреса') || item.textContent.includes('Адреса')) {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            showAddressModal();
+        });
+    }
+});
+
+// Функция для показа модального окна акций
+function showPromotionsModal() {
+    return showModal('promotionsModal');
+}
+
+function closePromotionsModal() {
+    return closeModal('promotionsModal');
+}
+
+function toggleMobileMenu() {
+    document.querySelector('.nav-menu').classList.toggle('show');
+}
+
+function showLoginModal() {
+    var modal = document.getElementById('loginModal');
+    if (modal) {
+        modal.style.display = 'block';
+        setTimeout(function() {
+            modal.classList.add('show');
+        }, 10);
+    }
+}
+
+function showRegisterModal() {
+    var modal = document.getElementById('registerModal');
+    if (modal) {
+        modal.style.display = 'block';
+        setTimeout(function() {
+            modal.classList.add('show');
+        }, 10);
+    }
+}
+
+function showForgotPasswordModal() {
+    var modal = document.getElementById('forgotPasswordModal');
+    if (modal) {
+        modal.style.display = 'block';
+        setTimeout(function() {
+            modal.classList.add('show');
+        }, 10);
+    }
+}
+
+// Обработчик для иконки пользователя (если не авторизован)
+document.addEventListener('DOMContentLoaded', function() {
+    var userIcon = document.getElementById('userIcon');
+    if (userIcon) {
+        userIcon.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Показываем модальное окно входа
+            var loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                loginModal.style.display = 'block';
+                setTimeout(function() {
+                    loginModal.classList.add('show');
+                }, 10);
+            } else {
+                console.log('loginModal не найден, создаем...');
+
+            }
+        });
+    }
+});
+
+</script>
+
+<!-- Модальное окно с адресами -->
+<div id="addressModal" class="modal">
+    <div class="modal-content" style="max-width: 500px;">
+        <div class="modal-header">
+            <h2>Наши адреса</h2>
+            <span class="close" onclick="closeAddressModal()">&times;</span>
+        </div>
+        <div class="address-modal-list">
+            <div class="address-modal-item">
+                <div class="address-icon"></div>
+                <div class="address-details">
+                    <h4>Улица Ленина 23</h4>
+                    <p>Пн-Вс: 10:00 - 23:00</p>
+                    <p>📞 8-920-267-11-44</p>
+                    <p class="address-desc"></p>
+                </div>
+            </div>
+            <div class="address-modal-item">
+                <div class="address-icon"></div>
+                <div class="address-details">
+                    <h4>Улица Садовая 11</h4>
+                    <p>Пн-Вс: 10:00 - 22:00</p>
+                    <p>📞 8-920-729-22-77</p>
+                    <p class="address-desc"></p>
+                </div>
+            </div>
+            <div class="address-modal-item">
+                <div class="address-icon"></div>
+                <div class="address-details">
+                    <h4>Проспект Кулакова 4</h4>
+                    <p>Пн-Вс: 10:00 - 23:00</p>
+                    <p>📞 8-920-708-22-88</p>
+                    <p class="address-desc"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальные окна для документов -->
+<div id="agreementModal" class="modal">
+    <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+            <h2>Пользовательское соглашение</h2>
+            <span class="close" onclick="closeAgreementModal()">&times;</span>
+        </div>
+        <div class="modal-text">
+            <p>Пользовательское соглашение интернет-магазина TokyoRoll</p>
+            <p>1. Общие положения<br>
+            1.1. Настоящее Соглашение регулирует отношения между интернет-магазином TokyoRoll и пользователем сайта.<br>
+            1.2. Оформляя заказ, пользователь соглашается с условиями настоящего Соглашения.<br>
+            1.3. Магазин оставляет за собой право изменять условия Соглашения без уведомления пользователя.</p>
+            <p>2. Оформление заказа<br>
+            2.1. Заказ оформляется через корзину на сайте.<br>
+            2.2. После оформления заказа с вами свяжется оператор для подтверждения.</p>
+            <p>3. Оплата и доставка<br>
+            3.1. Оплата производится наличными или картой при получении.<br>
+            3.2. Доставка осуществляется в пределах города Курск.</p>
+        </div>
+    </div>
+</div>
+
+<div id="privacyModal" class="modal">
+    <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+            <h2>Политика конфиденциальности</h2>
+            <span class="close" onclick="closePrivacyModal()">&times;</span>
+        </div>
+        <div class="modal-text">
+            <p>Политика конфиденциальности персональных данных</p>
+            <p>1. Сбор персональных данных<br>
+            1.1. Мы собираем только те данные, которые необходимы для обработки заказа (имя, телефон, адрес).<br>
+            1.2. Ваши данные не передаются третьим лицам без вашего согласия.</p>
+            <p>2. Использование данных<br>
+            2.1. Данные используются только для обработки заказов и информирования о статусе доставки.<br>
+            2.2. Вы можете отказаться от рассылки в любой момент.</p>
+        </div>
+    </div>
+</div>
+
+<div id="newsletterModal" class="modal">
+    <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+            <h2>Согласие на информационную рассылку</h2>
+            <span class="close" onclick="closeNewsletterModal()">&times;</span>
+        </div>
+        <div class="modal-text">
+            <p>Согласие на получение информационных сообщений</p>
+            <p>Я даю согласие на получение информационных сообщений от интернет-магазина TokyoRoll.<br>
+            Сообщения могут содержать информацию об акциях, скидках, новых блюдах и специальных предложениях.<br><br>
+            Вы можете отписаться от рассылки в любой момент, отправив письмо на адрес TokyoRoll46@mail.ru с темой "ОТПИСКА".</p>
+            <button class="auth-btn" onclick="closeNewsletterModal()" style="margin-top: 20px;">Понятно</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

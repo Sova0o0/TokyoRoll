@@ -1,0 +1,41 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Удалить промокод | Панель администратора{% endblock %}
+{% block page_title %}Удалить промокод{% endblock %}
+
+{% block content %}
+<div class="form-card" style="max-width: 500px; margin: 0 auto; text-align: center;">
+    <div style="font-size: 64px; margin-bottom: 15px;">⚠️</div>
+    <h2 style="color: #e74c3c; margin-bottom: 15px;">Подтверждение удаления</h2>
+    <p style="color: #7f8c8d; margin-bottom: 10px;">Вы действительно хотите удалить промокод:</p>
+    <p style="font-size: 18px; font-weight: bold; color: #d4af37; margin-bottom: 15px;">"{{ promo.code }}"</p>
+    
+    <div style="background: rgba(212, 175, 55, 0.1); padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+        <p style="margin: 5px 0; color: #b8b8b8;">
+            Скидка: {% if promo.discount_type == 'percent' %}{{ promo.discount_value|floatformat:0 }}%{% else %}{{ promo.discount_value|floatformat:0 }} ₽{% endif %}
+        </p>
+        <p style="margin: 5px 0; color: #b8b8b8;">
+            Использован: {{ promo.used_count|default:0 }} раз
+        </p>
+    </div>
+    
+    {% if promo.used_count > 0 %}
+    <div style="margin-top: 15px; margin-bottom: 20px; padding: 12px; background: rgba(243, 156, 18, 0.1); border-radius: 10px; border-left: 4px solid #f39c12;">
+        <p style="color: #f39c12; margin: 0; font-size: 14px;">
+            ⚠️ Промокод уже использовался {{ promo.used_count }} раз. 
+            При удалении он станет недоступен для новых заказов.
+        </p>
+    </div>
+    {% endif %}
+    
+    <p style="color: #e74c3c; font-size: 14px; margin-bottom: 25px;">⚠️ Это действие нельзя отменить!</p>
+    
+    <div style="display: flex; gap: 15px; justify-content: center;">
+        <form method="post" style="margin: 0;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" style="padding: 12px 30px;">Да, удалить</button>
+        </form>
+        <a href="{% url 'admin_panel:promocodes_list' %}" class="btn btn-warning" style="padding: 12px 30px; text-decoration: none;">Отмена</a>
+    </div>
+</div>
+{% endblock %}
