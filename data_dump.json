@@ -120,10 +120,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "9j0xt5sbeprgu0y18xf6g0kzkexgkohv",
+  "pk": "ferkux4g5gfex0rm3z9oqg2objni8xjd",
   "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2pBCWygu3XsGMsPMSNVAUtqV8e7apAvd_vfef6kI25rj1niJM6mzMur0uyGkB5cd0B3KrepUy7rMqHdFH7TpayV-Xg737yBDy98aoUMG6TmZ0HeefbJEPlhnpuAgeZEhsBgriOgGj5aARzCJ-mAmP4p6fwARSDj4:1wNIoj:deTeeiWNP2AekXp83buvOAlKM9dbHSVL4J3JZOfpNq0",
-    "expire_date": "2026-05-27T23:16:41.212Z"
+    "session_data": ".eJxVjEEOwiAQRe_C2hAKBWyX7nsGMjMMtmogKXRlvLtt0oVu_3v_vUWArc1hq7yGJYpReHH53RDoyfkA8QH5XiSV3NYF5aHIk1Y5lciv2-n-BWao8_62vYvJJsWcrHHg2CoiTN4NHTKbftAaMXZgwKFOnddsCGJidWWvvbV7lGBtgcqWmxjV5wuFRD3R:1wNdBG:hxfKLtQi8IXwI1N4qDsGyUJSndO9OF_GV0r3FuFH2fQ",
+    "expire_date": "2026-05-28T21:01:18.039Z"
   }
 },
 {
@@ -1044,7 +1044,7 @@
     "valid_from": "2026-05-10T10:00:00Z",
     "valid_to": "2027-01-01T10:00:00Z",
     "max_uses": 10,
-    "used_count": 0,
+    "used_count": 2,
     "is_active": true,
     "only_first_order": false,
     "created_at": "2026-05-13T22:55:08.896Z"
@@ -1271,6 +1271,56 @@
   }
 },
 {
+  "model": "orders.orderitem",
+  "pk": 23,
+  "fields": {
+    "order": 9,
+    "product": 31,
+    "quantity": 2,
+    "price": "110.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 24,
+  "fields": {
+    "order": 9,
+    "product": 2,
+    "quantity": 1,
+    "price": "1490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 25,
+  "fields": {
+    "order": 10,
+    "product": 2,
+    "quantity": 1,
+    "price": "1490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 26,
+  "fields": {
+    "order": 10,
+    "product": 30,
+    "quantity": 3,
+    "price": "90.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 27,
+  "fields": {
+    "order": 11,
+    "product": 3,
+    "quantity": 1,
+    "price": "2490.00"
+  }
+},
+{
   "model": "cart.cart",
   "pk": 1,
   "fields": {
@@ -1348,6 +1398,78 @@
   "fields": {
     "session_key": "9j0xt5sbeprgu0y18xf6g0kzkexgkohv",
     "created_at": "2026-05-14T00:33:28.103Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 11,
+  "fields": {
+    "session_key": "e73ffk7n24pdk92cj11h23gyij3ctrwj",
+    "created_at": "2026-05-14T18:27:21.353Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 12,
+  "fields": {
+    "session_key": "deckgkw9odkhvv0zn2129odbq1d3mel2",
+    "created_at": "2026-05-14T18:28:45.527Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 13,
+  "fields": {
+    "session_key": "e7d72gu5l7oxxzcqnjowba031ldjjyru",
+    "created_at": "2026-05-14T19:10:51.770Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 14,
+  "fields": {
+    "session_key": "ompppuzer1viosamlgssqdwtaoys3lmc",
+    "created_at": "2026-05-14T19:10:55.929Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 15,
+  "fields": {
+    "session_key": "iwonat9hy54viy2mnrwhsf606etw7smb",
+    "created_at": "2026-05-14T19:37:33.091Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 16,
+  "fields": {
+    "session_key": "gf49wrrturuur26ribjva8lxhkofe75e",
+    "created_at": "2026-05-14T19:37:40.184Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 17,
+  "fields": {
+    "session_key": "pl7f4xe2699jegs3qjwubc3hng1so0ml",
+    "created_at": "2026-05-14T19:41:53.061Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 18,
+  "fields": {
+    "session_key": "b3ry8k3zb90d5iucsbkapvsk5ss43vdz",
+    "created_at": "2026-05-14T19:42:01.346Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 19,
+  "fields": {
+    "session_key": "ferkux4g5gfex0rm3z9oqg2objni8xjd",
+    "created_at": "2026-05-14T19:42:20.163Z"
   }
 },
 {
@@ -1488,6 +1610,46 @@
     "product": 1,
     "quantity": 1,
     "added_at": "2026-05-13T23:03:41.654Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 97,
+  "fields": {
+    "cart": 10,
+    "product": 12,
+    "quantity": 1,
+    "added_at": "2026-05-14T18:19:11.571Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 98,
+  "fields": {
+    "cart": 10,
+    "product": 13,
+    "quantity": 1,
+    "added_at": "2026-05-14T18:19:12.874Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 99,
+  "fields": {
+    "cart": 12,
+    "product": 2,
+    "quantity": 1,
+    "added_at": "2026-05-14T18:44:25.334Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 100,
+  "fields": {
+    "cart": 12,
+    "product": 35,
+    "quantity": 1,
+    "added_at": "2026-05-14T18:44:29.553Z"
   }
 },
 {
@@ -1713,6 +1875,24 @@
     "user_message": "привет, расскажи о меню",
     "bot_response": "Привет! 👋 У нас в TokyoRoll ты найдёшь вкуснейшие японские блюда!\n\n🍣 **Сеты** – это наборы суши и роллов по специальным ценам со скидками до 25%! Например, у нас есть сеты \"Филадельфия\", \"Калифорния\" и премиальный \"Токио\".\n\n🔪 **Отдельные роллы** – от классических до жареных и запечённых. Самые популярные: ролл \"Филадельфия\" за 490₽ и ролл \"Калифорния\" за 450₽.\n\n🌶️ Ещё у нас есть лапша WOK, азиатская кухня и даже тёплые роллы для уютного вечера дома.\n\nЕсли хочешь узнать подробнее про какое-то конкретное блюдо – спрашивай! 😊",
     "created_at": "2026-04-28T14:20:57.634Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 26,
+  "fields": {
+    "user_message": "привет расскажи о меню",
+    "bot_response": "Привет! 👋 Рад тебя видеть у нас в TokyoRoll!\n\nУ нас есть несколько категорий блюд:\n\n🍣 **Сеты** – наборы суши и роллов по специальным ценам со скидками до 25%:\n- Сет «Филадельфия» — 32 ролла разных видов за 1890₽ (скидка 20%).\n- Сет «Калифорния» — 24 ролла классических и горячих за 1490₽ (скидка 15%).\n- Сет «Токио» — 40 премиальных суши и роллов с бесплатным соусом за 2190₽ (скидка 25%).\n\n🥓 **Отдельные роллы**: \n- Филадельфия — лосось, сливочный сыр, огурец, авокадо (490₽).\n- Калифорния — краб, авокадо, огурец, икра тобико (450₽).\n- Угорь (520₽) и запечённые/горячие роллы (от 480₽ и 500₽ соответственно).\n\nЕсли хочешь узнать подробнее про какое-то конкретное блюдо, просто спроси! 😊",
+    "created_at": "2026-05-14T01:38:35.396Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 27,
+  "fields": {
+    "user_message": "расскажи о закусках",
+    "bot_response": "Привет! 👋 У нас есть несколько замечательных закусок, которые отлично подойдут для начала трапезы!\n\n✨ **Суши и роллы** – у нас вы найдете классические и премиальные варианты, такие как \"Филадельфия\", \"Калифорния\" и другие. Например, отдельно можно заказать ролл \"Филадельфия\" за 490₽ или \"Калифорнию\" за 450₽.\n\n🍣 Отдельно стоит упомянуть наши **запечённые роллы**, которые готовятся прямо при вас и подаются горячим – их цена начинается от 480₽.\n\nТакже мы предлагаем **горячие роллы** по цене от 500₽ – они обжариваются на гриле до хрустящей корочки.\n\nЕсли хотите попробовать что-то новенькое, обязательно обратите внимание на наши **жареные роллы** и **лапшу WOK** – это настоящие вкусовые приключения!\n\nНадеюсь, тебе понравится наш выбор! 😊",
+    "created_at": "2026-05-14T01:39:01.909Z"
   }
 },
 {
@@ -2467,7 +2647,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$1000000$CxuLojafpdbBUvhYAEysbV$sih9RdduItHWfE2gj8xxSTIrSzVdE0JgYwlCMJkbJEY=",
-    "last_login": "2026-05-13T23:16:41.206Z",
+    "last_login": "2026-05-14T19:09:01.263Z",
     "is_superuser": true,
     "username": "Sova",
     "first_name": "Никита",
@@ -2484,7 +2664,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$1000000$U10xHKkQ3xNXL6dZbJsxjX$EcCUvklnJrUvT7Rmi5C3DtUoKjzo6Qz679h12K7Pyn0=",
-    "last_login": "2026-05-13T10:09:25.330Z",
+    "last_login": "2026-05-14T19:08:14.774Z",
     "is_superuser": false,
     "username": "9081265463",
     "first_name": "Никита",
@@ -2518,7 +2698,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$1000000$sMs8dy3t2Fg0BBiFiPWmLF$vqbTDfYgJ2AH4RCvZ2IX8SZ60+OPZ4K+29r0Na6oPYs=",
-    "last_login": "2026-05-13T23:16:15.660Z",
+    "last_login": "2026-05-14T19:08:42.011Z",
     "is_superuser": false,
     "username": "9513204433",
     "first_name": "DimVor",
@@ -2527,6 +2707,57 @@
     "is_staff": true,
     "is_active": true,
     "date_joined": "2026-05-13T23:11:51.412Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$FEzlPUTCbz9VVkx1pkz15t$VHUZFDkgd+J3X6BmFu+Za/WzIk6+RKgxc2QGzlA3GO0=",
+    "last_login": "2026-05-14T19:41:51.724Z",
+    "is_superuser": false,
+    "username": "8888888888",
+    "first_name": "Nikita",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-14T18:28:30.642Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$OvQlD5JdiRDGz0tCxCFEpY$YYhDHjfi8Wcs7SOrcARJVRVlceHOtr470ZsRXBLC7ps=",
+    "last_login": "2026-05-14T19:08:04.652Z",
+    "is_superuser": false,
+    "username": "9102101111",
+    "first_name": "Nikita",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-14T19:07:02.713Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$ovB64zeB0mxEuw8GyvN95d$ZA1eXTCVYXZkJxwVJ7rtgbAznhZstXQ2HZh41wd+juE=",
+    "last_login": "2026-05-14T19:42:18.787Z",
+    "is_superuser": false,
+    "username": "+7(888)888-88-88",
+    "first_name": "Nikita",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-14T19:42:17.315Z",
     "groups": [],
     "user_permissions": []
   }
@@ -2553,6 +2784,30 @@
     "promocode": 1,
     "used_at": "2026-05-13T10:22:54.646Z",
     "order": 6
+  }
+},
+{
+  "model": "orders.promocodeusage",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "promocode": 2,
+    "used_at": "2026-05-14T18:18:38.942Z",
+    "order": 9
+  }
+},
+{
+  "model": "orders.promocodeusage",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "+7(888)888-88-88"
+    ],
+    "promocode": 2,
+    "used_at": "2026-05-14T19:43:15.393Z",
+    "order": 10
   }
 },
 {
@@ -2708,13 +2963,69 @@
   }
 },
 {
+  "model": "orders.order",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "customer_name": "Никита",
+    "phone": "+7(908)126-54-63",
+    "address": "ул ленина дом 4, п.2, эт.4, кв.33 (код домофона 394823)",
+    "comment": "быстрее",
+    "promocode": "TEST26",
+    "discount_amount": "200.00",
+    "delivery_type": "delivery",
+    "total_price": "1510.00",
+    "status": "new",
+    "created_at": "2026-05-14T18:18:38.920Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "+7(888)888-88-88"
+    ],
+    "customer_name": "Nikita",
+    "phone": "1111111111",
+    "address": "Самовывоз",
+    "comment": "",
+    "promocode": "TEST26",
+    "discount_amount": "200.00",
+    "delivery_type": "pickup",
+    "total_price": "1384.00",
+    "status": "new",
+    "created_at": "2026-05-14T19:43:15.063Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "+7(888)888-88-88"
+    ],
+    "customer_name": "Nikita",
+    "phone": "+7(888)888-88-88",
+    "address": "ул школьная дом 45, п.1, эт.2, кв.33 (домофон 390483)",
+    "comment": "",
+    "promocode": "",
+    "discount_amount": "0.00",
+    "delivery_type": "delivery",
+    "total_price": "2490.00",
+    "status": "new",
+    "created_at": "2026-05-14T19:55:12.973Z"
+  }
+},
+{
   "model": "accounts.userprofile",
   "pk": 1,
   "fields": {
     "user": [
       "Sova"
     ],
-    "avatar": "avatars/photo_8etLvNh.jpg",
     "phone": "+7(908)126-54-63"
   }
 },
@@ -2725,7 +3036,6 @@
     "user": [
       "9992221111"
     ],
-    "avatar": "",
     "phone": "+7(999)222-11-11"
   }
 },
@@ -2736,7 +3046,6 @@
     "user": [
       "9081265463"
     ],
-    "avatar": "",
     "phone": ""
   }
 },
@@ -2747,8 +3056,37 @@
     "user": [
       "9513204433"
     ],
-    "avatar": "",
     "phone": ""
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "8888888888"
+    ],
+    "phone": "+7(888)888-88-88"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "9102101111"
+    ],
+    "phone": "+7(910)210-11-11"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "+7(888)888-88-88"
+    ],
+    "phone": "+7(888)888-88-88"
   }
 },
 {
@@ -2817,6 +3155,23 @@
     "comment": "",
     "is_default": true,
     "created_at": "2026-05-13T12:03:44.912Z"
+  }
+},
+{
+  "model": "accounts.address",
+  "pk": 12,
+  "fields": {
+    "user": [
+      "+7(888)888-88-88"
+    ],
+    "title": "дом",
+    "address": "ул школьная дом 45",
+    "entrance": "1",
+    "floor": "2",
+    "apartment": "33",
+    "comment": "домофон 390483",
+    "is_default": true,
+    "created_at": "2026-05-14T19:54:51.614Z"
   }
 },
 {

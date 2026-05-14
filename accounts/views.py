@@ -29,14 +29,6 @@ def profile_view(request):
         profile.phone = request.user.username
         profile.save()
     
-    # Проверяем, что аватар существует физически (если есть в БД)
-    if profile.avatar and profile.avatar.name:
-        import os
-        from django.conf import settings
-        avatar_path = os.path.join(settings.MEDIA_ROOT, profile.avatar.name)
-        if not os.path.exists(avatar_path):
-            profile.avatar = None
-            profile.save()
     
     # Получаем заказы пользователя
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
