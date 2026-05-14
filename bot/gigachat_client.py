@@ -2,7 +2,7 @@
 import requests
 import json
 from datetime import datetime, timedelta
-from main.models import Category, Product
+from menu_data import FULL_MENU_TEXT  
 
 class GigaChatClient:
     def __init__(self):
@@ -31,7 +31,7 @@ class GigaChatClient:
         }
         
         try:
-            response = requests.post(url, headers=headers, data=data)
+            response = requests.post(url, headers=headers, data=data, verify=False)
             if response.status_code == 200:
                 token_data = response.json()
                 self.access_token = token_data.get('access_token')
@@ -45,33 +45,7 @@ class GigaChatClient:
             print(f"Ошибка: {e}")
             return None
     
-    def get_menu_context(self):
-        """Получаем всё меню из базы данных"""
-        try:
-            categories = Category.objects.filter(is_active=True).order_by('order')
-            menu_text = "Вот наше текущее меню:\n\n"
-            
-            for category in categories:
-                products = Product.objects.filter(category=category, available=True)
-                if products.exists():
-                    menu_text += f"📁 **{category.name}**\n"
-                    for product in products[:10]:  # Ограничиваем 10 товаров на категорию
-                        menu_text += f"  • {product.name} — {product.price}₽"
-                        if product.weight:
-                            menu_text += f" ({product.weight}г)"
-                        if product.pieces:
-                            menu_text += f", {product.pieces}шт"
-                        if product.composition:
-                            menu_text += f"\n    Состав: {product.composition[:100]}"
-                        menu_text += "\n"
-                    menu_text += "\n"
-            
-            return menu_text
-        except Exception as e:
-            print(f"Ошибка загрузки меню: {e}")
-            return "Меню загружается..."
-    
-    def ask_gigachat(self, question, context=""):
+    def ask_gigachat(self, question):
         """Задаем вопрос GigaChat с полным меню"""
         access_token = self.get_access_token()
         if not access_token:
@@ -85,23 +59,24 @@ class GigaChatClient:
             'Authorization': f'Bearer {access_token}'
         }
         
-        # Получаем актуальное меню из БД
-        full_menu = self.get_menu_context()
-        
-        # Формируем промпт с полным меню
-        system_prompt = f"""Ты - консультант ресторана доставки суши TokyoRoll. 
-Твоя задача помогать клиентам выбирать блюда, рассказывать о составе и давать рекомендации.
+        # Используем полное меню из файла menu_data.py
+        system_prompt = f"""Ты - консультант ресторана доставки суши TokyoRoll.
 
-ПРАВИЛА:
-- Отвечай дружелюбно, кратко и по делу (максимум 3-4 предложения)
-- Используй эмодзи для украшения ответов
-- Если не знаешь ответ, честно скажи и предложи посмотреть меню
-- Не выдумывай цены и блюда, которых нет в меню
+Вот ПОЛНОЕ МЕНЮ ресторана (все цены актуальны):
 
-{f'Актуальное меню (цены актуальны):\n{full_menu}' if full_menu else 'Меню временно недоступно. Расскажи в общих чертах о суши, роллах и сетях.'}
+{FULL_MENU_TEXT}
 
-Если клиент спрашивает про цену или состав конкретного блюда, отвечай используя только информацию из меню выше."""
-        
+ВАЖНЫЕ ПРАВИЛА:
+1. При вопросе про ЗАКУСКИ обязательно назови: МИДИИ В СОУСЕ (220₽), Креветки в панировке (260₽), Наггетсы (250₽), Картофель фри (150₽), Салат Чука (190₽), Осьминог (280₽)
+2. При вопросе про СОУСЫ перечисли все соусы с ценами из меню
+3. При вопросе про РОЛЛЫ назови конкретные названия и цены из меню
+4. При вопросе про СЕТЫ перечисли все сеты с ценами из меню
+5. Если блюда нет в меню - так и скажи, не выдумывай
+6. Отвечай кратко, по делу (2-4 предложения), используй эмодзи 🍣
+7. Все цены указывай в рублях (₽)
+
+Теперь ответь на вопрос клиента:"""
+
         data = {
             "model": "GigaChat",
             "messages": [
@@ -113,7 +88,7 @@ class GigaChatClient:
         }
         
         try:
-            response = requests.post(url, headers=headers, json=data, timeout=30)
+            response = requests.post(url, headers=headers, json=data, timeout=30, verify=False)
             if response.status_code == 200:
                 result = response.json()
                 return result['choices'][0]['message']['content']
@@ -121,7 +96,7 @@ class GigaChatClient:
                 # Токен устарел, пробуем обновить
                 self.access_token = None
                 self.token_expires_at = None
-                return self.ask_gigachat(question, context)
+                return self.ask_gigachat(question)
             else:
                 print(f"Ошибка GigaChat: {response.status_code} - {response.text}")
                 return "Извините, сервис временно недоступен. Попробуйте позже. 🍣"
