@@ -1,0 +1,1498 @@
+[
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "main",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "main",
+    "model": "product"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "cart",
+    "model": "cartitem"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "cart",
+    "model": "cart"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "bot",
+    "model": "chatmessage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "orders",
+    "model": "order"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "orders",
+    "model": "orderitem"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "orders",
+    "model": "promocode"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "address"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "userprofile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "orders",
+    "model": "promocodeusage"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "9j0xt5sbeprgu0y18xf6g0kzkexgkohv",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pBCWygu3XsGMsPMSNVAUtqV8e7apAvd_vfef6kI25rj1niJM6mzMur0uyGkB5cd0B3KrepUy7rMqHdFH7TpayV-Xg737yBDy98aoUMG6TmZ0HeefbJEPlhnpuAgeZEhsBgriOgGj5aARzCJ-mAmP4p6fwARSDj4:1wNIoj:deTeeiWNP2AekXp83buvOAlKM9dbHSVL4J3JZOfpNq0",
+    "expire_date": "2026-05-27T23:16:41.212Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "j5lydsd2lpl45wi8uzbl9wx7rb5gg1gz",
+  "fields": {
+    "session_data": "e30:1w4dNU:j0Vufme3MQdgK6BvukBBFvDpiVbR9WNjpjYI36OwS-w",
+    "expire_date": "2026-04-06T11:23:24.996Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "n6mpfbf2izvs4fndfw7drkkjk0rpnf81",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pBhKh3q0r1nIAMDUjU0Ke3KeHdD0oVu_3vvv5XnfSt-b2n1s6iLQnX63QLHZ6odyIPrfdFxqds6B90VfdCmb4uk1_Vw_w4Kt9LrmLOxTIYTMKKTMcCYJuFMgAOTxSkYgyhgzsYRUMrBAg-QhWx2pD5f8FM3uw:1vPArL:IenJs6kpx_TPefdCSiEfEFQRl6qUeL7_qa2gzWz7F88",
+    "expire_date": "2025-12-13T02:38:51.012Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "syjwwgp1yvox08q0z5djc5n8y4buellr",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pBCWygu3XsGMsPMSNVAUtqV8e7apAvd_vfef6kI25rj1niJM6mzMur0uyGkB5cd0B3KrepUy7rMqHdFH7TpayV-Xg737yBDy98aoUMG6TmZ0HeefbJEPlhnpuAgeZEhsBgriOgGj5aARzCJ-mAmP4p6fwARSDj4:1wNEzf:Gq6l7QkN6cJ2k1VYgwzvW1F5JFWoP4tnleRGCcryOz0",
+    "expire_date": "2026-05-27T19:11:43.984Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "xwdwxurasvr9zne4y8q9rktyjyzcabkx",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAUBf-FtSGFPihduvcbyH1hqwaSQlfGf7dNutDtmTnzVgG2OoetyBoWVpMy6vK7IdBT0gH4AemeNeVU1wX1oeiTFn3LLK_r6f4FZijz_kZoUCC2Qsa3jRNHltl5O5jRD0Auxs5LNDYi4tA5tAzSgyFuvRldH_cowVoD5S1VNTWfL45dPgQ:1wHj7O:aKJIDsvtkfW6Ecvuh32G4wjx_xyaNEWhGPyImtQaDfE",
+    "expire_date": "2026-05-12T14:08:54.339Z"
+  }
+},
+{
+  "model": "main.category",
+  "pk": 2,
+  "fields": {
+    "name": "Сеты",
+    "image": "categories/setico.jpg",
+    "order": 1
+  }
+},
+{
+  "model": "main.category",
+  "pk": 3,
+  "fields": {
+    "name": "Роллы",
+    "image": "categories/rolico.jpg",
+    "order": 2
+  }
+},
+{
+  "model": "main.category",
+  "pk": 4,
+  "fields": {
+    "name": "Жареные роллы",
+    "image": "categories/zharico.jpg",
+    "order": 3
+  }
+},
+{
+  "model": "main.category",
+  "pk": 5,
+  "fields": {
+    "name": "Запеченные роллы",
+    "image": "categories/zapico.jpg",
+    "order": 4
+  }
+},
+{
+  "model": "main.category",
+  "pk": 6,
+  "fields": {
+    "name": "Классические роллы",
+    "image": "categories/klasico.jpg",
+    "order": 5
+  }
+},
+{
+  "model": "main.category",
+  "pk": 7,
+  "fields": {
+    "name": "Суши",
+    "image": "categories/sushi.jpg",
+    "order": 6
+  }
+},
+{
+  "model": "main.category",
+  "pk": 8,
+  "fields": {
+    "name": "Закуски",
+    "image": "categories/zakuski.jpg",
+    "order": 7
+  }
+},
+{
+  "model": "main.category",
+  "pk": 9,
+  "fields": {
+    "name": "Соусы и дополнения",
+    "image": "categories/sousi.jpg",
+    "order": 8
+  }
+},
+{
+  "model": "main.product",
+  "pk": 1,
+  "fields": {
+    "category": 2,
+    "name": "Сет \"Филадельфия\"",
+    "description": "",
+    "composition": "Филадельфия (8шт), Калифорния (8шт), с угрем (8шт), с лососем (8шт)",
+    "price": "1890.00",
+    "weight": 960,
+    "pieces": 32,
+    "image": "products/set_filadelfiya_9qflgLo.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 2,
+  "fields": {
+    "category": 2,
+    "name": "Сет \"Калифорния\"",
+    "description": "",
+    "composition": "Калифорния (24шт)",
+    "price": "1490.00",
+    "weight": 720,
+    "pieces": 24,
+    "image": "products/set-kali.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 3,
+  "fields": {
+    "category": 2,
+    "name": "Сет \"Токио\"",
+    "description": "",
+    "composition": "Угорь (8шт), Лосось (8шт), Тунец (8шт), Креветка (8шт) Филадельфия (8шт), Калифорния (8шт), Краб(10шт), Овощной (6шт)",
+    "price": "2490.00",
+    "weight": 1200,
+    "pieces": 64,
+    "image": "products/set_tokyo.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 4,
+  "fields": {
+    "category": 2,
+    "name": "Сет \"Императорский\"",
+    "description": "",
+    "composition": "Филадельфия (8шт), Калифорния (8шт), Угорь (8шт), Лосось (8шт), Креветка (8шт)",
+    "price": "2590.00",
+    "weight": 1350,
+    "pieces": 40,
+    "image": "products/set-imper.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 5,
+  "fields": {
+    "category": 2,
+    "name": "Сет \"Самурай\"",
+    "description": "",
+    "composition": "Филадельфия (6шт), Калифорния (6шт), с угрем (6шт), запеченный (6шт)",
+    "price": "1690.00",
+    "weight": 850,
+    "pieces": 24,
+    "image": "products/set-samurai.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 6,
+  "fields": {
+    "category": 2,
+    "name": "Сет \"Вегетарианский\"",
+    "description": "",
+    "composition": "Аво-ролл (6шт), Овощной (6шт), с огурцом (6шт), с сыром (6шт)",
+    "price": "1290.00",
+    "weight": 780,
+    "pieces": 24,
+    "image": "products/set-veg.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 7,
+  "fields": {
+    "category": 2,
+    "name": "Сет \"Острый\"",
+    "description": "",
+    "composition": "Острая Калифорния (8шт), Острый лосось (8шт), Острый угорь (8шт)",
+    "price": "1790.00",
+    "weight": 720,
+    "pieces": 24,
+    "image": "products/set-spice.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 8,
+  "fields": {
+    "category": 2,
+    "name": "Сет \"Детский\"",
+    "description": "",
+    "composition": "Нежный ролл с курицей (4шт), Ролл с огурцом (4шт), Ролл с сыром (4шт)",
+    "price": "890.00",
+    "weight": 450,
+    "pieces": 12,
+    "image": "products/set-kids.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 9,
+  "fields": {
+    "category": 2,
+    "name": "Сет \"Ролломания\"",
+    "description": "",
+    "composition": "Горячий ролл (8шт), Жареный ролл (8шт), Запеченный ролл (8шт)",
+    "price": "1590.00",
+    "weight": 780,
+    "pieces": 24,
+    "image": "products/set-roll.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 10,
+  "fields": {
+    "category": 2,
+    "name": "Сет \"Премиум\"",
+    "description": "",
+    "composition": "Филадельфия с трюфелем (4шт), Калифорния с икрой (4шт), Угорь с авокадо (4шт), Лосось с манго (4шт)",
+    "price": "2890.00",
+    "weight": 1100,
+    "pieces": 16,
+    "image": "products/set-premium.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 11,
+  "fields": {
+    "category": 3,
+    "name": "Филадельфия",
+    "description": "",
+    "composition": "Лосось, сливочный сыр, огурец, авокадо",
+    "price": "490.00",
+    "weight": 240,
+    "pieces": 8,
+    "image": "products/fil_t0CzCak.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 12,
+  "fields": {
+    "category": 3,
+    "name": "Калифорния",
+    "description": "",
+    "composition": "Краб, авокадо, огурец, икра тобико",
+    "price": "450.00",
+    "weight": 220,
+    "pieces": 8,
+    "image": "products/kali_TIkFb6n.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 13,
+  "fields": {
+    "category": 3,
+    "name": "Унаги (с угрем)",
+    "description": "",
+    "composition": "Угорь, огурец, соус унаги",
+    "price": "520.00",
+    "weight": 230,
+    "pieces": 8,
+    "image": "products/rollunagi.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 14,
+  "fields": {
+    "category": 3,
+    "name": "Том Ям",
+    "description": "",
+    "composition": "Креветка, авокадо, огурец, острый соус",
+    "price": "550.00",
+    "weight": 240,
+    "pieces": 8,
+    "image": "products/zartom_hmGMq8w.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 15,
+  "fields": {
+    "category": 3,
+    "name": "Спайси лосось",
+    "description": "",
+    "composition": "Лосось, огурец, спайси соус",
+    "price": "480.00",
+    "weight": 230,
+    "pieces": 8,
+    "image": "products/rollsplos.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 16,
+  "fields": {
+    "category": 3,
+    "name": "Спайси тунец",
+    "description": "",
+    "composition": "Тунец, авокадо, спайси соус",
+    "price": "500.00",
+    "weight": 230,
+    "pieces": 8,
+    "image": "products/rollostryjtunec.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 17,
+  "fields": {
+    "category": 3,
+    "name": "Аво-ролл",
+    "description": "",
+    "composition": "Авокадо, огурец, кунжут",
+    "price": "350.00",
+    "weight": 200,
+    "pieces": 8,
+    "image": "products/avoroll.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 18,
+  "fields": {
+    "category": 3,
+    "name": "Овощной",
+    "description": "",
+    "composition": "Огурец, перец, морковь, салат",
+    "price": "380.00",
+    "weight": 210,
+    "pieces": 8,
+    "image": "products/rollovosh.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 19,
+  "fields": {
+    "category": 4,
+    "name": "Жареная Филадельфия",
+    "description": "",
+    "composition": "Лосось, сливочный сыр, авокадо, панировка",
+    "price": "520.00",
+    "weight": 250,
+    "pieces": 8,
+    "image": "products/zarfil.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 20,
+  "fields": {
+    "category": 4,
+    "name": "Жареная Калифорния",
+    "description": "",
+    "composition": "Краб, авокадо, икра тобико, панировка",
+    "price": "490.00",
+    "weight": 240,
+    "pieces": 8,
+    "image": "products/zarkali.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 21,
+  "fields": {
+    "category": 4,
+    "name": "Жареный угорь",
+    "description": "",
+    "composition": "Угорь, огурец, панировка",
+    "price": "550.00",
+    "weight": 250,
+    "pieces": 8,
+    "image": "products/zarug.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 22,
+  "fields": {
+    "category": 4,
+    "name": "Жареный Том Ям",
+    "description": "",
+    "composition": "Креветка, авокадо, острый соус, панировка",
+    "price": "580.00",
+    "weight": 260,
+    "pieces": 8,
+    "image": "products/zartom.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 23,
+  "fields": {
+    "category": 5,
+    "name": "Запеченная Филадельфия",
+    "description": "",
+    "composition": "Лосось, сливочный сыр, авокадо, сырная шапка",
+    "price": "530.00",
+    "weight": 260,
+    "pieces": 8,
+    "image": "products/zapfil.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 24,
+  "fields": {
+    "category": 5,
+    "name": "Запеченная Калифорния",
+    "description": "",
+    "composition": "Краб, авокадо, икра тобико, сырная шапка",
+    "price": "500.00",
+    "weight": 250,
+    "pieces": 8,
+    "image": "products/zapkali.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 25,
+  "fields": {
+    "category": 5,
+    "name": "Запеченный угорь",
+    "description": "",
+    "composition": "Угорь, огурец, сырная шапка",
+    "price": "560.00",
+    "weight": 260,
+    "pieces": 8,
+    "image": "products/zapug.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 26,
+  "fields": {
+    "category": 6,
+    "name": "Классическая Филадельфия",
+    "description": "",
+    "composition": "Лосось, сливочный сыр, огурец",
+    "price": "470.00",
+    "weight": 230,
+    "pieces": 8,
+    "image": "products/fil.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 27,
+  "fields": {
+    "category": 6,
+    "name": "Классическая Калифорния",
+    "description": "",
+    "composition": "Краб, авокадо, огурец",
+    "price": "430.00",
+    "weight": 210,
+    "pieces": 8,
+    "image": "products/kali.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 28,
+  "fields": {
+    "category": 6,
+    "name": "Ролл с лососем",
+    "description": "",
+    "composition": "Лосось, огурец",
+    "price": "420.00",
+    "weight": 200,
+    "pieces": 8,
+    "image": "products/los.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 29,
+  "fields": {
+    "category": 6,
+    "name": "Ролл с крабом",
+    "description": "",
+    "composition": "Краб, огурец",
+    "price": "400.00",
+    "weight": 200,
+    "pieces": 8,
+    "image": "products/kra.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 30,
+  "fields": {
+    "category": 7,
+    "name": "Суши с лососем",
+    "description": "",
+    "composition": "Лосось, рис, васаби",
+    "price": "90.00",
+    "weight": 40,
+    "pieces": 1,
+    "image": "products/sushilos.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 31,
+  "fields": {
+    "category": 7,
+    "name": "Суши с угрем",
+    "description": "",
+    "composition": "Угорь, рис, соус",
+    "price": "110.00",
+    "weight": 45,
+    "pieces": 1,
+    "image": "products/sushiug.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 32,
+  "fields": {
+    "category": 7,
+    "name": "Суши с креветкой",
+    "description": "",
+    "composition": "Креветка, рис",
+    "price": "100.00",
+    "weight": 40,
+    "pieces": 1,
+    "image": "products/sushikre.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 33,
+  "fields": {
+    "category": 7,
+    "name": "Суши с тунцом",
+    "description": "",
+    "composition": "Тунец, рис",
+    "price": "95.00",
+    "weight": 40,
+    "pieces": 1,
+    "image": "products/sushitun.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 34,
+  "fields": {
+    "category": 8,
+    "name": "Картофель фри",
+    "description": "",
+    "composition": "Картофель, соль, специи",
+    "price": "150.00",
+    "weight": 150,
+    "pieces": 1,
+    "image": "products/fri.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 35,
+  "fields": {
+    "category": 8,
+    "name": "Наггетсы",
+    "description": "",
+    "composition": "Куриное филе в панировке",
+    "price": "180.00",
+    "weight": 120,
+    "pieces": 6,
+    "image": "products/nag.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 36,
+  "fields": {
+    "category": 8,
+    "name": "Креветки в кляре",
+    "description": "",
+    "composition": "Креветки, кляр",
+    "price": "250.00",
+    "weight": 150,
+    "pieces": 6,
+    "image": "products/kr2.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 37,
+  "fields": {
+    "category": 8,
+    "name": "Креветки в панировке",
+    "description": "",
+    "composition": "Креветки, панировка",
+    "price": "260.00",
+    "weight": 150,
+    "pieces": 6,
+    "image": "products/kr1.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 38,
+  "fields": {
+    "category": 8,
+    "name": "Мидии в соусе",
+    "description": "",
+    "composition": "Мидии, сливочный соус",
+    "price": "220.00",
+    "weight": 120,
+    "pieces": 5,
+    "image": "products/mid.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 39,
+  "fields": {
+    "category": 8,
+    "name": "Осьминог",
+    "description": "",
+    "composition": "Осьминог, соус терияки",
+    "price": "280.00",
+    "weight": 100,
+    "pieces": 1,
+    "image": "products/osm.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 40,
+  "fields": {
+    "category": 8,
+    "name": "Салат Чука",
+    "description": "",
+    "composition": "Водоросли чука, кунжут",
+    "price": "190.00",
+    "weight": 100,
+    "pieces": 1,
+    "image": "products/chuka.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 41,
+  "fields": {
+    "category": 9,
+    "name": "Васаби",
+    "description": "",
+    "composition": "Хрен васаби",
+    "price": "30.00",
+    "weight": 20,
+    "pieces": 1,
+    "image": "products/vasabi.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 42,
+  "fields": {
+    "category": 9,
+    "name": "Имбирь",
+    "description": "",
+    "composition": "Маринованный имбирь",
+    "price": "30.00",
+    "weight": 30,
+    "pieces": 1,
+    "image": "products/imbir.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 43,
+  "fields": {
+    "category": 9,
+    "name": "Соевый соус",
+    "description": "",
+    "composition": "Соевый соус",
+    "price": "30.00",
+    "weight": 30,
+    "pieces": 1,
+    "image": "products/soussoev.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 44,
+  "fields": {
+    "category": 9,
+    "name": "Соус Унаги",
+    "description": "",
+    "composition": "Сладкий соус для угря",
+    "price": "40.00",
+    "weight": 30,
+    "pieces": 1,
+    "image": "products/sousunagi.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 45,
+  "fields": {
+    "category": 9,
+    "name": "Соус Спайси",
+    "description": "",
+    "composition": "Острый соус",
+    "price": "40.00",
+    "weight": 30,
+    "pieces": 1,
+    "image": "products/sousspice.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 46,
+  "fields": {
+    "category": 9,
+    "name": "Соус Терияки",
+    "description": "",
+    "composition": "Японский соус терияки",
+    "price": "40.00",
+    "weight": 30,
+    "pieces": 1,
+    "image": "products/sousterik.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 47,
+  "fields": {
+    "category": 9,
+    "name": "Соус Сырный",
+    "description": "",
+    "composition": "Нежный сырный соус",
+    "price": "50.00",
+    "weight": 40,
+    "pieces": 1,
+    "image": "products/soussir.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 48,
+  "fields": {
+    "category": 9,
+    "name": "Соус Кимчи",
+    "description": "",
+    "composition": "Острый корейский соус",
+    "price": "40.00",
+    "weight": 30,
+    "pieces": 1,
+    "image": "products/souskimchi.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.product",
+  "pk": 49,
+  "fields": {
+    "category": 9,
+    "name": "Палочки",
+    "description": "",
+    "composition": "Деревянные палочки для еды",
+    "price": "10.00",
+    "weight": 10,
+    "pieces": 2,
+    "image": "products/palki.jpg",
+    "available": true,
+    "order": 0
+  }
+},
+{
+  "model": "orders.promocode",
+  "pk": 1,
+  "fields": {
+    "code": "FIRST20",
+    "discount_type": "percent",
+    "discount_value": "20.00",
+    "min_order_amount": "0.00",
+    "max_discount": "0.00",
+    "valid_from": "2026-04-01T18:00:00Z",
+    "valid_to": "2027-08-01T00:00:00Z",
+    "max_uses": 1000,
+    "used_count": 2,
+    "is_active": true,
+    "only_first_order": true,
+    "created_at": "2026-04-21T21:33:48.651Z"
+  }
+},
+{
+  "model": "orders.promocode",
+  "pk": 2,
+  "fields": {
+    "code": "TEST26",
+    "discount_type": "fixed",
+    "discount_value": "200.00",
+    "min_order_amount": "1200.00",
+    "max_discount": "0.00",
+    "valid_from": "2026-05-10T10:00:00Z",
+    "valid_to": "2027-01-01T10:00:00Z",
+    "max_uses": 10,
+    "used_count": 0,
+    "is_active": true,
+    "only_first_order": false,
+    "created_at": "2026-05-13T22:55:08.896Z"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "product": 4,
+    "quantity": 1,
+    "price": "2590.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 2,
+  "fields": {
+    "order": 1,
+    "product": 2,
+    "quantity": 1,
+    "price": "1490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 3,
+  "fields": {
+    "order": 1,
+    "product": 1,
+    "quantity": 1,
+    "price": "1890.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 4,
+  "fields": {
+    "order": 2,
+    "product": 2,
+    "quantity": 2,
+    "price": "1490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 5,
+  "fields": {
+    "order": 3,
+    "product": 3,
+    "quantity": 1,
+    "price": "2490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 6,
+  "fields": {
+    "order": 3,
+    "product": 34,
+    "quantity": 2,
+    "price": "150.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 7,
+  "fields": {
+    "order": 3,
+    "product": 20,
+    "quantity": 2,
+    "price": "490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 8,
+  "fields": {
+    "order": 3,
+    "product": 21,
+    "quantity": 1,
+    "price": "550.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 9,
+  "fields": {
+    "order": 3,
+    "product": 19,
+    "quantity": 4,
+    "price": "520.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 10,
+  "fields": {
+    "order": 4,
+    "product": 3,
+    "quantity": 2,
+    "price": "2490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 11,
+  "fields": {
+    "order": 4,
+    "product": 34,
+    "quantity": 2,
+    "price": "150.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 12,
+  "fields": {
+    "order": 4,
+    "product": 20,
+    "quantity": 2,
+    "price": "490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 13,
+  "fields": {
+    "order": 4,
+    "product": 21,
+    "quantity": 1,
+    "price": "550.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 14,
+  "fields": {
+    "order": 4,
+    "product": 19,
+    "quantity": 4,
+    "price": "520.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 15,
+  "fields": {
+    "order": 4,
+    "product": 1,
+    "quantity": 2,
+    "price": "1890.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 16,
+  "fields": {
+    "order": 4,
+    "product": 31,
+    "quantity": 1,
+    "price": "110.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 17,
+  "fields": {
+    "order": 4,
+    "product": 2,
+    "quantity": 2,
+    "price": "1490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 18,
+  "fields": {
+    "order": 5,
+    "product": 3,
+    "quantity": 1,
+    "price": "2490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 19,
+  "fields": {
+    "order": 6,
+    "product": 3,
+    "quantity": 1,
+    "price": "2490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 20,
+  "fields": {
+    "order": 7,
+    "product": 3,
+    "quantity": 1,
+    "price": "2490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 21,
+  "fields": {
+    "order": 8,
+    "product": 3,
+    "quantity": 1,
+    "price": "2490.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 22,
+  "fields": {
+    "order": 8,
+    "product": 20,
+    "quantity": 1,
+    "price": "490.00"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 1,
+  "fields": {
+    "session_key": "xwdwxurasvr9zne4y8q9rktyjyzcabkx",
+    "created_at": "2026-04-14T21:46:13.568Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 2,
+  "fields": {
+    "session_key": "avh90b339bpip0fckv3ucsz4qhlyjbrb",
+    "created_at": "2026-05-13T08:01:36.142Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 3,
+  "fields": {
+    "session_key": "hhwchgubfj4woqvwykbp060yq1qu7b6i",
+    "created_at": "2026-05-13T09:34:45.879Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 4,
+  "fields": {
+    "session_key": "6is9zf26kqjvrl2ze2mlx74u31xbhhjo",
+    "created_at": "2026-05-13T09:38:03.524Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 5,
+  "fields": {
+    "session_key": "7bocchcudskuncuw97ltdj3m43lbdrs0",
+    "created_at": "2026-05-13T10:21:16.349Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 6,
+  "fields": {
+    "session_key": "elpcadfcntvr1idc5g7hrxnebuis31ge",
+    "created_at": "2026-05-13T18:26:45.515Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 7,
+  "fields": {
+    "session_key": "syjwwgp1yvox08q0z5djc5n8y4buellr",
+    "created_at": "2026-05-13T19:12:49.876Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 8,
+  "fields": {
+    "session_key": "jypdl0lqrh7pmgx5okbwoyzm36uxmhyv",
+    "created_at": "2026-05-13T23:11:09.875Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 9,
+  "fields": {
+    "session_key": "3kpzgpivztli3bl6w3izgxakg9bibmys",
+    "created_at": "2026-05-13T23:12:35.468Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 10,
+  "fields": {
+    "session_key": "9j0xt5sbeprgu0y18xf6g0kzkexgkohv",
+    "created_at": "2026-05-14T00:33:28.103Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 70,
+  "fields": {
+    "cart": 1,
+    "product": 3,
+    "quantity": 1,
+    "added_at": "2026-04-28T14:34:53.101Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 71,
+  "fields": {
+    "cart": 1,
+    "product": 34,
+    "quantity": 2,
+    "added_at": "2026-04-28T14:34:53.109Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 72,
+  "fields": {
+    "cart": 1,
+    "product": 20,
+    "quantity": 2,
+    "added_at": "2026-04-28T14:34:53.116Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 73,
+  "fields": {
+    "cart": 1,
+    "product": 21,
+    "quantity": 1,
+    "added_at": "2026-04-28T14:34:53.126Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 74,
+  "fields": {
+    "cart": 1,
+    "product": 19,
+    "quantity": 4,
+    "added_at": "2026-04-28T14:34:53.135Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 75,
+  "fields": {
+    "cart": 2,
+    "product": 3,
+    "quantity": 1,
+    "added_at": "2026-05-13T08:01:44.405Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 77,
+  "fields": {
+    "cart": 3,
+    "product": 3,
+    "quantity": 1,
+    "added_at": "2026-05-13T09:35:40.396Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 82,
+  "fields": {
+    "cart": 5,
+    "product": 3,
+    "quantity": 1,
+    "added_at": "2026-05-13T12:01:07.936Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 83,
+  "fields": {
+    "cart": 5,
+    "product": 20,
+    "quantity": 3,
+    "added_at": "2026-05-13T12:01:07.945Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 84,
+  "fields": {
+    "cart": 5,
+    "product": 31,
+    "quantity": 1,
+    "added_at": "2026-05-13T12:22:56.015Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 85,
+  "fields": {
+    "cart": 5,
+    "product": 26,
+    "quantity": 1,
+    "added_at": "2026-05-13T12:22:58.554Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 86,
+  "fields": {
+    "cart": 5,
+    "product": 41,
+    "quantity": 2,
+    "added_at": "2026-05-13T12:23:03.139Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 87,
+  "fields": {
+    "cart": 5,
+    "product": 42,
+    "quantity": 1,
+    "added_at": "2026-05-13T12:23:03.728Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 90,
+  "fields": {
+    "cart": 6,
+    "product": 1,
+    "quantity": 1,
+    "added_at": "2026-05-13T23:03:41.654Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 1,
+  "fields": {
+    "user_message": "привет, подскажи какой сет роллов лучше взять?",
+    "bot_response": 
