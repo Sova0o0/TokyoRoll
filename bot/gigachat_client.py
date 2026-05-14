@@ -1,7 +1,7 @@
-# bot/gigachat_client.py
 import requests
 import json
 import logging
+import base64
 from datetime import datetime, timedelta
 
 # Настройка логирования
@@ -14,7 +14,7 @@ try:
     MENU_LOADED = True
 except ImportError as e:
     logger.error(f"❌ Ошибка импорта menu_data.py: {e}")
-    # Резервное меню (минимальное)
+    # Резервное меню (минимальное) - исправлены отступы
     FULL_MENU_TEXT = """
 🍣 МЕНЮ TOKYOROLL 🍣
 
@@ -50,29 +50,35 @@ class GigaChatClient:
         
         url = "https://ngw.devices.sberbank.ru:9443/api/v2/oauth"
         
+        # Basic Auth
+        auth_string = f"{self.client_id}:{self.client_secret}"
+        auth_bytes = auth_string.encode('ascii')
+        base64_bytes = base64.b64encode(auth_bytes)
+        base64_auth = base64_bytes.decode('ascii')
+        
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json',
+            'Authorization': f'Basic {base64_auth}',
             'RqUID': '12345678-1234-1234-1234-123456789012'
         }
         
         data = {
-            'scope': 'GIGACHAT_API_PERS',
-            'client_id': self.client_id,
-            'client_secret': self.client_secret
+            'scope': 'GIGACHAT_API_PERS'
         }
         
         try:
-            response = requests.post(url, headers=headers, data=data, verify=False)
+            response = requests.post(url, headers=headers, data=data, verify=False, timeout=30)
+            print(f"Токен ответ: {response.status_code}")
             if response.status_code == 200:
                 token_data = response.json()
                 self.access_token = token_data.get('access_token')
                 expires_in = token_data.get('expires_in', 3600)
                 self.token_expires_at = datetime.now() + timedelta(seconds=expires_in)
-                print(f"✅ Токен получен, expires_in: {expires_in}")
+                print(f"✅ Токен получен")
                 return self.access_token
             else:
-                print(f"❌ Ошибка получения токена: {response.status_code}")
+                print(f"❌ Ошибка получения токена: {response.status_code} - {response.text}")
                 return None
         except Exception as e:
             print(f"❌ Ошибка: {e}")
@@ -101,7 +107,7 @@ class GigaChatClient:
 
 {FULL_MENU_TEXT}
 
-ВАЖНЫЕ ПРАВИЛА (нарушай их только если данных нет в меню):
+ВАЖНЫЕ ПРАВИЛА:
 1. Никогда не выдумывай блюда, которых нет в меню выше
 2. Если спрашивают про "Детский сет" — он есть в меню за 890₽
 3. Если спрашивают про "Сет Премиум" — он есть в меню за 2890₽
