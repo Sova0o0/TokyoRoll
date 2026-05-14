@@ -2,6 +2,7 @@
 import requests
 import json
 from datetime import datetime, timedelta
+from main.models import Category, Product
 
 class GigaChatClient:
     def __init__(self):
@@ -44,11 +45,37 @@ class GigaChatClient:
             print(f"Ошибка: {e}")
             return None
     
+    def get_menu_context(self):
+        """Получаем всё меню из базы данных"""
+        try:
+            categories = Category.objects.filter(is_active=True).order_by('order')
+            menu_text = "Вот наше текущее меню:\n\n"
+            
+            for category in categories:
+                products = Product.objects.filter(category=category, available=True)
+                if products.exists():
+                    menu_text += f"📁 **{category.name}**\n"
+                    for product in products[:10]:  # Ограничиваем 10 товаров на категорию
+                        menu_text += f"  • {product.name} — {product.price}₽"
+                        if product.weight:
+                            menu_text += f" ({product.weight}г)"
+                        if product.pieces:
+                            menu_text += f", {product.pieces}шт"
+                        if product.composition:
+                            menu_text += f"\n    Состав: {product.composition[:100]}"
+                        menu_text += "\n"
+                    menu_text += "\n"
+            
+            return menu_text
+        except Exception as e:
+            print(f"Ошибка загрузки меню: {e}")
+            return "Меню загружается..."
+    
     def ask_gigachat(self, question, context=""):
-        """Задаем вопрос GigaChat"""
+        """Задаем вопрос GigaChat с полным меню"""
         access_token = self.get_access_token()
         if not access_token:
-            return None
+            return "Извините, сейчас не могу ответить. Попробуйте позже. 🤖"
         
         url = "https://gigachat.devices.sberbank.ru/api/v1/chat/completions"
         
@@ -58,15 +85,22 @@ class GigaChatClient:
             'Authorization': f'Bearer {access_token}'
         }
         
-        # Формируем промпт с контекстом меню
+        # Получаем актуальное меню из БД
+        full_menu = self.get_menu_context()
+        
+        # Формируем промпт с полным меню
         system_prompt = f"""Ты - консультант ресторана доставки суши TokyoRoll. 
-        Твоя задача помогать клиентам выбирать блюда, рассказывать о составе и давать рекомендации.
-        
-        Контекст меню:
-        {context}
-        
-        Отвечай дружелюбно, кратко и по делу. Используй эмодзи для украшения ответов.
-        """
+Твоя задача помогать клиентам выбирать блюда, рассказывать о составе и давать рекомендации.
+
+ПРАВИЛА:
+- Отвечай дружелюбно, кратко и по делу (максимум 3-4 предложения)
+- Используй эмодзи для украшения ответов
+- Если не знаешь ответ, честно скажи и предложи посмотреть меню
+- Не выдумывай цены и блюда, которых нет в меню
+
+{f'Актуальное меню (цены актуальны):\n{full_menu}' if full_menu else 'Меню временно недоступно. Расскажи в общих чертах о суши, роллах и сетях.'}
+
+Если клиент спрашивает про цену или состав конкретного блюда, отвечай используя только информацию из меню выше."""
         
         data = {
             "model": "GigaChat",
@@ -79,16 +113,23 @@ class GigaChatClient:
         }
         
         try:
-            response = requests.post(url, headers=headers, json=data)
+            response = requests.post(url, headers=headers, json=data, timeout=30)
             if response.status_code == 200:
                 result = response.json()
                 return result['choices'][0]['message']['content']
+            elif response.status_code == 401:
+                # Токен устарел, пробуем обновить
+                self.access_token = None
+                self.token_expires_at = None
+                return self.ask_gigachat(question, context)
             else:
-                print(f"Ошибка GigaChat: {response.status_code}")
-                return None
+                print(f"Ошибка GigaChat: {response.status_code} - {response.text}")
+                return "Извините, сервис временно недоступен. Попробуйте позже. 🍣"
+        except requests.Timeout:
+            return "Превышено время ожидания ответа. Попробуйте спросить что-то ещё! ⏱️"
         except Exception as e:
             print(f"Ошибка: {e}")
-            return None
+            return "Произошла ошибка. Пожалуйста, попробуйте переформулировать вопрос. 🤗"
 
 # Создаем глобальный экземпляр
 gigachat = GigaChatClient()
