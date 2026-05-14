@@ -23,6 +23,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     'tokyoroll.onrender.com',      # Основной домен на Render
+    'tokyoroll.vercel.app'         # Основной домен на Vercel
     '.onrender.com',               # Добавит все *.onrender.com адреса
     'www.tokyoroll.onrender.com',
 ]
@@ -31,9 +32,9 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     'https://127.0.0.1',
     'https://localhost',
-    # Добавь сюда URL своего сайта при деплое
-    # 'https://tokyoroll.onrender.com',
-    # 'https://tokyoroll.ru',
+    'tokyoroll.vercel.app',
+    'https://tokyoroll.onrender.com',
+    'https://tokyoroll.ru',
 ]
 
 # Application definition
