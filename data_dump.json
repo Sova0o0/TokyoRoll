@@ -162,7 +162,7 @@
   "model": "main.category",
   "pk": 2,
   "fields": {
-    "name": "����",
+    "name": "Сеты",
     "image": "categories/setico.jpg",
     "order": 1
   }
@@ -171,7 +171,7 @@
   "model": "main.category",
   "pk": 3,
   "fields": {
-    "name": "�����",
+    "name": "Роллы",
     "image": "categories/rolico.jpg",
     "order": 2
   }
@@ -180,7 +180,7 @@
   "model": "main.category",
   "pk": 4,
   "fields": {
-    "name": "������� �����",
+    "name": "Жареные роллы",
     "image": "categories/zharico.jpg",
     "order": 3
   }
@@ -189,7 +189,7 @@
   "model": "main.category",
   "pk": 5,
   "fields": {
-    "name": "���������� �����",
+    "name": "Запеченные роллы",
     "image": "categories/zapico.jpg",
     "order": 4
   }
@@ -198,7 +198,7 @@
   "model": "main.category",
   "pk": 6,
   "fields": {
-    "name": "������������ �����",
+    "name": "Классические роллы",
     "image": "categories/klasico.jpg",
     "order": 5
   }
@@ -207,7 +207,7 @@
   "model": "main.category",
   "pk": 7,
   "fields": {
-    "name": "����",
+    "name": "Суши",
     "image": "categories/sushi.jpg",
     "order": 6
   }
@@ -216,7 +216,7 @@
   "model": "main.category",
   "pk": 8,
   "fields": {
-    "name": "�������",
+    "name": "Закуски",
     "image": "categories/zakuski.jpg",
     "order": 7
   }
@@ -225,7 +225,7 @@
   "model": "main.category",
   "pk": 9,
   "fields": {
-    "name": "����� � ����������",
+    "name": "Соусы и дополнения",
     "image": "categories/sousi.jpg",
     "order": 8
   }
@@ -235,9 +235,9 @@
   "pk": 1,
   "fields": {
     "category": 2,
-    "name": "��� \"�����������\"",
+    "name": "Сет \"Филадельфия\"",
     "description": "",
-    "composition": "����������� (8��), ���������� (8��), � ����� (8��), � ������� (8��)",
+    "composition": "Филадельфия (8шт), Калифорния (8шт), с угрем (8шт), с лососем (8шт)",
     "price": "1890.00",
     "weight": 960,
     "pieces": 32,
@@ -251,9 +251,9 @@
   "pk": 2,
   "fields": {
     "category": 2,
-    "name": "��� \"����������\"",
+    "name": "Сет \"Калифорния\"",
     "description": "",
-    "composition": "���������� (24��)",
+    "composition": "Калифорния (24шт)",
     "price": "1490.00",
     "weight": 720,
     "pieces": 24,
@@ -267,9 +267,9 @@
   "pk": 3,
   "fields": {
     "category": 2,
-    "name": "��� \"�����\"",
+    "name": "Сет \"Токио\"",
     "description": "",
-    "composition": "����� (8��), ������ (8��), ����� (8��), �������� (8��) ����������� (8��), ���������� (8��), ����(10��), ������� (6��)",
+    "composition": "Угорь (8шт), Лосось (8шт), Тунец (8шт), Креветка (8шт) Филадельфия (8шт), Калифорния (8шт), Краб(10шт), Овощной (6шт)",
     "price": "2490.00",
     "weight": 1200,
     "pieces": 64,
@@ -283,9 +283,9 @@
   "pk": 4,
   "fields": {
     "category": 2,
-    "name": "��� \"�������������\"",
+    "name": "Сет \"Императорский\"",
     "description": "",
-    "composition": "����������� (8��), ���������� (8��), ����� (8��), ������ (8��), �������� (8��)",
+    "composition": "Филадельфия (8шт), Калифорния (8шт), Угорь (8шт), Лосось (8шт), Креветка (8шт)",
     "price": "2590.00",
     "weight": 1350,
     "pieces": 40,
@@ -299,9 +299,9 @@
   "pk": 5,
   "fields": {
     "category": 2,
-    "name": "��� \"�������\"",
+    "name": "Сет \"Самурай\"",
     "description": "",
-    "composition": "����������� (6��), ���������� (6��), � ����� (6��), ���������� (6��)",
+    "composition": "Филадельфия (6шт), Калифорния (6шт), с угрем (6шт), запеченный (6шт)",
     "price": "1690.00",
     "weight": 850,
     "pieces": 24,
@@ -315,9 +315,9 @@
   "pk": 6,
   "fields": {
     "category": 2,
-    "name": "��� \"��������������\"",
+    "name": "Сет \"Вегетарианский\"",
     "description": "",
-    "composition": "���-���� (6��), ������� (6��), � ������� (6��), � ����� (6��)",
+    "composition": "Аво-ролл (6шт), Овощной (6шт), с огурцом (6шт), с сыром (6шт)",
     "price": "1290.00",
     "weight": 780,
     "pieces": 24,
@@ -331,9 +331,9 @@
   "pk": 7,
   "fields": {
     "category": 2,
-    "name": "��� \"������\"",
+    "name": "Сет \"Острый\"",
     "description": "",
-    "composition": "������ ���������� (8��), ������ ������ (8��), ������ ����� (8��)",
+    "composition": "Острая Калифорния (8шт), Острый лосось (8шт), Острый угорь (8шт)",
     "price": "1790.00",
     "weight": 720,
     "pieces": 24,
@@ -347,9 +347,9 @@
   "pk": 8,
   "fields": {
     "category": 2,
-    "name": "��� \"�������\"",
+    "name": "Сет \"Детский\"",
     "description": "",
-    "composition": "������ ���� � ������� (4��), ���� � ������� (4��), ���� � ����� (4��)",
+    "composition": "Нежный ролл с курицей (4шт), Ролл с огурцом (4шт), Ролл с сыром (4шт)",
     "price": "890.00",
     "weight": 450,
     "pieces": 12,
@@ -363,9 +363,9 @@
   "pk": 9,
   "fields": {
     "category": 2,
-    "name": "��� \"����������\"",
+    "name": "Сет \"Ролломания\"",
     "description": "",
-    "composition": "������� ���� (8��), ������� ���� (8��), ���������� ���� (8��)",
+    "composition": "Горячий ролл (8шт), Жареный ролл (8шт), Запеченный ролл (8шт)",
     "price": "1590.00",
     "weight": 780,
     "pieces": 24,
@@ -379,9 +379,9 @@
   "pk": 10,
   "fields": {
     "category": 2,
-    "name": "��� \"�������\"",
+    "name": "Сет \"Премиум\"",
     "description": "",
-    "composition": "����������� � �������� (4��), ���������� � ����� (4��), ����� � ������� (4��), ������ � ����� (4��)",
+    "composition": "Филадельфия с трюфелем (4шт), Калифорния с икрой (4шт), Угорь с авокадо (4шт), Лосось с манго (4шт)",
     "price": "2890.00",
     "weight": 1100,
     "pieces": 16,
@@ -395,9 +395,9 @@
   "pk": 11,
   "fields": {
     "category": 3,
-    "name": "�����������",
+    "name": "Филадельфия",
     "description": "",
-    "composition": "������, ��������� ���, ������, �������",
+    "composition": "Лосось, сливочный сыр, огурец, авокадо",
     "price": "490.00",
     "weight": 240,
     "pieces": 8,
@@ -411,9 +411,9 @@
   "pk": 12,
   "fields": {
     "category": 3,
-    "name": "����������",
+    "name": "Калифорния",
     "description": "",
-    "composition": "����, �������, ������, ���� ������",
+    "composition": "Краб, авокадо, огурец, икра тобико",
     "price": "450.00",
     "weight": 220,
     "pieces": 8,
@@ -427,9 +427,9 @@
   "pk": 13,
   "fields": {
     "category": 3,
-    "name": "����� (� �����)",
+    "name": "Унаги (с угрем)",
     "description": "",
-    "composition": "�����, ������, ���� �����",
+    "composition": "Угорь, огурец, соус унаги",
     "price": "520.00",
     "weight": 230,
     "pieces": 8,
@@ -443,9 +443,9 @@
   "pk": 14,
   "fields": {
     "category": 3,
-    "name": "��� ��",
+    "name": "Том Ям",
     "description": "",
-    "composition": "��������, �������, ������, ������ ����",
+    "composition": "Креветка, авокадо, огурец, острый соус",
     "price": "550.00",
     "weight": 240,
     "pieces": 8,
@@ -459,9 +459,9 @@
   "pk": 15,
   "fields": {
     "category": 3,
-    "name": "������ ������",
+    "name": "Спайси лосось",
     "description": "",
-    "composition": "������, ������, ������ ����",
+    "composition": "Лосось, огурец, спайси соус",
     "price": "480.00",
     "weight": 230,
     "pieces": 8,
@@ -475,9 +475,9 @@
   "pk": 16,
   "fields": {
     "category": 3,
-    "name": "������ �����",
+    "name": "Спайси тунец",
     "description": "",
-    "composition": "�����, �������, ������ ����",
+    "composition": "Тунец, авокадо, спайси соус",
     "price": "500.00",
     "weight": 230,
     "pieces": 8,
@@ -491,9 +491,9 @@
   "pk": 17,
   "fields": {
     "category": 3,
-    "name": "���-����",
+    "name": "Аво-ролл",
     "description": "",
-    "composition": "�������, ������, ������",
+    "composition": "Авокадо, огурец, кунжут",
     "price": "350.00",
     "weight": 200,
     "pieces": 8,
@@ -507,9 +507,9 @@
   "pk": 18,
   "fields": {
     "category": 3,
-    "name": "�������",
+    "name": "Овощной",
     "description": "",
-    "composition": "������, �����, �������, �����",
+    "composition": "Огурец, перец, морковь, салат",
     "price": "380.00",
     "weight": 210,
     "pieces": 8,
@@ -523,9 +523,9 @@
   "pk": 19,
   "fields": {
     "category": 4,
-    "name": "������� �����������",
+    "name": "Жареная Филадельфия",
     "description": "",
-    "composition": "������, ��������� ���, �������, ���������",
+    "composition": "Лосось, сливочный сыр, авокадо, панировка",
     "price": "520.00",
     "weight": 250,
     "pieces": 8,
@@ -539,9 +539,9 @@
   "pk": 20,
   "fields": {
     "category": 4,
-    "name": "������� ����������",
+    "name": "Жареная Калифорния",
     "description": "",
-    "composition": "����, �������, ���� ������, ���������",
+    "composition": "Краб, авокадо, икра тобико, панировка",
     "price": "490.00",
     "weight": 240,
     "pieces": 8,
@@ -555,9 +555,9 @@
   "pk": 21,
   "fields": {
     "category": 4,
-    "name": "������� �����",
+    "name": "Жареный угорь",
     "description": "",
-    "composition": "�����, ������, ���������",
+    "composition": "Угорь, огурец, панировка",
     "price": "550.00",
     "weight": 250,
     "pieces": 8,
@@ -571,9 +571,9 @@
   "pk": 22,
   "fields": {
     "category": 4,
-    "name": "������� ��� ��",
+    "name": "Жареный Том Ям",
     "description": "",
-    "composition": "��������, �������, ������ ����, ���������",
+    "composition": "Креветка, авокадо, острый соус, панировка",
     "price": "580.00",
     "weight": 260,
     "pieces": 8,
@@ -587,9 +587,9 @@
   "pk": 23,
   "fields": {
     "category": 5,
-    "name": "���������� �����������",
+    "name": "Запеченная Филадельфия",
     "description": "",
-    "composition": "������, ��������� ���, �������, ������ �����",
+    "composition": "Лосось, сливочный сыр, авокадо, сырная шапка",
     "price": "530.00",
     "weight": 260,
     "pieces": 8,
@@ -603,9 +603,9 @@
   "pk": 24,
   "fields": {
     "category": 5,
-    "name": "���������� ����������",
+    "name": "Запеченная Калифорния",
     "description": "",
-    "composition": "����, �������, ���� ������, ������ �����",
+    "composition": "Краб, авокадо, икра тобико, сырная шапка",
     "price": "500.00",
     "weight": 250,
     "pieces": 8,
@@ -619,9 +619,9 @@
   "pk": 25,
   "fields": {
     "category": 5,
-    "name": "���������� �����",
+    "name": "Запеченный угорь",
     "description": "",
-    "composition": "�����, ������, ������ �����",
+    "composition": "Угорь, огурец, сырная шапка",
     "price": "560.00",
     "weight": 260,
     "pieces": 8,
@@ -635,9 +635,9 @@
   "pk": 26,
   "fields": {
     "category": 6,
-    "name": "������������ �����������",
+    "name": "Классическая Филадельфия",
     "description": "",
-    "composition": "������, ��������� ���, ������",
+    "composition": "Лосось, сливочный сыр, огурец",
     "price": "470.00",
     "weight": 230,
     "pieces": 8,
@@ -651,9 +651,9 @@
   "pk": 27,
   "fields": {
     "category": 6,
-    "name": "������������ ����������",
+    "name": "Классическая Калифорния",
     "description": "",
-    "composition": "����, �������, ������",
+    "composition": "Краб, авокадо, огурец",
     "price": "430.00",
     "weight": 210,
     "pieces": 8,
@@ -667,9 +667,9 @@
   "pk": 28,
   "fields": {
     "category": 6,
-    "name": "���� � �������",
+    "name": "Ролл с лососем",
     "description": "",
-    "composition": "������, ������",
+    "composition": "Лосось, огурец",
     "price": "420.00",
     "weight": 200,
     "pieces": 8,
@@ -683,9 +683,9 @@
   "pk": 29,
   "fields": {
     "category": 6,
-    "name": "���� � ������",
+    "name": "Ролл с крабом",
     "description": "",
-    "composition": "����, ������",
+    "composition": "Краб, огурец",
     "price": "400.00",
     "weight": 200,
     "pieces": 8,
@@ -699,9 +699,9 @@
   "pk": 30,
   "fields": {
     "category": 7,
-    "name": "���� � �������",
+    "name": "Суши с лососем",
     "description": "",
-    "composition": "������, ���, ������",
+    "composition": "Лосось, рис, васаби",
     "price": "90.00",
     "weight": 40,
     "pieces": 1,
@@ -715,9 +715,9 @@
   "pk": 31,
   "fields": {
     "category": 7,
-    "name": "���� � �����",
+    "name": "Суши с угрем",
     "description": "",
-    "composition": "�����, ���, ����",
+    "composition": "Угорь, рис, соус",
     "price": "110.00",
     "weight": 45,
     "pieces": 1,
@@ -731,9 +731,9 @@
   "pk": 32,
   "fields": {
     "category": 7,
-    "name": "���� � ���������",
+    "name": "Суши с креветкой",
     "description": "",
-    "composition": "��������, ���",
+    "composition": "Креветка, рис",
     "price": "100.00",
     "weight": 40,
     "pieces": 1,
@@ -747,9 +747,9 @@
   "pk": 33,
   "fields": {
     "category": 7,
-    "name": "���� � ������",
+    "name": "Суши с тунцом",
     "description": "",
-    "composition": "�����, ���",
+    "composition": "Тунец, рис",
     "price": "95.00",
     "weight": 40,
     "pieces": 1,
@@ -763,9 +763,9 @@
   "pk": 34,
   "fields": {
     "category": 8,
-    "name": "��������� ���",
+    "name": "Картофель фри",
     "description": "",
-    "composition": "���������, ����, ������",
+    "composition": "Картофель, соль, специи",
     "price": "150.00",
     "weight": 150,
     "pieces": 1,
@@ -779,9 +779,9 @@
   "pk": 35,
   "fields": {
     "category": 8,
-    "name": "��������",
+    "name": "Наггетсы",
     "description": "",
-    "composition": "������� ���� � ���������",
+    "composition": "Куриное филе в панировке",
     "price": "180.00",
     "weight": 120,
     "pieces": 6,
@@ -795,9 +795,9 @@
   "pk": 36,
   "fields": {
     "category": 8,
-    "name": "�������� � �����",
+    "name": "Креветки в кляре",
     "description": "",
-    "composition": "��������, ����",
+    "composition": "Креветки, кляр",
     "price": "250.00",
     "weight": 150,
     "pieces": 6,
@@ -811,9 +811,9 @@
   "pk": 37,
   "fields": {
     "category": 8,
-    "name": "�������� � ���������",
+    "name": "Креветки в панировке",
     "description": "",
-    "composition": "��������, ���������",
+    "composition": "Креветки, панировка",
     "price": "260.00",
     "weight": 150,
     "pieces": 6,
@@ -827,9 +827,9 @@
   "pk": 38,
   "fields": {
     "category": 8,
-    "name": "����� � �����",
+    "name": "Мидии в соусе",
     "description": "",
-    "composition": "�����, ��������� ����",
+    "composition": "Мидии, сливочный соус",
     "price": "220.00",
     "weight": 120,
     "pieces": 5,
@@ -843,9 +843,9 @@
   "pk": 39,
   "fields": {
     "category": 8,
-    "name": "��������",
+    "name": "Осьминог",
     "description": "",
-    "composition": "��������, ���� �������",
+    "composition": "Осьминог, соус терияки",
     "price": "280.00",
     "weight": 100,
     "pieces": 1,
@@ -859,9 +859,9 @@
   "pk": 40,
   "fields": {
     "category": 8,
-    "name": "����� ����",
+    "name": "Салат Чука",
     "description": "",
-    "composition": "��������� ����, ������",
+    "composition": "Водоросли чука, кунжут",
     "price": "190.00",
     "weight": 100,
     "pieces": 1,
@@ -875,9 +875,9 @@
   "pk": 41,
   "fields": {
     "category": 9,
-    "name": "������",
+    "name": "Васаби",
     "description": "",
-    "composition": "���� ������",
+    "composition": "Хрен васаби",
     "price": "30.00",
     "weight": 20,
     "pieces": 1,
@@ -891,9 +891,9 @@
   "pk": 42,
   "fields": {
     "category": 9,
-    "name": "������",
+    "name": "Имбирь",
     "description": "",
-    "composition": "������������ ������",
+    "composition": "Маринованный имбирь",
     "price": "30.00",
     "weight": 30,
     "pieces": 1,
@@ -907,9 +907,9 @@
   "pk": 43,
   "fields": {
     "category": 9,
-    "name": "������ ����",
+    "name": "Соевый соус",
     "description": "",
-    "composition": "������ ����",
+    "composition": "Соевый соус",
     "price": "30.00",
     "weight": 30,
     "pieces": 1,
@@ -923,9 +923,9 @@
   "pk": 44,
   "fields": {
     "category": 9,
-    "name": "���� �����",
+    "name": "Соус Унаги",
     "description": "",
-    "composition": "������� ���� ��� ����",
+    "composition": "Сладкий соус для угря",
     "price": "40.00",
     "weight": 30,
     "pieces": 1,
@@ -939,9 +939,9 @@
   "pk": 45,
   "fields": {
     "category": 9,
-    "name": "���� ������",
+    "name": "Соус Спайси",
     "description": "",
-    "composition": "������ ����",
+    "composition": "Острый соус",
     "price": "40.00",
     "weight": 30,
     "pieces": 1,
@@ -955,9 +955,9 @@
   "pk": 46,
   "fields": {
     "category": 9,
-    "name": "���� �������",
+    "name": "Соус Терияки",
     "description": "",
-    "composition": "�������� ���� �������",
+    "composition": "Японский соус терияки",
     "price": "40.00",
     "weight": 30,
     "pieces": 1,
@@ -971,9 +971,9 @@
   "pk": 47,
   "fields": {
     "category": 9,
-    "name": "���� ������",
+    "name": "Соус Сырный",
     "description": "",
-    "composition": "������ ������ ����",
+    "composition": "Нежный сырный соус",
     "price": "50.00",
     "weight": 40,
     "pieces": 1,
@@ -987,9 +987,9 @@
   "pk": 48,
   "fields": {
     "category": 9,
-    "name": "���� �����",
+    "name": "Соус Кимчи",
     "description": "",
-    "composition": "������ ��������� ����",
+    "composition": "Острый корейский соус",
     "price": "40.00",
     "weight": 30,
     "pieces": 1,
@@ -1003,9 +1003,9 @@
   "pk": 49,
   "fields": {
     "category": 9,
-    "name": "�������",
+    "name": "Палочки",
     "description": "",
-    "composition": "���������� ������� ��� ���",
+    "composition": "Деревянные палочки для еды",
     "price": "10.00",
     "weight": 10,
     "pieces": 2,
@@ -1494,5 +1494,2535 @@
   "model": "bot.chatmessage",
   "pk": 1,
   "fields": {
-    "user_message": "������, �������� ����� ��� ������ ����� �����?",
-    "bot_response": 
+    "user_message": "привет, подскажи какой сет роллов лучше взять?",
+    "bot_response": "Привет! Я бот TokyoRoll! 🍣 Чем могу помочь?",
+    "created_at": "2026-04-14T20:18:31.114Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 2,
+  "fields": {
+    "user_message": "привет. подскажи какой сет роллов лучше взять?",
+    "bot_response": "Привет! Я бот TokyoRoll! 🍣 Чем могу помочь?",
+    "created_at": "2026-04-14T20:18:52.076Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 3,
+  "fields": {
+    "user_message": "п",
+    "bot_response": "Спроси меня про роллы Филадельфия или Калифорния, или про сеты! 🍣",
+    "created_at": "2026-04-14T20:18:53.580Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 4,
+  "fields": {
+    "user_message": "сеты",
+    "bot_response": "🍱 Наши сеты: Филадельфия (1890₽) - 32 суши, Калифорния (1490₽) - 24 ролла",
+    "created_at": "2026-04-14T20:19:04.805Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 5,
+  "fields": {
+    "user_message": "роллы",
+    "bot_response": "Спроси меня про роллы Филадельфия или Калифорния, или про сеты! 🍣",
+    "created_at": "2026-04-14T20:19:10.020Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 6,
+  "fields": {
+    "user_message": "калифорния",
+    "bot_response": "🍣 Калифорния - ролл с крабом и авокадо. Состав: краб, авокадо, огурец, икра тобико. Цена: 450₽",
+    "created_at": "2026-04-14T20:19:16.132Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 7,
+  "fields": {
+    "user_message": "привет, подскажи какой лучше чет выбрать",
+    "bot_response": "🤗 Привет! Я TokyoBot! Расскажу о нашем меню, помогу выбрать блюда. Спрашивай! 🍣",
+    "created_at": "2026-04-14T20:29:32.617Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 8,
+  "fields": {
+    "user_message": "привет. подскажи какой лучше сет выбрать",
+    "bot_response": "🤗 Привет! Я TokyoBot! Расскажу о нашем меню, помогу выбрать блюда. Спрашивай! 🍣",
+    "created_at": "2026-04-14T20:29:49.542Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 9,
+  "fields": {
+    "user_message": "привет",
+    "bot_response": "🤗 Привет! Я TokyoBot! Расскажу о нашем меню, помогу выбрать блюда. Спрашивай! 🍣",
+    "created_at": "2026-04-14T20:29:54.485Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 10,
+  "fields": {
+    "user_message": "сет",
+    "bot_response": "🍱 Наши сеты: Филадельфия (1890₽) и Калифорния (1490₽). Какой интересует?",
+    "created_at": "2026-04-14T20:29:56.654Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 11,
+  "fields": {
+    "user_message": "э",
+    "bot_response": "Я могу рассказать о роллах Филадельфия, Калифорния и сетах. Просто спросите! 🍣",
+    "created_at": "2026-04-14T20:30:03.474Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 12,
+  "fields": {
+    "user_message": "привет",
+    "bot_response": "🤗 **Привет! Я TokyoBot!**\n\nРасскажу о нашем меню, помогу выбрать блюда и посоветую лучшие сеты!\n\n🍣 **Что интересует?**\n• Роллы Филадельфия или Калифорния\n• Сеты для компании\n• Состав и калории",
+    "created_at": "2026-04-14T20:35:56.899Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 13,
+  "fields": {
+    "user_message": "сет",
+    "bot_response": "🍱 **Наши сеты:** Филадельфия (1890₽), Калифорния (1490₽), Токио (2190₽). Какой интересует?",
+    "created_at": "2026-04-14T20:36:10.717Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 14,
+  "fields": {
+    "user_message": "о",
+    "bot_response": "🍣 **Чем могу помочь?**\n\nЯ могу:\n• Рассказать о роллах Филадельфия и Калифорния\n• Посоветовать сеты для компании\n• Описать состав и калорийность\n\nПросто спросите! Например: \"Расскажи про Филадельфию\" или \"Какой сет лучше выбрать?\"",
+    "created_at": "2026-04-14T20:36:13.703Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 15,
+  "fields": {
+    "user_message": "привет",
+    "bot_response": "🌸 Привет! Рад тебя видеть в TokyoRoll! Чем могу помочь с выбором блюд? 🍣✨",
+    "created_at": "2026-04-14T20:40:29.670Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 16,
+  "fields": {
+    "user_message": "расскажи какой сет лучше калифорния или токио",
+    "bot_response": "Оба сета вкусные! 🍣✨\n\n🌸 **Сет Калифорния**:\n- 6 роллов Калифорния\n- Цена: ¥2500\n- Калорийность примерно: 370 ккал на порцию\n\n🌟 **Сет Токио**:\n- 6 роллов Токио\n- Цена: ¥2800\n- Калорийность примерно: 410 ккал на порцию\n\nВыбирай по вкусу и настроению! 😊",
+    "created_at": "2026-04-14T20:40:51.331Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 17,
+  "fields": {
+    "user_message": "расскажи о составе роллов калифорния",
+    "bot_response": "🍣 Роллы Калифорния в нашем ресторане TokyoRoll состоят из:\n- Рис для суши\n- Авокадо 🍋\n- Креветки или крабовое мясо 🦐 (по вашему выбору)\n- Икра тобико 🍤\n- Обёрнуты огурцом\n\nЭто вкусное сочетание нежных ингредиентов!",
+    "created_at": "2026-04-14T20:42:55.302Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 18,
+  "fields": {
+    "user_message": "понял, спасибо!",
+    "bot_response": "😊 Пожалуйста! Если что-то понадобится, обращайся! 🍣🔥",
+    "created_at": "2026-04-14T20:43:08.336Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 19,
+  "fields": {
+    "user_message": "привет, расскажи какие есть сеты и какой лучше по твоему мнению",
+    "bot_response": "Привет! 👋 У нас три вида сетов:\n\n1. **Сет \"Филадельфия\"** – 32 суши разных видов за 1890₽ со скидкой 20%. Это отличный выбор для тех, кто любит классические вкусы!\n\n2. **Сет \"Калифорния\"** – 24 ролла разных видов за 1490₽ со скидкой 15%. Здесь можно попробовать как холодные, так и горячие роллы.\n\n3. **Сет \"Токио\"** – 40 премиальных суши и роллов плюс бонусный соус за 2190₽ со скидкой 25%! Это наш топовый набор для настоящих ценителей японской кухни.\n\nМой совет? Если вы любите разнообразие и хотите попробовать много разных блюд сразу, выбирайте **сет \"Токио\"**. Он самый вкусный и щедрый на угощения! 😊",
+    "created_at": "2026-04-14T20:55:44.449Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 20,
+  "fields": {
+    "user_message": "какие роллы входят в сет Токио?",
+    "bot_response": "В сет \"Токио\" входят 40 суши и роллов премиум-класса, а также **бесплатный соус**. 🍣🍕 Но конкретных наименований роллов в этом сете не указано в нашем меню. \n\nЕсли хотите узнать подробнее о составе какого-то конкретного ролла – спрашивайте! 😊",
+    "created_at": "2026-04-14T20:57:29.650Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 21,
+  "fields": {
+    "user_message": "привет. расскажи мне о меню",
+    "bot_response": "Привет! 👋 У нас в TokyoRoll вкусное и разнообразное меню японской кухни!\n\n🌸 **Сеты** – это наборы суши и роллов по специальным ценам со скидками до 25%. Например, можно попробовать наш популярный **сэт \"Филадельфия\"** за 1890₽ (обычная цена 2363₽) или **сэт \"Токио\"** за 2190₽ (обычно 2920₽).\n\n🍣 **Отдельные роллы**: у нас есть классические роллы, такие как \"Филадельфия\" (лосось, сливочный сыр, огурец, авокадо – 490₽) и \"Калифорния\" (краб, авокадо, огурец, икра тобико – 450₽). Также есть горячие, жареные, запечённые и тёплые роллы на любой вкус.\n\n🔥 Ещё мы предлагаем лапшу WOK и блюда азиатской кухни, например, карри или супы.\n\nЕсли хочешь узнать подробнее про какое-то конкретное блюдо или скидку, просто спроси! 😊",
+    "created_at": "2026-04-17T19:47:49.748Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 22,
+  "fields": {
+    "user_message": "привет расскажи про меню",
+    "bot_response": "Привет! 👋 Рад тебя видеть у нас в TokyoRoll!\n\nУ нас есть несколько категорий блюд:\n\n🍣 **Сеты** – это наборы суши и роллов по специальным ценам со скидками до 25%! Например, сет \"Филадельфия\" за 1890₽ (обычная цена 2363₽) или премиальный сет \"Токио\" всего за 2190₽ вместо 2920₽.\n\n🍣 **Отдельные роллы** – классические, горячие, запечённые и жареные варианты на любой вкус. Например, ролл \"Филадельфия\" стоит 490₽, а \"Калифорния\" – 450₽.\n\n🍜 Ещё мы предлагаем лапшу WOK, азиатскую кухню и тёплые блюда для уютного вечера дома или в ресторане.\n\nЕсли хочешь узнать подробнее про какое-то конкретное блюдо или скидку – просто спроси! 😊",
+    "created_at": "2026-04-17T22:15:27.176Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 23,
+  "fields": {
+    "user_message": "расскажи о меню",
+    "bot_response": "🍣 Привет! У нас в ресторане TokyoRoll есть несколько категорий блюд:\n\n➡️ **Сеты** – это наборы суши и роллов по специальным ценам со скидками до 25%. Например, сет \"Филадельфия\" за 1890₽ (сэкономишь 20%), а сет \"Токио\" за 2190₽ (скидка 25%).\n\n➡️ **Отдельные роллы**: у нас есть классические роллы, такие как \"Филадельфия\" (лосось, сливочный сыр, огурец, авокадо) за 490₽ и \"Калифорния\" (краб, авокадо, огурец, икра тобико) за 450₽.\n\nТакже у нас есть горячие роллы, запечённые роллы, жареные роллы, тёплая лапша WOK и блюда азиатской кухни 🌶️\n\nЕсли хочешь узнать подробнее про какое-то конкретное блюдо, просто спроси! 😊",
+    "created_at": "2026-04-18T00:01:38.776Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 24,
+  "fields": {
+    "user_message": "расскажи о меню",
+    "bot_response": "🍣 Добро пожаловать! Наше меню предлагает широкий выбор блюд японской кухни!\n\n✨ **Сеты** 🌸 \nУ нас есть три варианта сетов:\n- Сет \"Филадельфия\" – 32 суши разных видов, цена со скидкой 1890₽.\n- Сет \"Калифорния\" – 24 ролла различных вкусов, скидка 15%, цена 1490₽.\n- Сет \"Токио\" – 40 премиальных суши и роллов с бесплатным соусом, скидка 25%, цена 2190₽.\n\n🍱 **Отдельные роллы** 🐟 \nЕсть несколько популярных роллов по отдельности:\n- Роллы \"Филадельфия\" – лосось, сливочный сыр, огурец и авокадо за 490₽.\n- Роллы \"Калифорния\" – краб, авокадо, огурец и икра тобико за 450₽.\n- Роллы с угрём – нежный вкус угря за 520₽.\n- Запечённые роллы – аппетитные запечённые варианты за 480₽.\n- Горячие роллы – подаются теплыми, цена 500₽.\n\n🔥 Также у нас есть горячие блюда, жареные роллы, лапша WOK и азиатская кухня на любой вкус!\n\nЕсли хотите узнать подробнее о конкретном блюде, просто спросите! 😊",
+    "created_at": "2026-04-18T11:55:12.607Z"
+  }
+},
+{
+  "model": "bot.chatmessage",
+  "pk": 25,
+  "fields": {
+    "user_message": "привет, расскажи о меню",
+    "bot_response": "Привет! 👋 У нас в TokyoRoll ты найдёшь вкуснейшие японские блюда!\n\n🍣 **Сеты** – это наборы суши и роллов по специальным ценам со скидками до 25%! Например, у нас есть сеты \"Филадельфия\", \"Калифорния\" и премиальный \"Токио\".\n\n🔪 **Отдельные роллы** – от классических до жареных и запечённых. Самые популярные: ролл \"Филадельфия\" за 490₽ и ролл \"Калифорния\" за 450₽.\n\n🌶️ Ещё у нас есть лапша WOK, азиатская кухня и даже тёплые роллы для уютного вечера дома.\n\nЕсли хочешь узнать подробнее про какое-то конкретное блюдо – спрашивай! 😊",
+    "created_at": "2026-04-28T14:20:57.634Z"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Категория",
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Категория",
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Категория",
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Категория",
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Товар",
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "codename": "add_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Товар",
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "codename": "change_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Товар",
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "codename": "delete_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Товар",
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "codename": "view_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add cart item",
+    "content_type": [
+      "cart",
+      "cartitem"
+    ],
+    "codename": "add_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change cart item",
+    "content_type": [
+      "cart",
+      "cartitem"
+    ],
+    "codename": "change_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete cart item",
+    "content_type": [
+      "cart",
+      "cartitem"
+    ],
+    "codename": "delete_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view cart item",
+    "content_type": [
+      "cart",
+      "cartitem"
+    ],
+    "codename": "view_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add cart",
+    "content_type": [
+      "cart",
+      "cart"
+    ],
+    "codename": "add_cart"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change cart",
+    "content_type": [
+      "cart",
+      "cart"
+    ],
+    "codename": "change_cart"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete cart",
+    "content_type": [
+      "cart",
+      "cart"
+    ],
+    "codename": "delete_cart"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view cart",
+    "content_type": [
+      "cart",
+      "cart"
+    ],
+    "codename": "view_cart"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add chat message",
+    "content_type": [
+      "bot",
+      "chatmessage"
+    ],
+    "codename": "add_chatmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change chat message",
+    "content_type": [
+      "bot",
+      "chatmessage"
+    ],
+    "codename": "change_chatmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete chat message",
+    "content_type": [
+      "bot",
+      "chatmessage"
+    ],
+    "codename": "delete_chatmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view chat message",
+    "content_type": [
+      "bot",
+      "chatmessage"
+    ],
+    "codename": "view_chatmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "add_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "change_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "delete_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "view_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add order item",
+    "content_type": [
+      "orders",
+      "orderitem"
+    ],
+    "codename": "add_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change order item",
+    "content_type": [
+      "orders",
+      "orderitem"
+    ],
+    "codename": "change_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete order item",
+    "content_type": [
+      "orders",
+      "orderitem"
+    ],
+    "codename": "delete_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view order item",
+    "content_type": [
+      "orders",
+      "orderitem"
+    ],
+    "codename": "view_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Промокод",
+    "content_type": [
+      "orders",
+      "promocode"
+    ],
+    "codename": "add_promocode"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Промокод",
+    "content_type": [
+      "orders",
+      "promocode"
+    ],
+    "codename": "change_promocode"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Промокод",
+    "content_type": [
+      "orders",
+      "promocode"
+    ],
+    "codename": "delete_promocode"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Промокод",
+    "content_type": [
+      "orders",
+      "promocode"
+    ],
+    "codename": "view_promocode"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Адрес доставки",
+    "content_type": [
+      "accounts",
+      "address"
+    ],
+    "codename": "add_address"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Адрес доставки",
+    "content_type": [
+      "accounts",
+      "address"
+    ],
+    "codename": "change_address"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Адрес доставки",
+    "content_type": [
+      "accounts",
+      "address"
+    ],
+    "codename": "delete_address"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Адрес доставки",
+    "content_type": [
+      "accounts",
+      "address"
+    ],
+    "codename": "view_address"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Профиль пользователя",
+    "content_type": [
+      "accounts",
+      "userprofile"
+    ],
+    "codename": "add_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Профиль пользователя",
+    "content_type": [
+      "accounts",
+      "userprofile"
+    ],
+    "codename": "change_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Профиль пользователя",
+    "content_type": [
+      "accounts",
+      "userprofile"
+    ],
+    "codename": "delete_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Профиль пользователя",
+    "content_type": [
+      "accounts",
+      "userprofile"
+    ],
+    "codename": "view_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Использование промокода",
+    "content_type": [
+      "orders",
+      "promocodeusage"
+    ],
+    "codename": "add_promocodeusage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Использование промокода",
+    "content_type": [
+      "orders",
+      "promocodeusage"
+    ],
+    "codename": "change_promocodeusage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Использование промокода",
+    "content_type": [
+      "orders",
+      "promocodeusage"
+    ],
+    "codename": "delete_promocodeusage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Использование промокода",
+    "content_type": [
+      "orders",
+      "promocodeusage"
+    ],
+    "codename": "view_promocodeusage"
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$CxuLojafpdbBUvhYAEysbV$sih9RdduItHWfE2gj8xxSTIrSzVdE0JgYwlCMJkbJEY=",
+    "last_login": "2026-05-13T23:16:41.206Z",
+    "is_superuser": true,
+    "username": "Sova",
+    "first_name": "Никита",
+    "last_name": "Мощенко",
+    "email": "wertu00u@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-11-28T22:41:43.849Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$U10xHKkQ3xNXL6dZbJsxjX$EcCUvklnJrUvT7Rmi5C3DtUoKjzo6Qz679h12K7Pyn0=",
+    "last_login": "2026-05-13T10:09:25.330Z",
+    "is_superuser": false,
+    "username": "9081265463",
+    "first_name": "Никита",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-29T02:35:52.065Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$WkeO0RGC6qOD7yVDtqmKmZ$WWK03qNChcMJR7SVlOSzLvew3fHZHuphUXIifRuCvT4=",
+    "last_login": "2026-05-13T10:09:51.397Z",
+    "is_superuser": false,
+    "username": "9992221111",
+    "first_name": "Nikita2",
+    "last_name": "Moss2",
+    "email": "sovatest2@mail.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-13T09:56:31.115Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$sMs8dy3t2Fg0BBiFiPWmLF$vqbTDfYgJ2AH4RCvZ2IX8SZ60+OPZ4K+29r0Na6oPYs=",
+    "last_login": "2026-05-13T23:16:15.660Z",
+    "is_superuser": false,
+    "username": "9513204433",
+    "first_name": "DimVor",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-05-13T23:11:51.412Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "orders.promocodeusage",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "promocode": 1,
+    "used_at": "2026-05-13T09:35:32.209Z",
+    "order": 5
+  }
+},
+{
+  "model": "orders.promocodeusage",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "9992221111"
+    ],
+    "promocode": 1,
+    "used_at": "2026-05-13T10:22:54.646Z",
+    "order": 6
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "customer_name": "тест",
+    "phone": "+7(999)999-99-99",
+    "address": "союзная 31",
+    "comment": "побыстрее",
+    "promocode": "",
+    "discount_amount": "0.00",
+    "delivery_type": "delivery",
+    "total_price": "5970.00",
+    "status": "completed",
+    "created_at": "2026-04-21T15:41:07.483Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "customer_name": "Мощенко Никита Николаевич",
+    "phone": "+7(908)126-54-63",
+    "address": "союзная 31",
+    "comment": "быстрее",
+    "promocode": "FIRST20",
+    "discount_amount": "0.00",
+    "delivery_type": "delivery",
+    "total_price": "2384.00",
+    "status": "new",
+    "created_at": "2026-04-27T14:26:40.865Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "customer_name": "Никита",
+    "phone": "+7(908)333-62-37",
+    "address": "ул ленина дом 4, подъезд 2, этаж 4, кв. 33 (код домофона 394823)",
+    "comment": "быстрее",
+    "promocode": "FIRST20",
+    "discount_amount": "0.00",
+    "delivery_type": "delivery",
+    "total_price": "5120.00",
+    "status": "new",
+    "created_at": "2026-04-28T13:33:45.697Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "customer_name": "Никита",
+    "phone": "+7(908)126-54-63",
+    "address": "ул ленина дом 4, подъезд 2, этаж 4, кв. 33 (код домофона 394823)",
+    "comment": "gfgdfg",
+    "promocode": "FIRST20",
+    "discount_amount": "0.00",
+    "delivery_type": "delivery",
+    "total_price": "12608.00",
+    "status": "new",
+    "created_at": "2026-04-28T14:08:10.873Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "customer_name": "Никита",
+    "phone": "+7(908)126-11-11",
+    "address": "ул ленина дом 4, подъезд 2, этаж 4, кв. 33 (код домофона 394823)",
+    "comment": "побыстрее",
+    "promocode": "FIRST20",
+    "discount_amount": "498.00",
+    "delivery_type": "delivery",
+    "total_price": "1992.00",
+    "status": "new",
+    "created_at": "2026-05-13T09:35:32.195Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "9992221111"
+    ],
+    "customer_name": "Nikita",
+    "phone": "+7(999)222-11-11",
+    "address": "ул. Ленина33, подъезд 2, этаж 1, кв. 22",
+    "comment": ",scnhtt",
+    "promocode": "FIRST20",
+    "discount_amount": "498.00",
+    "delivery_type": "delivery",
+    "total_price": "1992.00",
+    "status": "new",
+    "created_at": "2026-05-13T10:22:54.632Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "9992221111"
+    ],
+    "customer_name": "Nikita",
+    "phone": "+7(999)222-11-11",
+    "address": "Самовывоз",
+    "comment": ",scnhtt",
+    "promocode": "",
+    "discount_amount": "0.00",
+    "delivery_type": "pickup",
+    "total_price": "2241.00",
+    "status": "new",
+    "created_at": "2026-05-13T10:25:32.484Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "9992221111"
+    ],
+    "customer_name": "Nikita",
+    "phone": "+7(999)222-11-11",
+    "address": "Самовывоз",
+    "comment": "вкусно",
+    "promocode": "",
+    "discount_amount": "0.00",
+    "delivery_type": "pickup",
+    "total_price": "2682.00",
+    "status": "new",
+    "created_at": "2026-05-13T12:00:59.531Z"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "avatar": "avatars/photo_8etLvNh.jpg",
+    "phone": "+7(908)126-54-63"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "9992221111"
+    ],
+    "avatar": "",
+    "phone": "+7(999)222-11-11"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "9081265463"
+    ],
+    "avatar": "",
+    "phone": ""
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "9513204433"
+    ],
+    "avatar": "",
+    "phone": ""
+  }
+},
+{
+  "model": "accounts.address",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "title": "дом",
+    "address": "ул ленина дом 4",
+    "entrance": "2",
+    "floor": "4",
+    "apartment": "33",
+    "comment": "код домофона 394823",
+    "is_default": true,
+    "created_at": "2026-04-28T01:17:53.600Z"
+  }
+},
+{
+  "model": "accounts.address",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "title": "тест2",
+    "address": "союзная",
+    "entrance": "1",
+    "floor": "1",
+    "apartment": "78",
+    "comment": "111",
+    "is_default": false,
+    "created_at": "2026-04-28T01:18:57.020Z"
+  }
+},
+{
+  "model": "accounts.address",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "Sova"
+    ],
+    "title": "тесссссст",
+    "address": "ул ленина д44",
+    "entrance": "2",
+    "floor": "7",
+    "apartment": "22",
+    "comment": "код 34598",
+    "is_default": false,
+    "created_at": "2026-04-28T01:40:38.378Z"
+  }
+},
+{
+  "model": "accounts.address",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "9992221111"
+    ],
+    "title": "дом",
+    "address": "садовая д5",
+    "entrance": "1",
+    "floor": "2",
+    "apartment": "22",
+    "comment": "",
+    "is_default": true,
+    "created_at": "2026-05-13T12:03:44.912Z"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2025-11-28T22:43:52.097Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "object_id": "1",
+    "object_repr": "Суши",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2025-11-28T22:44:11.437Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "object_id": "2",
+    "object_repr": "Роллы",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2025-11-28T22:46:41.929Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "1",
+    "object_repr": "Саке (лосось)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2025-11-29T02:27:39.983Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "2",
+    "object_repr": "ролл",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2025-11-29T02:28:41.655Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "2",
+    "object_repr": "ролл",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-04-21T21:33:48.653Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "orders",
+      "promocode"
+    ],
+    "object_id": "1",
+    "object_repr": "FIRST20",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-04-27T18:23:57.720Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "34",
+    "object_repr": "Картофель фри",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-04-27T18:36:05.635Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "38",
+    "object_repr": "Мидии в соусе",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-04-27T18:36:35.078Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "35",
+    "object_repr": "Наггетсы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-04-27T18:36:50.282Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "36",
+    "object_repr": "Креветки в кляре",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-04-27T18:36:59.788Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "37",
+    "object_repr": "Креветки в панировке",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-04-27T18:37:17.003Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "39",
+    "object_repr": "Осьминог",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-04-27T18:37:27.917Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "40",
+    "object_repr": "Салат Чука",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-04-27T23:27:33.478Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "41",
+    "object_repr": "Васаби",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-04-27T23:27:43.022Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "42",
+    "object_repr": "Имбирь",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-04-27T23:27:55.021Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "43",
+    "object_repr": "Соевый соус",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-04-27T23:28:05.092Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "44",
+    "object_repr": "Соус Унаги",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-04-27T23:28:14.226Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "45",
+    "object_repr": "Соус Спайси",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2026-04-27T23:29:03.164Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "46",
+    "object_repr": "Соус Терияки",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2026-04-27T23:29:13.482Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "47",
+    "object_repr": "Соус Сырный",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2026-04-27T23:29:24.491Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "48",
+    "object_repr": "Соус Кимчи",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2026-04-27T23:30:10.078Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "45",
+    "object_repr": "Соус Спайси",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2026-04-27T23:30:47.847Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "44",
+    "object_repr": "Соус Унаги",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2026-04-27T23:31:18.992Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "41",
+    "object_repr": "Васаби",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2026-04-27T23:32:23.625Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "49",
+    "object_repr": "Палочки",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2026-04-27T23:34:33.300Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "30",
+    "object_repr": "Суши с лососем",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2026-04-27T23:34:50.920Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "31",
+    "object_repr": "Суши с угрем",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2026-04-27T23:35:00.760Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "32",
+    "object_repr": "Суши с креветкой",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2026-04-27T23:35:09.477Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "33",
+    "object_repr": "Суши с тунцом",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2026-04-27T23:35:39.983Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "1",
+    "object_repr": "Сет \"Филадельфия\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2026-04-27T23:37:18.462Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "26",
+    "object_repr": "Классическая Филадельфия",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2026-04-27T23:37:28.444Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "27",
+    "object_repr": "Классическая Калифорния",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2026-04-27T23:37:44.113Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "28",
+    "object_repr": "Ролл с лососем",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2026-04-27T23:37:54.314Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "29",
+    "object_repr": "Ролл с крабом",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2026-04-27T23:44:21.334Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "3",
+    "object_repr": "Сет \"Токио\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0421\\u043e\\u0441\\u0442\\u0430\\u0432\", \"\\u0426\\u0435\\u043d\\u0430\", \"\\u041a\\u043e\\u043b\\u0438\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u043a\\u0443\\u0441\\u043e\\u0447\\u043a\\u043e\\u0432\", \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2026-04-27T23:46:07.730Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "12",
+    "object_repr": "Калифорния",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2026-04-27T23:46:17.470Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "11",
+    "object_repr": "Филадельфия",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2026-04-27T23:47:15.655Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "23",
+    "object_repr": "Запеченная Филадельфия",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2026-04-27T23:48:06.481Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "24",
+    "object_repr": "Запеченная Калифорния",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2026-04-27T23:49:12.412Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "25",
+    "object_repr": "Запеченный угорь",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2026-04-27T23:50:59.426Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "19",
+    "object_repr": "Жареная Филадельфия",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2026-04-27T23:51:45.171Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "20",
+    "object_repr": "Жареная Калифорния",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2026-04-27T23:52:24.217Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "21",
+    "object_repr": "Жареный угорь",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2026-04-27T23:54:57.273Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "22",
+    "object_repr": "Жареный Том Ям",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2026-04-27T23:59:30.022Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "14",
+    "object_repr": "Том Ям",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2026-04-27T23:59:41.948Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "13",
+    "object_repr": "Унаги (с угрем)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2026-04-28T00:04:50.718Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "18",
+    "object_repr": "Овощной",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2026-04-28T00:04:57.059Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "17",
+    "object_repr": "Аво-ролл",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2026-04-28T00:05:59.441Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "16",
+    "object_repr": "Спайси тунец",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2026-04-28T00:06:07.106Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "15",
+    "object_repr": "Спайси лосось",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2026-04-28T00:07:06.988Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "2",
+    "object_repr": "Сет \"Калифорния\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2026-04-28T00:13:14.374Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "10",
+    "object_repr": "Сет \"Премиум\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2026-04-28T00:13:20.417Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "9",
+    "object_repr": "Сет \"Ролломания\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2026-04-28T00:13:27.077Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "8",
+    "object_repr": "Сет \"Детский\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2026-04-28T00:13:33.948Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "7",
+    "object_repr": "Сет \"Острый\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2026-04-28T00:13:42.360Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "6",
+    "object_repr": "Сет \"Вегетарианский\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2026-04-28T00:13:48.177Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "5",
+    "object_repr": "Сет \"Самурай\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2026-04-28T00:13:54.744Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "product"
+    ],
+    "object_id": "4",
+    "object_repr": "Сет \"Императорский\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2026-04-28T23:37:08.724Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "object_id": "2",
+    "object_repr": "Сеты",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2026-04-28T23:37:44.688Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "object_id": "4",
+    "object_repr": "Жареные роллы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2026-04-28T23:37:50.629Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "object_id": "5",
+    "object_repr": "Запеченные роллы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2026-04-29T00:00:24.860Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "object_id": "9",
+    "object_repr": "Соусы и дополнения",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2026-04-29T00:00:30.453Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "object_id": "8",
+    "object_repr": "Закуски",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2026-04-29T00:00:36.460Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "object_id": "7",
+    "object_repr": "Суши",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2026-04-29T00:00:44.528Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "object_id": "6",
+    "object_repr": "Классические роллы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2026-04-29T00:00:56.991Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "main",
+      "category"
+    ],
+    "object_id": "3",
+    "object_repr": "Роллы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2026-05-13T09:36:15.119Z",
+    "user": [
+      "Sova"
+    ],
+    "content_type": [
+      "orders",
+      "promocode"
+    ],
+    "object_id": "1",
+    "object_repr": "FIRST20",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u043e\\u043b\\u044c\\u043a\\u043e \\u0434\\u043b\\u044f \\u043f\\u0435\\u0440\\u0432\\u043e\\u0433\\u043e \\u0437\\u0430\\u043a\\u0430\\u0437\\u0430\"]}}]"
+  }
+}
+]
