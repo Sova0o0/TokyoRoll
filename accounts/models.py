@@ -35,13 +35,21 @@ class Address(models.Model):
 
 # === СИГНАЛЫ ДЛЯ АВТОМАТИЧЕСКОГО СОЗДАНИЯ ПРОФИЛЯ ===
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+def create_user_profile(sender, instance, created, raw, **kwargs):
+    # Если raw=True, значит идет загрузка фикстур (loaddata).
+    # В этом случае профиль создавать НЕ НУЖНО, он загрузится из JSON.
+    if raw:
+        return
     if created:
-        UserProfile.objects.create(user=instance)
+        UserProfile.objects.get_or_create(user=instance)
 
 @receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    if not hasattr(instance, 'profile'):
-        UserProfile.objects.create(user=instance)
-    else:
+def save_user_profile(sender, instance, raw, **kwargs):
+    # Аналогично пропускаем сохранение при загрузке фикстур
+    if raw:
+        return
+    
+    if hasattr(instance, 'profile'):
         instance.profile.save()
+    else:
+        UserProfile.objects.create(user=instance)
